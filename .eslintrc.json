@@ -14,17 +14,12 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "prettier/prettier": [
-        "error",
-        {
-            "endOfLine": "auto"
-        }
-    ],
     "plugins": [
         "react",
         "prettier"
     ],
     "rules": {
-      "prettier/prettier":"warn"
+        "react/prop-types": "off",
+        "prettier/prettier": "warn"
     }
 }
