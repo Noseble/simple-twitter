@@ -24,7 +24,17 @@
         "react",
         "prettier"
     ],
+    "parser":"babel-eslint",
     "rules": {
-      "prettier/prettier":"warn"
+      "eqeqeq":2, //必須使用 === 和 !==
+      "no-empty-function":2, //禁止使用空函數
+      "no-multi-spaces":2, //禁止使用多個空格
+      "no-trailing-spaces":2, //禁止使用行尾空格
+      "space-infix-ops":2, //要求操作符號周圍有空格
+      "space-in-parens":2, //強制在原括號內使用醫治的空格
+      "no-var":2, //要求使用let或const而不是var
+      "no-unused-vars":2, //禁止出現未使用過的變數
+      "react/prop-types":0, //防止在react組件定義中缺乏props驗證
+      "prettier/prettier":"warn" //將Prettier的警告改為和eslint不同的"warn"
     }
 }
