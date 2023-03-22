@@ -43,7 +43,6 @@ const StyledTextInput = styled(TextInput)`
   .input_label{
     font-size: 14px;
     line-height: 22px;
-    font-family: "Noto Sans TC";
     color: #696974;
   }
 

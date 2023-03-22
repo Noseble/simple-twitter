@@ -14,7 +14,6 @@ const StyledTextLink = styled(TextLink)`
   border-bottom: 1px solid #0062FF;
 
   /* font & others */
-  font-family: 'Noto Sans TC';
   font-size: 16px;
   line-height: 24px;
   text-decoration: none;

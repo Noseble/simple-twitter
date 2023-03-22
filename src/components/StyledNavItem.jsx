@@ -44,7 +44,6 @@ const StyledNavItem = styled(NavItem)`
 
   .nav_title{
     margin:0 0 0 16px;
-    font-family: 'Noto Sans TC';
     font-size: 18px;
     font-weight: 700;
     color: #44444F;

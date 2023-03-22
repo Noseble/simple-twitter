@@ -17,7 +17,6 @@ const StyledButton = styled(Button)`
   border-radius:50px;
   
   /* font & others */
-  font-family: 'Noto Sans TC';
   font-size: 1rem;
   line-height: 24px;
   color: white;

@@ -48,7 +48,6 @@ const StyledPostTweet = styled(PostTweet)`
     border-radius: 2px;
     
     /* font & others */
-    font-family: 'Noto Sans TC';
     font-weight: 700;
     font-size: 18px;
     line-height: 26px;

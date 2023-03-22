@@ -23,7 +23,6 @@ const StyledUserInfo = styled(UserInfo)`
   }
 
   .user_name{
-    font-family: 'Noto Sans TC';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -33,7 +32,6 @@ const StyledUserInfo = styled(UserInfo)`
 
   .user_account{
     margin-left: 8px;
-    font-family: 'Noto Sans TC';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
