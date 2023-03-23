@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+*{
+  /* box model */
+  box-sizing: border-box;
+
+  /* font & others */
+  font-family: "Noto Sans TC";
+}

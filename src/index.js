@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import Tweet from 'components/tweet'
+import Tweet from 'components/tweet'
 // import UserNavItem from 'components/userNavItem'
-import OthersButtonArea from 'components/othersButtonArea'
+// import OthersButtonArea from 'components/othersButtonArea'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <OthersButtonArea />
+    <Tweet />
   </React.StrictMode>
 );
 
