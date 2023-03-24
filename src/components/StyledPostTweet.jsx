@@ -4,17 +4,22 @@ import styled, { css } from 'styled-components';
 import StyledUserAvatar from './StyledUserAvatar';
 import StyledButton from './StyledButton';
 
-//Usage: <StyledPostTweet (modalUsed) userImageSrc='https://assets-lighthouse.alphacamp.co//medium_PXL_20210405_004126448.MP.jpg' />
+//Usage: <StyledPostTweet userImageSrc='https://picsum.photos/300/300?text=1'/> 
 
 const PostTweet = ({ userImageSrc,className }) => {
+  let alertMessage = ''
+
+  alertMessage='內容不可為空白'
+  
   return(
     <div className={className}>
-      <div className='post_tweet_area'>
-        <StyledUserAvatar className='user_avatar' userImageSrc={userImageSrc}/>
-        <textarea className="tweet_input_area" type="textarea" placeholder='有什麼新鮮事?'/>
+      <div className='post-tweet-area'>
+        <StyledUserAvatar className='user-avatar' userImageSrc={userImageSrc}/>
+        <textarea className="tweet-input-area" type="textarea" placeholder='有什麼新鮮事?'/>
       </div>
-      <div className='button_area'>
-        <StyledButton className="tweet_button" width="64px">推文</StyledButton>
+      <div className='footer-area'>
+        {alertMessage.trim().length > 0 && <span className='alert-message'>{alertMessage}</span>}
+        <StyledButton className="tweet-button filled">推文</StyledButton>
       </div>
       
     </div>
@@ -32,13 +37,13 @@ const StyledPostTweet = styled(PostTweet)`
   height:136px;
   padding: 16px 24px;
   
-  .post_tweet_area{
+  .post-tweet-area{
     display: flex;
     height:100%;
   }
 
 
-  .tweet_input_area{
+  .tweet-input-area{
     /* box model */
     height:56px;
     width: 526px;
@@ -59,15 +64,26 @@ const StyledPostTweet = styled(PostTweet)`
     }
   }
 
-  .button_area{
+  .footer-area{
     display:flex;
     justify-content: end;
+    align-items: center;
+    
+    .alert-message{
+      width: fit-content;
+      margin-right: 20px;
+      color: #FC5A5A;
+      font-size: 15px;
+      line-height: 15px;
+
+    }
+
   }
 
   ${props=>props.modalUsed && css`
     height: 243px;
 
-    .tweet_input_area{
+    .tweet-input-area{
       height: 163px;
       font-weight: 400;
     }

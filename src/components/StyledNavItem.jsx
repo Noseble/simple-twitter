@@ -8,24 +8,24 @@ import { ReactComponent as NavHomeIconFilled } from 'assets/icon/NavHomeIconFill
 import { ReactComponent as NavUserIconFilled } from 'assets/icon/NavUserIconFilled.svg';
 import { ReactComponent as NavSettingIconFilled } from 'assets/icon/NavSettingIconFilled.svg';
 
-//Usage: <StyledNavItem navTitle='設定' (selected) />
+//Usage: <StyledNavItem navTitle='設定' (className="selected")/> 
 
-const NavItem = ({navTitle,selected,className}) => {
+const NavItem = ({ navTitle ,className }) => {
   return(
     <div className={className}>
-      <div className='nav_icon'>
-        { navTitle === "首頁" && !selected && <NavHomeIcon fill="#44444F" />}
-        { navTitle === "個人資料" && !selected && <NavUserIcon fill="#44444F" />}
-        { navTitle === "設定" && !selected && <NavSettingIcon fill="#44444F" />}
-        { navTitle === "推文清單" && !selected && <NavHomeIcon fill="#44444F" />}
-        { navTitle === "使用者列表" && !selected && <NavUserIcon fill="#44444F" />}
-        { navTitle === "首頁" && selected && <NavHomeIconFilled fill="#FF6600" />}
-        { navTitle === "個人資料" && selected && <NavUserIconFilled fill="#FF6600" />}
-        { navTitle === "設定" && selected && <NavSettingIconFilled fill="#FF6600" />}
-        { navTitle === "推文清單" && selected && <NavHomeIconFilled fill="#FF6600" />}
-        { navTitle === "使用者列表" && selected && <NavUserIconFilled fill="#FF6600" />}
+      <div className='nav-icon'>
+        { navTitle === "首頁" && !className.includes('selected') && <NavHomeIcon fill="#44444F" />}
+        { navTitle === "個人資料" && !className.includes('selected') && <NavUserIcon fill="#44444F" />}
+        { navTitle === "設定" && !className.includes('selected') && <NavSettingIcon fill="#44444F" />}
+        { navTitle === "推文清單" && !className.includes('selected') && <NavHomeIcon fill="#44444F" />}
+        { navTitle === "使用者列表" && !className.includes('selected') && <NavUserIcon fill="#44444F" />}
+        { navTitle === "首頁" && className.includes('selected') && <NavHomeIconFilled fill="#FF6600" />}
+        { navTitle === "個人資料" && className.includes('selected') && <NavUserIconFilled fill="#FF6600" />}
+        { navTitle === "設定" && className.includes('selected') && <NavSettingIconFilled fill="#FF6600" />}
+        { navTitle === "推文清單" && className.includes('selected') && <NavHomeIconFilled fill="#FF6600" />}
+        { navTitle === "使用者列表" && className.includes('selected') && <NavUserIconFilled fill="#FF6600" />}
       </div>
-      <h3 className='nav_title'>{navTitle}</h3>
+      <h3 className='nav-title'>{navTitle}</h3>
     </div>
   )
 }
@@ -36,28 +36,26 @@ const StyledNavItem = styled(NavItem)`
   width: 178px;
   height: 58px;
   
-  .nav_icon{
+  .nav-icon{
     margin-left: 20px;
     width: 24px;
     height: 24px;
   }
 
-  .nav_title{
+  .nav-title{
     margin:0 0 0 16px;
     font-size: 18px;
     font-weight: 700;
     color: #44444F;
   }
-
-  ${
-    props=>props.selected && css`
-      .nav_icon{
-        color: #FF6600;
-      }
-      .nav_title{
-        color: #FF6600;
-      }
-    `
+  
+  &.selected{
+    .nav-icon{
+      color: #FF6600;
+    }
+    .nav-title{
+      color: #FF6600;
+    }
   }
 `
 

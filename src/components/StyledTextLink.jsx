@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-//Usage: <StyledTextLink> 連結名稱 </StyledTextLink>
+//Usage: <StyledTextLink> 連結名稱 </StyledTextLink> 
 
 const TextLink = ({ className, children }) => {
   return(
-    <a href="/" className={className}> {children} </a>
+    <a href="#" className={className}> {children} </a>
   )
 }
 

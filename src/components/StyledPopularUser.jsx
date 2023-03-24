@@ -1,51 +1,60 @@
 import styled from 'styled-components';
+import clsx from 'clsx';
 
 /* import shared components */
 import StyledUserAvatar from './StyledUserAvatar';
 import StyledUserInfo from './StyledUserInfo';
 import StyledButton from './StyledButton';
 
-//Usage: <StyledPopularUser userName='Kevin Chou' userAccount='@kevinchou' isFollowing={false} />
+//Usage: <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={true} /> 
 
 const PopularUser = ({userName,userAccount,isFollowing,className}) => {
   return(
     <div className={className}>
-      <div className="popular_user">
-        <StyledUserAvatar className="popular_user_avatar"/>
-        <StyledUserInfo className="popular_user_info" columnArrange userName={userName} userAccount={userAccount} />
+      <div className={ clsx('popular-user', {small:isFollowing}, {large: !isFollowing})}>
+        <StyledUserAvatar className="popular-user-avatar"/>
+        <StyledUserInfo className="popular-user-info" columnArrange userName={userName} userAccount={userAccount} />
       </div>
-      { isFollowing === true ?
-      <StyledButton className="popular_user_button" width="96px">正在跟隨</StyledButton> : 
-      <StyledButton className="popular_user_button"outlined width="64px">跟隨</StyledButton> }
+      <StyledButton className={clsx('popular-user-button',{filled: isFollowing})} width={isFollowing ? '96px' : '64px'} > {isFollowing ? '正在跟隨' : '跟隨'} </StyledButton>
     </div>
   )
 }
 
 const StyledPopularUser = styled( PopularUser )`
+  /* display */
   display:flex;
   justify-content:space-between;
   align-items:center;
+
+  /* box model */
   width:241px;
   height:50px;
   margin: 16px;
 
-  .popular_user{
+  .popular-user{
     display:flex;
     align-items:center;
+
+    &.small{
+      width: 145px;
+    }
+
+    &.large{
+      width: 177px;
+    }
   }
 
-  .popular_user_avatar{
+  .popular-user-avatar{
     width:50px;
     height:50px;
   }
 
-  .popular_user_info{
+  .popular-user-info{
     margin-left: 8px;
   }
 
-  .popular_user_button{
-    justify-self: end;
-
+  .popular-user-button{
+    width: fit-content;
   }
 `
 

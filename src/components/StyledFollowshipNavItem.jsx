@@ -1,30 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 
-//Usage: <StyledUserNavItem />
+//Usage: <StyledFollowshipNavItem/>
 
-const UserNavItem = ({ className }) => {
+const FollowshipNavItem = ({ className }) => {
 	return (
 		<div className={className}>
 			<ul>
 				<li>
-					<input type='radio' id='contactChoice1' name='contact' />
-					<label htmlFor='contactChoice1'>推文</label>
+					<input type='radio' id='followshipChoice1' name='contact' />
+					<label htmlFor='followshipChoice1'>追隨者</label>
 				</li>
 				<li>
-					<input type='radio' id='contactChoice2' name='contact' />
-					<label htmlFor='contactChoice2'>回覆</label>
-				</li>
-				<li>
-					<input type='radio' id='contactChoice3' name='contact' />
-					<label htmlFor='contactChoice3'>喜歡的內容</label>
+					<input type='radio' id='followshipChoice2' name='contact' />
+					<label htmlFor='followshipChoice2'>正在追隨</label>
 				</li>
 			</ul>
 		</div>
 	);
 };
 
-const StyledUserNavItem = styled(UserNavItem)`
+const StyledFollowshipNavItem = styled(FollowshipNavItem)`
 	ul {
 		/* display */
 		display: flex;
@@ -75,6 +71,4 @@ const StyledUserNavItem = styled(UserNavItem)`
 	}
 `;
 
-
-
-export default StyledUserNavItem;
+export default StyledFollowshipNavItem

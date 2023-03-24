@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-//Usage: <StyledUserInfo (columnArrange) userName='Kevin Chou' userAccount='@kevinchou' />
+//Usage: <StyledUserInfo (columnArrange) userName='Kevin Chou' userAccount='@kevinchou' /> 
 
 const UserInfo = ({ userName, userAccount, className }) => {
   return(

@@ -1,26 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
+import clsx from 'clsx';
 import StyledUserAvatar from './StyledUserAvatar';
+
+import StyledUserInfo from './StyledUserInfo';
+
+//Usage: <StyledTweet userImageSrc='https://picsum.photos/300/300?text=1' userName='John' userAccount='@heyjohn' tweetTime='3小時' tweetContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isLiked={true}/> 
+
+
+//  { avatar, name, account, time, reply, like, id }
 /* 導入svg圖檔 */
 import { ReactComponent as Reply } from 'assets/icon/reply.svg';
-import { ReactComponent as Like } from 'assets/icon/like.svg';
+import { ReactComponent as LikeButton } from 'assets/icon/likeButton.svg';
 
-
-const Tweet = ({ className }) => {
+const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, isLiked, className }) => {
 	return (
 		<div className={ className }>
-			<StyledUserAvatar userImageSrc={'https://picsum.photos/300/300?text=1'} />
-			<div className='content'>
-				<div className='title'>
-					<label>Jhon<span>@heyjhon．3 小時</span></label>
+			<StyledUserAvatar userImageSrc={userImageSrc} />
+			<div className='tweet-area'>
+				<div className="tweet-title">
+					<StyledUserInfo userName={userName} userAccount={userAccount}/>
+          <span className='tweet-time'>．{tweetTime}</span>
 				</div>
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis
-					fuga, unde vitae vero. Qui, cupiditate?
+				<p className='tweet-content'>
+         {tweetContent}
 				</p>
 				<div className='footer'>
-					<label><Reply />13</label>
-					<label><Like />76</label>					
+					<button><Reply className='icon' fill='#6C757D' /><label>13</label></button>
+					<button><LikeButton className={clsx('icon','like-icon',{liked: isLiked})} fill='none' stroke='#6C757D' strokeWidth='2px' /><label>76</label></button>					
 				</div>
 			</div>
 		</div>
@@ -29,65 +36,77 @@ const Tweet = ({ className }) => {
 
 const StyledTweet = styled(Tweet)`
 	display: flex;
-	box-sizing: border-box;
 	justify-content: space-between;
-	padding: 8px 16px;
-	width: 500px;
+	padding: 16px 24px;
+	width: 640px;
 	border-bottom: 1px solid #E6ECF0;
 	
-	p {
-		font-size: 14px;
-		font-weight: 300;
-		margin: 0 auto;
-	}
+  .tweet-area{
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
 
-	.content{
-		display: flex;
-		flex-direction: column;
-		margin-left: 10px;
-	}
+    .tweet-title{
+      display: flex;
+      align-items: center;
+      
+      .tweet-time{
+        color: #6C757D;
+        font-size: 14px;
+        line-height: 22px;
+				font-weight: 400;
+      }
+    }
 
-	.title{
-		display: flex;
-		align-items: center;
-		height: 30px;
-	
-	label:first-child{
-		margin-right: 5px;
-		color: black;
-		font-weight: 700;
-	}
+		.tweet-content{
+			margin-top: 8px;
+			font-size: 16px;
+			line-height: 26px;
+			margin: 0 auto;
+		}
+ 
+		.footer {
+			display: flex;
+			font-size: 14px;
+			font-weight:600;
+			color: #657786;
+			margin-top: 8px;
 
-	label span {
-		color: #999999;
-		font-size: 15px;
-		font-weight: 500;
-		
-	}
-}
+			button{
+				display: flex;
+				justify-content: space-between;
+				align-items: center; 
+				background-color: white;
+				border: none;
+				width: 42px;
+				height: 16px;
+				padding: 1px;
+				
 
-	.footer {
-		display: flex;
-		font-size: 13px;
-		color: #657786;
-		width: 100px;
-		justify-content: space-between;
-		margin-top: 5px;
-	}
+				.icon{
+					width:14px;
+					height:14px;
+					padding: 0.5px;
+					cursor: pointer;
 
-	label {
-		display: flex;
-		align-items: center; 
-	}
+					&:hover{
+						fill:#FF6600;
+						stroke: #FF6600;
+						shadow: 0 0 2.5px #6C757D;
+					}
 
-	svg {
-		margin-right: 5px;
+					&.liked{
+						fill:#FF6600;
+						stroke: #FF6600;
+					}
+				}
+
+				&:first-child{
+					margin-right: 40px;
+				}
+			}
+		}
 	}
 `;
-
-
-
-//  { avatar, name, account, time, reply, like, id }
-
 
 export default StyledTweet;

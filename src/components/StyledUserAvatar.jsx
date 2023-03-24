@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import defaultUserImg from 'assets/image/defaultUserImg.svg';
 
-//Usage:<StyledUserAvatar userImageSrc="https://assets-lighthouse.alphacamp.co/medium_PXL_20210405_004126448.MP.jpg" />
+//Usage:<StyledUserAvatar userImageSrc="https://picsum.photos/300/300?text=1" /> 
 
 const UserAvatar = ({ userImageSrc, className }) => {
   return(

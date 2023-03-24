@@ -20,8 +20,6 @@
     ],
     "parser":"babel-eslint",
     "rules": {
-        "react/prop-types": "off",
-        "prettier/prettier": "warn"
       "eqeqeq":2, //必須使用 === 和 !==
       "no-empty-function":2, //禁止使用空函數
       "no-multi-spaces":2, //禁止使用多個空格
