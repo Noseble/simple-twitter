@@ -7,6 +7,7 @@ import { ReactComponent as NavSettingIcon } from 'assets/icon/NavSettingIcon.svg
 import { ReactComponent as NavHomeIconFilled } from 'assets/icon/NavHomeIconFilled.svg';
 import { ReactComponent as NavUserIconFilled } from 'assets/icon/NavUserIconFilled.svg';
 import { ReactComponent as NavSettingIconFilled } from 'assets/icon/NavSettingIconFilled.svg';
+import { ReactComponent as NavExitIcon } from 'assets/icon/NavExitIcon.svg'
 
 //Usage: <StyledNavItem navTitle='設定' (className="selected")/> 
 
@@ -19,6 +20,7 @@ const NavItem = ({ navTitle ,className }) => {
         { navTitle === "設定" && !className.includes('selected') && <NavSettingIcon fill="#44444F" />}
         { navTitle === "推文清單" && !className.includes('selected') && <NavHomeIcon fill="#44444F" />}
         { navTitle === "使用者列表" && !className.includes('selected') && <NavUserIcon fill="#44444F" />}
+        { navTitle === "登出" && <NavExitIcon fill='#44444F'/>} 
         { navTitle === "首頁" && className.includes('selected') && <NavHomeIconFilled fill="#FF6600" />}
         { navTitle === "個人資料" && className.includes('selected') && <NavUserIconFilled fill="#FF6600" />}
         { navTitle === "設定" && className.includes('selected') && <NavSettingIconFilled fill="#FF6600" />}
@@ -40,6 +42,9 @@ const StyledNavItem = styled(NavItem)`
     margin-left: 20px;
     width: 24px;
     height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .nav-title{
@@ -52,6 +57,15 @@ const StyledNavItem = styled(NavItem)`
   &.selected{
     .nav-icon{
       color: #FF6600;
+    }
+    .nav-title{
+      color: #FF6600;
+    }
+  }
+
+  &:hover{
+    .nav-icon > svg{
+      fill: #FF6600;
     }
     .nav-title{
       color: #FF6600;
