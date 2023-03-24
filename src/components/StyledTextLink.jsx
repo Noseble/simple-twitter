@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 //Usage: <StyledTextLink> 連結名稱 </StyledTextLink> 
 
-const TextLink = ({ className, children }) => {
+const TextLink = ({ link, className, children }) => {
   return(
-    <a href="#" className={className}> {children} </a>
+    <a href={link} className={className}> {children} </a>
   )
 }
 
