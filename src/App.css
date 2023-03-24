@@ -61,11 +61,18 @@ body > #root > .web-container{
   justify-content: space-between;
 }
 
-.website-logo{
+h2 {
+  margin-left: 20px;
+  font-weight: 700;
+  color: #171725;
+}
+
+.website-logo {
   width: 40px;
   height: 40px;
 
   margin-top: 13px;
+  margin-bottom: 13px;
   margin-left: 13px;
 }
 

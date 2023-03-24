@@ -35,6 +35,7 @@ const StyledAdminTweet = styled(AdminTweet)`
   width: 936px;
   height: 118px;
   padding: 16px 24px;
+  border-bottom: 1px  solid #E6ECF0;
 
 
   .tweet-area{
