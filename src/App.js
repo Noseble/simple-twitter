@@ -36,8 +36,8 @@ function App() {
         {/*前台路由*/}
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
-        <Route path="/" element={<HomePage />}>
-          <Route index element={<HomePageIndexArea/>}/>
+        <Route path='/' element={<HomePage/>}>
+          <Route index element={<HomePageIndexArea />} />
           <Route path="tweet/:tweetId" element={<HomePageTweetArea />} />
           <Route path="user/:userId" element={<HomePageUserArea />}>
             <Route index element={<HomePageUserTweetArea />} />
