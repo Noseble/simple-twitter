@@ -1,12 +1,21 @@
-import { Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom";
+import styled from "styled-components";
+import clsx from "clsx";
 
-const AdminPage = () => {
+const AdminPage = ({className}) => {
   return(
-    <>
-      <h1>This is AdminPage.</h1>
-      <Outlet/>
-    </>
-
+    <div className={clsx('web-container', className)}>
+      <nav className="nav-column">
+        nav-column
+      </nav>
+      <div className="main-list-container">
+        <div className="main-header">
+          main-header
+        </div>
+        <hr className="main-header-line"/>
+        main-lit-container
+      </div>
+    </div>
   )
 }
 

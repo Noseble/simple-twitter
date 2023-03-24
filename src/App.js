@@ -29,6 +29,7 @@ function App() {
         {/*後台路由*/}
         <Route path="admin_login" element={<AdminLoginPage />}/>
         <Route path="admin" element={<AdminPage/>}>
+          <Route index element={<AdminPageTweetsArea/>}/>
           <Route path="tweets" element={<AdminPageTweetsArea/>}/>
           <Route path="users" element={<AdminPageUsersArea />}/>
         </Route>
@@ -40,6 +41,7 @@ function App() {
           <Route path="tweet/:tweetId" element={<HomePageTweetArea />} />
           <Route path="user/:userId" element={<HomePageUserArea />}>
             <Route index element={<HomePageUserTweetArea />} />
+            <Route path="tweet" element={<HomePageUserTweetArea />}/> 
             <Route path="reply" element={<HomePageUserReplyArea />}/>
             <Route path="like" element={<HomePageUserLikeArea />}/>
             <Route path="follower" element={<HomePageUserFollowerArea/>}/>
