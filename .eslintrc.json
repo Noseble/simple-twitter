@@ -14,12 +14,6 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "prettier/prettier": [
-        "error",
-        {
-            "endOfLine": "auto"
-        }
-    ],
     "plugins": [
         "react",
         "prettier"
