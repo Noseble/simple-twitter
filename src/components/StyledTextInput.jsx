@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 //Usage: <StyledTextInput (className='focus/error/disabled') width="360px" labelName='名稱' placeholder='請輸入名稱' (wordLimit="50") />
 
-const TextInput = ({ labelName,defaultValue, placeholder, wordLimit, className})=>{
+const TextInput = ({ labelName, placeholder, type, value, wordLimit, onChange, className})=>{
   let alertMessage = ""
   let wordCount = 0
 
@@ -12,7 +12,7 @@ const TextInput = ({ labelName,defaultValue, placeholder, wordLimit, className})
     <div className={ className }>
       <div className='input_block'>
         <label className='input_label'>{labelName ? labelName : "Label"}</label>
-        <input disabled={ className.includes('disabled') ? true : false } defaultValue={defaultValue} type='text' placeholder={placeholder ? placeholder : "Placeholder"}/>
+        <input disabled={ className.includes('disabled') ? true : false } type={type || 'text'} defaultValue={defaultValue} value={value || ''} placeholder={placeholder ? placeholder : "Placeholder"} onChange={(event) => onChange?.(event.target.value)} />
       </div>
       <div className='input_info'>
         {alertMessage.trim().length > 0 ? <span className="input_message">{alertMessage}</span> : null}

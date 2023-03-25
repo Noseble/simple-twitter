@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import { useState, useEffect } from 'react';
 import StyledUserCard from "components/StyledUserCard"
-
+import { getAdminUsers } from "api/api";
 
 const AdminPageUsersArea = ({ className }) => {
+  const [users, setUsers] = useState([]);
+  console.log(getAdminUsers)
 
   return (
     

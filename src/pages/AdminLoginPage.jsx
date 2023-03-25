@@ -15,8 +15,8 @@ const AdminLoginPage = ({ className }) => {
       <Aclogo className='login-logo' width='40px' height='40px'/>
       <h1 className="login-title">後台登入</h1>
       <div className="login-input-area">
-        <StyledTextInput className='text-input' labelName='帳號' placeholder={'請輸入帳號'} width={'356px'} wordLimit={20}/>
-        <StyledTextInput className='text-input' labelName={'密碼'} placeholder={'請輸入密碼'} width={'356px'} wordLimit={16}/>
+        <StyledTextInput className='text-input' labelName='帳號' placeholder='請輸入帳號' type='text' width='356px' wordLimit={20}/>
+        <StyledTextInput className='text-input' labelName='密碼' placeholder='請輸入密碼' type='password' width='356px' wordLimit={16}/>
       </div>
       <StyledButton className='login-button filled' width='100%'>登入</StyledButton>
       <div className="footer">
