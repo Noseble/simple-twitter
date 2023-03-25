@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 /* import shared components */
 import StyledUserAvatar from './StyledUserAvatar';
-import StyledUserInfo from './StyledUserInfo';
+import StyledUserTitle from './StyledUserTitle';
 import StyledButton from './StyledButton';
 
 //Usage: <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={true} /> 
@@ -13,7 +13,7 @@ const PopularUser = ({userName,userAccount,isFollowing,className}) => {
     <div className={className}>
       <div className={ clsx('popular-user', {small:isFollowing}, {large: !isFollowing})}>
         <StyledUserAvatar className="popular-user-avatar"/>
-        <StyledUserInfo className="popular-user-info" columnArrange userName={userName} userAccount={userAccount} />
+        <StyledUserTitle className="popular-user-info" columnArrange userName={userName} userAccount={userAccount} />
       </div>
       <StyledButton className={clsx('popular-user-button',{filled: isFollowing})} width={isFollowing ? '96px' : 'fit-content'} > {isFollowing ? '正在跟隨' : '跟隨'}</StyledButton>
     </div>

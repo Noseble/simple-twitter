@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
-//Usage: <StyledUserInfo (columnArrange) userName='Kevin Chou' userAccount='@kevinchou' /> 
+//Usage: <StyledUserTitle (columnArrange) userName='Kevin Chou' userAccount='@kevinchou' /> 
 
-const UserInfo = ({ userName, userAccount, className }) => {
+const UserTitle = ({ userName, userAccount, className }) => {
   return(
     <a href="/" className={ className }>
      <p className='user_name'>{userName}</p>
@@ -11,7 +11,7 @@ const UserInfo = ({ userName, userAccount, className }) => {
   )
 }
 
-const StyledUserInfo = styled(UserInfo)`
+const StyledUserTitle = styled(UserTitle)`
   display: block;
   display: flex;
   align-items: center;
@@ -49,4 +49,4 @@ const StyledUserInfo = styled(UserInfo)`
   `}
 `
 
-export default StyledUserInfo
+export default StyledUserTitle

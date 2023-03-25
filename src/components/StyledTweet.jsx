@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import clsx from 'clsx';
 import StyledUserAvatar from './StyledUserAvatar';
 
-import StyledUserInfo from './StyledUserInfo';
+import StyledUserTitle from './StyledUserTitle';
 
 //Usage: <StyledTweet userImageSrc='https://picsum.photos/300/300?text=1' userName='John' userAccount='@heyjohn' tweetTime='3小時' tweetContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isLiked={true}/> 
 
@@ -19,7 +19,7 @@ const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, i
 			<StyledUserAvatar userImageSrc={userImageSrc} />
 			<div className='tweet-area'>
 				<div className="tweet-title">
-					<StyledUserInfo userName={userName} userAccount={userAccount}/>
+					<StyledUserTitle userName={userName} userAccount={userAccount}/>
           <span className='tweet-time'>．{tweetTime}</span>
 				</div>
 				<p className='tweet-content'>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 /* 導入共用元件 */
 import StyledUserAvatar from './StyledUserAvatar';
-import StyledUserInfo from './StyledUserInfo';
+import StyledUserTitle from './StyledUserTitle';
 
 //Usage: <StyledReply userName='John' userAccount='@heyjohn' userImageSrc='https://picsum.photos/300/300?text=1' replyTime='3小時' replyTo='@apple' replyContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero.'/> 
 
@@ -13,7 +13,7 @@ const Reply = ({ userName, userAccount, userImageSrc, replyTime, replyTo, replyC
 		  <StyledUserAvatar userImageSrc={userImageSrc}/>
 			<div className="reply-area">
 				<div className="reply-title">
-					<StyledUserInfo userName={userName} userAccount={userAccount}/>
+					<StyledUserTitle userName={userName} userAccount={userAccount}/>
           <span className='reply-time'>．{replyTime}</span>
 				</div>
           <label className='reply-to-area'>回覆 <span className='target-user'>{replyTo}</span></label>

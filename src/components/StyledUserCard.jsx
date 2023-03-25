@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import StyledUserAvatar from "./StyledUserAvatar";
-import StyledUserInfo from "./StyledUserInfo";
+import StyledUserTitle from "./StyledUserTitle";
 
 import { ReactComponent as Pen } from 'assets/icon/Pen.svg';
 import { ReactComponent as Like } from "assets/icon/likeButton.svg";
@@ -16,7 +16,7 @@ const UserCard = ({ bgImageSrc, userImageSrc, userName, userAccount, userTweetsC
       <img src={bgImageSrc} className='user-background-image'/>
       <StyledUserAvatar className='user-avatar' userImageSrc={userImageSrc}/>
       <div className="user-info">
-        <StyledUserInfo className='user-title' columnArrange userName={userName} userAccount={userAccount}/>
+        <StyledUserTitle className='user-title' columnArrange userName={userName} userAccount={userAccount}/>
         <div className="tweets-likes-count">
           <div className="tweets-count"><Pen className="icon" fill='#6C757D' width='24px' height='22px'/>{userTweetsCount}</div>
           <div className="likes-count"><Like className="icon"  fill='none' stroke='#6C757D' strokeWidth='2px' width='20px' height='19px'/>{userLikesCounts}</div>

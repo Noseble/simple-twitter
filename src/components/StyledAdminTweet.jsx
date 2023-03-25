@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import StyledUserAvatar from "./StyledUserAvatar";
-import StyledUserInfo from "./StyledUserInfo";
+import StyledUserTitle from "./StyledUserTitle";
 
 import {ReactComponent as DeleteButton} from "assets/icon/cross.svg"
 
@@ -13,7 +13,7 @@ const AdminTweet = ({userImageSrc, userName, userAccount, tweetTime, tweetConten
       <div className="tweet-area">
         <div className="header">
           <div className="user-info">
-            <StyledUserInfo userName={userName} userAccount={userAccount}/>
+            <StyledUserTitle userName={userName} userAccount={userAccount}/>
             <span className='tweet-time'>．{tweetTime}</span>
           </div>
         </div>
