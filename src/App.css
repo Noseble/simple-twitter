@@ -43,11 +43,23 @@
 
   /* font & others */
   font-family: "Noto Sans TC";
+  font-style: #171725;
+}
+
+h2 {
+  margin: 0;
+  line-height: 26px;
+  font-weight: 700;
+  color: #171725;
+}
+
+ul{
+  padding:0;
+  margin: 0;
 }
 
 body > #root > .web-container{
   display:flex;
-  justify-content: space-between;
   margin: 0 auto;
   width: 1140px;
   height: 100vh;
@@ -59,13 +71,6 @@ body > #root > .web-container{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-h2 {
-  margin: 0;
-  line-height:26px;
-  font-weight: 700;
-  color: #171725;
 }
 
 .website-logo {
@@ -86,12 +91,45 @@ h2 {
   height: 100%;
 }
 
-.main-container{
-  width: 642px;
+.scroll-area {
+  width: 662px;
   height: 100%;
+  padding-right: 20px;
+  margin-left: 24px;
+  margin-right: 4px;
+  overflow-y: visible;
+  overflow-x: hidden;
+}
 
+.scrollbar::-webkit-scrollbar {
+  width: 15px;
+}
+
+.scrollbar::-webkit-scrollbar-track{
+  width: 15px;
+  background-color: #FAFAFA;
+  border-right: 0.5px solid #E6ECF0;
+  border-left: 0.5px solid #E6ECF0;
+    /* box-shadow: inset 1px 0px 0px #E8E8E8, inset -1px 0px 0px #F0F0F0; */
+}
+
+/* bar的樣式 */
+.scrollbar::-webkit-scrollbar-thumb {
+  border: 4px solid transparent;
+  border-radius: 8px;
+  background-clip: content-box;
+  background-color: #C1C1C1;
+  /* background-image: url(assets/icon/scrollbarThumb.svg);
+  background-repeat: no-repeat;
+  background-size: 8px 25px;
+  background-position: center; */
+}
+
+.main-container{
+  width: 642px; 
+  height: fit-content;
   border-right: 1px solid #E6ECF0;
-  border-left: 1px solid #E6ECF0;
+  border-left: 1px solid #E6ECF0
 }
 
 .main-header{

@@ -15,7 +15,7 @@ const PopularUser = ({userName,userAccount,isFollowing,className}) => {
         <StyledUserAvatar className="popular-user-avatar"/>
         <StyledUserInfo className="popular-user-info" columnArrange userName={userName} userAccount={userAccount} />
       </div>
-      <StyledButton className={clsx('popular-user-button',{filled: isFollowing})} width={isFollowing ? '96px' : '64px'} > {isFollowing ? '正在跟隨' : '跟隨'} </StyledButton>
+      <StyledButton className={clsx('popular-user-button',{filled: isFollowing})} width={isFollowing ? '96px' : 'fit-content'} > {isFollowing ? '正在跟隨' : '跟隨'}</StyledButton>
     </div>
   )
 }
@@ -36,11 +36,11 @@ const StyledPopularUser = styled( PopularUser )`
     align-items:center;
 
     &.small{
-      width: 145px;
+      width: 140px;
     }
 
     &.large{
-      width: 177px;
+      width: 172px;
     }
   }
 
