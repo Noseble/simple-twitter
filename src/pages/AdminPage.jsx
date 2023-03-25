@@ -7,23 +7,30 @@ import clsx from "clsx";
 import StyledNavItem from "components/StyledNavItem";
 
 // svg
-import { ReactComponent as Logo } from 'assets/icon/AcLogo.svg'
-
-
+import { ReactComponent as AcLogo } from 'assets/icon/AcLogo.svg'
 
 const AdminPage = ({className}) => {
 
   return(
-    <div className={clsx('web-container', className)}>
-      <nav className="nav-column">
-        <div className="top">
-        <div className="website-logo"><Logo /></div>
-        <Link to={'tweets'} style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'推文清單'} className='selected' /></Link>
-        <Link to={'users'} style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'使用者列表'} /></Link>
+    <div className={clsx('admin-web-container', className)}>
+      <nav className="admin-nav-column">
+        <div className="nav-main">
+          <div className="aclogo">
+            <AcLogo className="website-logo" />
+          </div>
+          <div className="nav-list">
+            <Link to='/admin/tweets' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'推文清單'} className='selected' /></Link>
+            <Link to='/admin/users' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'使用者列表'} /></Link>
+          </div>
         </div>
-        <StyledNavItem navTitle={'登出'} />
+        <StyledNavItem className='exit-nav-item' navTitle='登出' />
       </nav>
-      <Outlet />
+      <div className="main-list-scrollbar">
+        <div className="main-list-container">
+          <Outlet />
+        </div>
+      </div>
+
     </div>
   )
 }

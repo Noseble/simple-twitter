@@ -16,7 +16,7 @@ const Reply = ({ userName, userAccount, userImageSrc, replyTime, replyTo, replyC
 					<StyledUserTitle userName={userName} userAccount={userAccount}/>
           <span className='reply-time'>．{replyTime}</span>
 				</div>
-          <label className='reply-to-area'>回覆 <span className='target-user'>{replyTo}</span></label>
+          <label className='reply-to-area'>回覆 <a href='#' className='target-user'>{replyTo}</a></label>
 				<p className='reply-content'>
           {replyContent}
 				</p>
@@ -57,6 +57,11 @@ const StyledReply = styled(Reply)`
 
       .target-user{
        color: #FF6600;
+       text-decoration: none;
+
+       &:hover{
+        font-weight: 500;
+       }
       }
     }
    

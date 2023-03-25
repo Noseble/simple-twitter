@@ -22,8 +22,8 @@ const UserCard = ({ bgImageSrc, userImageSrc, userName, userAccount, userTweetsC
           <div className="likes-count"><Like className="icon"  fill='none' stroke='#6C757D' strokeWidth='2px' width='20px' height='19px'/>{userLikesCounts}</div>
         </div>
         <div className="followship-counts">
-          <div className="following"><span className='followship-number'>{userFollowingCount}個</span>跟隨中</div>
-          <div className="follower"><span className='followship-number'>{userFollowerCount}位</span>跟隨者</div>
+          <a href='/user/:userId/following' className="following">{userFollowingCount}個<span className='followship-unit'>跟隨中</span></a>
+          <a href='/user/:userId/follower' className="follower">{userFollowerCount}位<span className='followship-unit'>跟隨者</span></a>
         </div>
 
       </div>
@@ -75,6 +75,10 @@ const StyledUserCard = styled(UserCard)`
     height: 174px;
     padding: 32px 20px 24px;
 
+    .user-title{
+      align-items: center;
+    }
+
     .tweets-likes-count{
       /* display */
       display:flex;
@@ -111,8 +115,17 @@ const StyledUserCard = styled(UserCard)`
       color: #6C757D;
 
       
-      & .followship-number{
-        color: #171725;
+      & .followship-unit{
+        color: #6C757D;
+      }
+
+      .following,
+      .follower{
+        text-decoration: none;
+
+        &:hover{
+          font-weight: 500;
+        }
       }
 
       .following{

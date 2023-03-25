@@ -9,7 +9,7 @@ import {ReactComponent as DeleteButton} from "assets/icon/cross.svg"
 const AdminTweet = ({userImageSrc, userName, userAccount, tweetTime, tweetContent, className}) => {
   return(
     <div className={className}>
-      <StyledUserAvatar userImageSrc={userImageSrc}/>
+      <StyledUserAvatar className='user-avatar' userImageSrc={userImageSrc}/>
       <div className="tweet-area">
         <div className="header">
           <div className="user-info">
@@ -33,15 +33,15 @@ const StyledAdminTweet = styled(AdminTweet)`
   
   /* box model */
   width: 936px;
-  height: 118px;
+  height: fit-content;
   padding: 16px 24px;
   border-bottom: 1px  solid #E6ECF0;
-
-
+  
   .tweet-area{
     display: flex;
     flex-direction: column;
     margin-left: 8px;
+    width: 830px;
     
     .header{
       /* display */
@@ -67,10 +67,10 @@ const StyledAdminTweet = styled(AdminTweet)`
     }
 
     .tweet-content{
-      margin-top: 8px;
+      width: 100%;
+      margin: 8px 0 0;
 			font-size: 16px;
 			line-height: 26px;
-			margin: 0 auto;
     }
   }
 
@@ -83,6 +83,7 @@ const StyledAdminTweet = styled(AdminTweet)`
     /* others */
     margin: 4.5px;
     transform: translate(-50%, -50%);
+    cursor: pointer;
 
     &:hover{
       fill: #FF6600;

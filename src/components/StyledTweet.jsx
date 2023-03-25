@@ -26,8 +26,8 @@ const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, i
          {tweetContent}
 				</p>
 				<div className='footer'>
-					<button><Reply className='icon' fill='#6C757D' /><label>13</label></button>
-					<button><LikeButton className={clsx('icon','like-icon',{liked: isLiked})} fill='none' stroke='#6C757D' strokeWidth='2px' /><label>76</label></button>					
+					<button><Reply className='icon' fill='#6C757D' height='14px'/><label>13</label></button>
+					<button><LikeButton className={clsx('icon','like-icon',{liked: isLiked})} fill='none' stroke='#6C757D' strokeWidth='2px' height='14px' /><label>76</label></button>					
 				</div>
 			</div>
 		</div>
@@ -84,9 +84,6 @@ const StyledTweet = styled(Tweet)`
 				
 
 				.icon{
-					width:14px;
-					height:14px;
-					padding: 0.5px;
 					cursor: pointer;
 
 					&:hover{

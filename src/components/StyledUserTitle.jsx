@@ -5,8 +5,8 @@ import styled, { css } from 'styled-components';
 const UserTitle = ({ userName, userAccount, className }) => {
   return(
     <a href="/" className={ className }>
-     <p className='user_name'>{userName}</p>
-     <p className='user_account'>{userAccount}</p>
+     <p className='user-name'>{userName}</p>
+     <p className='user-account'>{userAccount}</p>
     </a>
   )
 }
@@ -22,7 +22,7 @@ const StyledUserTitle = styled(UserTitle)`
     margin:0;
   }
 
-  .user_name{
+  .user-name{
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -30,10 +30,9 @@ const StyledUserTitle = styled(UserTitle)`
     color:#171725;
   }
 
-  .user_account{
+  .user-account{
     margin-left: 8px;
     font-style: normal;
-    font-weight: 400;
     font-size: 14px;
     line-height: 22px;
     color:#6C757D;
@@ -43,10 +42,20 @@ const StyledUserTitle = styled(UserTitle)`
     flex-direction: column ;
     align-items: start;
 
-    .user_account{
+    .user-account{
       margin-left:0;
     }
   `}
+
+  &:hover{
+    .user-name{
+      font-weight: 800;
+    }
+
+    .user-account{
+      font-weight: 500;
+    }
+  }
 `
 
 export default StyledUserTitle

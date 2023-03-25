@@ -24,8 +24,8 @@ const UserInfoSection = ({ isSelf, className }) => {
           Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. 
         </p>
         <div className="user-followship">
-          <div className="following"><span className='followship-number'>34個</span>跟隨中</div>
-          <div className="follower"><span className='followship-number'>59位</span>跟隨者</div>
+          <a href='/user/:userId/following' className="following">34個<span className='followship-unit'>跟隨中</span></a>
+          <a href='/user/:userId/follower' className="follower">59位<span className='followship-unit'>跟隨者</span></a>
         </div>
       </div>
     </div>
@@ -82,13 +82,17 @@ const StyledUserInfoSection = styled(UserInfoSection)`
     color: #6C757D;
 
     
-    & .followship-number{
-      color: #171725;
+    & .followship-unit{
+      color: #6C757D;
     }
 
     .following,
     .follower{
-      cursor: pointer;
+      text-decoration: none;
+      
+      &:hover{
+        font-weight: 500;
+      }
     }
 
     .following{

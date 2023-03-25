@@ -21,6 +21,10 @@ const StyledUserAvatar = styled( UserAvatar )`
   background-image: url(${defaultUserImg});
   background-size: cover;
   cursor: pointer;
+
+  &:hover{
+    box-shadow: 0 0 3px #171725;
+  }
 `
 
 export default StyledUserAvatar

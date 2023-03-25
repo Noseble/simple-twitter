@@ -1,4 +1,4 @@
-import { useParams, Outlet } from "react-router-dom";
+import { useParams, Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 import { ReactComponent as ReturnIcon } from 'assets/icon/returnArrow.svg';
@@ -9,7 +9,7 @@ const HomePageUserArea = ({className}) => {
   return(
     <div className={className}>
       <div className='main-header'>
-        <ReturnIcon className="return-icon" />
+        <Link to="#" onClick={() => { window.history.back() }}><ReturnIcon className="return-icon" /></Link>
         <div className="user-title">
           <h3 className="user-title-name">John Doe</h3>
           <h5 className="user-tweets">25 推文</h5>

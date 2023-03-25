@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
 
@@ -18,9 +18,9 @@ const HomePage = ({className}) => {
             <AcLogo className="website-logo" />
           </div>
           <div className="nav-list">
-            <StyledNavItem navTitle='首頁' />
-            <StyledNavItem navTitle='個人資料' />
-            <StyledNavItem navTitle='設定' />
+            <Link to='/' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='首頁' /></Link>
+            <Link to='/user/:userId' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='個人資料' /></Link>
+            <Link to='/setting' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='設定' /></Link>
           </div>
           <StyledButton className='filled' width='100%'>推文</StyledButton>
         </div>

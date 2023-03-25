@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 import styled from 'styled-components';
 
 //Usage: <StyledUserNavItem />
@@ -8,16 +9,16 @@ const UserNavItem = ({ className }) => {
 		<div className={className}>
 			<ul>
 				<li>
-					<input type='radio' id='contactChoice1' name='contact' />
-					<label htmlFor='contactChoice1'>推文</label>
+						<input type='radio' id='contactChoice1' name='contact' />
+						<label htmlFor='contactChoice1'>推文</label>
 				</li>
 				<li>
-					<input type='radio' id='contactChoice2' name='contact' />
-					<label htmlFor='contactChoice2'>回覆</label>
+						<input type='radio' id='contactChoice2' name='contact' />
+						<label htmlFor='contactChoice2'>回覆</label>
 				</li>
 				<li>
-					<input type='radio' id='contactChoice3' name='contact' />
-					<label htmlFor='contactChoice3'>喜歡的內容</label>
+						<input type='radio' id='contactChoice3' name='contact' />
+						<label htmlFor='contactChoice3'>喜歡的內容</label>
 				</li>
 			</ul>
 		</div>
