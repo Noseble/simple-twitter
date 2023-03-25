@@ -6,7 +6,6 @@ import clsx from "clsx";
 import StyledButton from "components/StyledButton";
 import StyledNavItem from "components/StyledNavItem";
 import {ReactComponent as AcLogo} from 'assets/icon/AcLogo.svg'
-import StyledPostTweet from "components/StyledPostTweet";
 import StyledPopularUser from "components/StyledPopularUser";
 
 const HomePage = ({className}) => {

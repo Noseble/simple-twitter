@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import clsx from "clsx";
 
 import StyledUserAvatar from "components/StyledUserAvatar";
-import StyledUserInfo from "components/StyledUserInfo";
+import StyledUserTitle from "components/StyledUserTitle";
 
 import { ReactComponent as ReturnIcon } from 'assets/icon/returnArrow.svg';
 import { ReactComponent as Reply } from 'assets/icon/reply.svg';
@@ -22,7 +22,7 @@ const HomePageTweetArea = ({isLiked, className}) => {
       <div className="main-tweet">
         <div className="user-title">
           <StyledUserAvatar userImageSrc="https://picsum.photos/300/300?text=1"/>
-          <StyledUserInfo className='user-info' columnArrange userName='Kevin Chou' userAccount='@kevinchou'/>
+          <StyledUserTitle className='user-info' columnArrange userName='Kevin Chou' userAccount='@kevinchou'/>
         </div>
         <div className="tweet-content">
           Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt. Nulla Lorem mollit cupidatat irure. Laborum duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt. 
