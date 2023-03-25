@@ -91,7 +91,7 @@ body > #root > .web-container{
   height: 100%;
 }
 
-.scroll-area {
+.main-scrollbar {
   width: 662px;
   height: 100%;
   padding-right: 20px;
@@ -101,33 +101,33 @@ body > #root > .web-container{
   overflow-x: hidden;
 }
 
-.scrollbar::-webkit-scrollbar {
+.main-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.main-scrollbar:hover::-webkit-scrollbar {
+  display: block;
   width: 15px;
 }
 
-.scrollbar::-webkit-scrollbar-track{
+.main-scrollbar:hover::-webkit-scrollbar-track{
   width: 15px;
   background-color: #FAFAFA;
   border-right: 0.5px solid #E6ECF0;
   border-left: 0.5px solid #E6ECF0;
-    /* box-shadow: inset 1px 0px 0px #E8E8E8, inset -1px 0px 0px #F0F0F0; */
 }
 
 /* bar的樣式 */
-.scrollbar::-webkit-scrollbar-thumb {
+.main-scrollbar:hover::-webkit-scrollbar-thumb {
   border: 4px solid transparent;
   border-radius: 8px;
   background-clip: content-box;
   background-color: #C1C1C1;
-  /* background-image: url(assets/icon/scrollbarThumb.svg);
-  background-repeat: no-repeat;
-  background-size: 8px 25px;
-  background-position: center; */
 }
 
 .main-container{
   width: 642px; 
-  height: fit-content;
+  min-height: 100vh;
   border-right: 1px solid #E6ECF0;
   border-left: 1px solid #E6ECF0
 }
