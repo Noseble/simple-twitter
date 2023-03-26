@@ -6,7 +6,7 @@ const UserTitle = ({ userName, userAccount, className }) => {
   return(
     <a href="/" className={ className }>
      <p className='user-name'>{userName}</p>
-     <p className='user-account'>{userAccount}</p>
+     <p className='user-account'>{`@${userAccount}`}</p>
     </a>
   )
 }

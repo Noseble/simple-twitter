@@ -19,7 +19,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -29,7 +29,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -39,7 +39,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -49,7 +49,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -59,7 +59,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -69,7 +69,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -79,7 +79,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -89,7 +89,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -99,7 +99,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -109,7 +109,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -119,48 +119,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'@adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'@adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'@adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -171,7 +130,48 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
+        userTweetsCount={'5000'}
+        userLikesCounts={'2000'}
+        userFollowingCount={'100'}
+        userFollowerCount={'110'}
+        />
+        <StyledUserCard 
+        bgImageSrc={'https://is.gd/HLYrRZ'}
+        userImageSrc={'https://is.gd/3z1Ubr'}
+        userName={'Adam'}
+        userAccount={'adam666'}
+        userTweetsCount={'5000'}
+        userLikesCounts={'2000'}
+        userFollowingCount={'100'}
+        userFollowerCount={'110'}
+        />
+        <StyledUserCard 
+        bgImageSrc={'https://is.gd/HLYrRZ'}
+        userImageSrc={'https://is.gd/3z1Ubr'}
+        userName={'Adam'}
+        userAccount={'adam666'}
+        userTweetsCount={'5000'}
+        userLikesCounts={'2000'}
+        userFollowingCount={'100'}
+        userFollowerCount={'110'}
+        />
+        <StyledUserCard 
+        bgImageSrc={'https://is.gd/HLYrRZ'}
+        userImageSrc={'https://is.gd/3z1Ubr'}
+        userName={'Adam'}
+        userAccount={'adam666'}
+        userTweetsCount={'5000'}
+        userLikesCounts={'2000'}
+        userFollowingCount={'100'}
+        userFollowerCount={'110'}
+        />
+
+        <StyledUserCard 
+        bgImageSrc={'https://is.gd/HLYrRZ'}
+        userImageSrc={'https://is.gd/3z1Ubr'}
+        userName={'Adam'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -180,7 +180,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -189,7 +189,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -198,7 +198,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}
@@ -207,7 +207,7 @@ const AdminPageUsersArea = ({ className }) => {
         bgImageSrc={'https://is.gd/HLYrRZ'}
         userImageSrc={'https://is.gd/3z1Ubr'}
         userName={'Adam'}
-        userAccount={'@adam666'}
+        userAccount={'adam666'}
         userTweetsCount={'5000'}
         userLikesCounts={'2000'}
         userFollowingCount={'100'}

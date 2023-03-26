@@ -45,16 +45,16 @@ const HomePage = ({className}) => {
           <h2 className="popular-list-title">推薦跟隨</h2>
           <hr className="popular-list-hr"/>
           <div className="popular-list">
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={true}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={true}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={true}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={true}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
           </div>
         </div>
       </div>

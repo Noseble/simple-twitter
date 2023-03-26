@@ -19,7 +19,7 @@ const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, i
 			<StyledUserAvatar userImageSrc={userImageSrc} />
 			<div className='tweet-area'>
 				<div className="tweet-title">
-					<StyledUserTitle userName={userName} userAccount={userAccount}/>
+					<StyledUserTitle userName={userName} userAccount={`${userAccount}`}/>
           <span className='tweet-time'>．{tweetTime}</span>
 				</div>
 				<p className='tweet-content'>
