@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 // 載入共用元件
@@ -18,13 +19,12 @@ const LoginPage = ({ className }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleClick = async () => {
  if (email.length === 0 || password.length === 0) return;
    
-
- 
-  const { success, token } = await login({
+  const { success, authToken } = await login({
     email,
     password,
   });
@@ -39,6 +39,7 @@ const LoginPage = ({ className }) => {
         icon: 'success',
         showConfirmButton: false,
       });
+      navigate('/')
       return;
     }
     
@@ -58,10 +59,10 @@ const LoginPage = ({ className }) => {
       <AcLogo className='login-logo' width='40px' height='40px'/>
       <h1 className="login-title">登入 Alphitter</h1>
       <div className="login-input-area">
-        <StyledTextInput className='text-input' labelName='帳號' value={email} placeholder='請輸入帳號' width='356px' wordLimit='20'/>
-        <StyledTextInput className='text-input' labelName='密碼' value={password} placeholder='請輸入密碼' type='password' width='356px' wordLimit='16' onChange={(passwordInputValue) => setPassword(passwordInputValue)}/>
+        <StyledTextInput className='text-input' labelName='帳號' value={email}   placeholder='請輸入帳號' width='356px' wordLimit='50'  wordCount={email.length} onChange={(emailInputValue) => setEmail(emailInputValue)}/>
+        <StyledTextInput className='text-input' labelName='密碼' value={password}  placeholder='請輸入密碼' type='password' width='356px' wordLimit='16' wordCount={password.length} onChange={(passwordInputValue) => setPassword(passwordInputValue)}/>
       </div>
-      <StyledButton className='login-button filled' width='100%' onclick={handleClick}>登入</StyledButton>
+      <StyledButton className='login-button filled' width='100%' onClick={handleClick}>登入</StyledButton>
       <div className="footer">
         <StyledTextLink link='/register'>註冊</StyledTextLink>
         <span>．</span>

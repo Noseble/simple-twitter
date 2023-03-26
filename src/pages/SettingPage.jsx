@@ -35,9 +35,9 @@ const HomePage = ({className}) => {
           </div>
           <hr className='main-header-line' />
           <div className="setting-area">
-            <StyledTextInput  className="text-input" width="593px" labelName='帳號' defaultValue='wonderwoman' placeholder='請輸入帳號' />
-            <StyledTextInput  className="text-input" width="593px" labelName='名稱' defaultValue='Diana' placeholder='請輸入使用者名稱' />
-            <StyledTextInput  className="text-input" width="593px" labelName='Email' defaultValue='diana@gmail.com' placeholder='請輸入 Email' />
+            <StyledTextInput  className="text-input" width="593px" labelName='帳號' value='wonderwoman' placeholder='請輸入帳號' />
+            <StyledTextInput  className="text-input" width="593px" labelName='名稱' value='Diana' placeholder='請輸入使用者名稱' />
+            <StyledTextInput  className="text-input" width="593px" labelName='Email' value='diana@gmail.com' placeholder='請輸入 Email' />
             <StyledTextInput  className="text-input" width="593px" labelName='密碼' placeholder='請設定密碼' />
             <StyledTextInput  className="text-input" width="593px" labelName='密碼再確認' placeholder='請再次輸入密碼' />
           </div>

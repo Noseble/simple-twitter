@@ -3,20 +3,19 @@ import styled, { css } from 'styled-components'
 
 //Usage: <StyledTextInput (className='focus/error/disabled') width="360px" labelName='名稱' placeholder='請輸入名稱' (wordLimit="50") />
 
-const TextInput = ({ labelName, placeholder, type, value, wordLimit, onChange, className})=>{
-  let alertMessage = ""
-  let wordCount = 0
+const TextInput = ({ labelName, placeholder, type, value, wordLimit, wordCount, onChange, className})=>{
+  let alertMessage = "超過字數上線"
 
-  alertMessage = "超過字數上線"
+
   return(
     <div className={ className }>
       <div className='input_block'>
         <label className='input_label'>{labelName ? labelName : "Label"}</label>
-        <input disabled={ className.includes('disabled') ? true : false } type={type || 'text'} defaultValue={defaultValue} value={value || ''} placeholder={placeholder ? placeholder : "Placeholder"} onChange={(event) => onChange?.(event.target.value)} />
+        <input disabled={ className.includes('disabled') ? true : false } type={type || 'text'}  value={value || ''} placeholder={placeholder ? placeholder : "Placeholder"} onChange={(event) => onChange?.(event.target.value)} />
       </div>
       <div className='input_info'>
-        {alertMessage.trim().length > 0 ? <span className="input_message">{alertMessage}</span> : null}
-        {wordLimit ? <span>{wordCount} / {wordLimit}</span> : null}
+        { wordCount > wordLimit ? <span className="input_message">{alertMessage}</span> : null}
+        { wordLimit ? <span className='limit' onChange={(event) => onChange?.(event.target.value)}>{wordCount} / {wordLimit}</span> : null}
       </div>
     </div>
 
@@ -67,7 +66,7 @@ const StyledTextInput = styled(TextInput)`
     }
   }
 
-  .input_info{
+  .input_info {
     /* display */
     display:flex;
     justify-content: space-between;
@@ -81,7 +80,7 @@ const StyledTextInput = styled(TextInput)`
     line-height:20px;
     color:#696974;
   }
-  
+
   /* focus 樣式 */
   &.focus{
     .input_block{

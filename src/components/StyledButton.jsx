@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components'
 
 //Usage : <StyledButton (className="filled") (lg) (width="300px") onclick={onclickFunction} > 註冊 </StyledButton>
 
-const Button =({ className, onclick, children }) => {
+const Button =({ className, onClick, children }) => {
   return(
-    <button className={className} onClick={onclick}> {children} </button>
+    <button className={className} onClick={onClick}> {children} </button>
   )
 }
 

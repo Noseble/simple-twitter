@@ -4,17 +4,41 @@ const authURL = 'https://mysterious-basin-96824.herokuapp.com';
 
 export const login = async ({ email, password }) => {
   try {
-    const { data } = await axios.post(`${authURL}/api/signin`, {
+    const { data } = await axios.post(`${authURL}/api/login`, {
       email,
       password,
     });
-
-    const { token, user } = data;
-    if (token) {
-      return { success: true, token, user };
+    console.log(data)
+   const { authToken } = data;
+    if (authToken) {
+      return { success: true, ...data };
     }
     return data;
   } catch (error) {
     console.error('[Login Failed]:', error);
   }
 };
+
+ 
+export const register = async ({ account, email, name, password, passwordCheck }) => {
+
+  try {
+    const { data } = await axios.post(`${authURL}/api/users`, {
+      account,
+      name,
+      email,
+      password,
+      passwordCheck
+    });
+    console.log(data)
+    const { authToken } = data;
+
+    if (authToken) {
+      return { success: true, ...data};
+    }
+    return data;
+  } catch (error) {
+    console.error('[Register Failed]:',error )
+  }
+
+} 

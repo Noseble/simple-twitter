@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
 
@@ -9,6 +9,12 @@ import {ReactComponent as AcLogo} from 'assets/icon/AcLogo.svg'
 import StyledPopularUser from "components/StyledPopularUser";
 
 const HomePage = ({className}) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    localStorage.removeItem('authToken')
+    navigate('login')
+  }
   return(
     <div className={clsx('web-container', className)}>
       
@@ -24,7 +30,7 @@ const HomePage = ({className}) => {
           </div>
           <StyledButton className='filled' width='100%'>推文</StyledButton>
         </div>
-        <StyledNavItem className='exit-nav-item' navTitle='登出' />
+        <StyledNavItem className='exit-nav-item' onClick={handleClick} navTitle='登出' />
       </nav>
 
       <div className='main-scrollbar'>

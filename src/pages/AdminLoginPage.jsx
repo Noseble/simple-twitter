@@ -1,4 +1,7 @@
 import styled from "styled-components"
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 // 載入共用元件
 import StyledButton from "components/StyledButton"
@@ -8,17 +11,56 @@ import StyledTextLink from "components/StyledTextLink"
 // 載入svg
 import { ReactComponent as Aclogo } from "assets/icon/AcLogo.svg"
 
+// api
+import { login } from "api/auth"
 
 const AdminLoginPage = ({ className }) => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleClick = async () => {
+ if (email.length === 0 || password.length === 0) return;
+   
+  const { success, authToken } = await login({
+    email,
+    password,
+  });
+  if (success) {
+      localStorage.setItem('authToken', authToken);
+
+      // 登入成功訊息
+      Swal.fire({
+        position: 'top',
+        title: '登入成功！',
+        timer: 1000,
+        icon: 'success',
+        showConfirmButton: false,
+      });
+      navigate('/admin')
+      return;
+    }
+    
+    // 登入失敗訊息
+    Swal.fire({
+      position: 'top',
+      title: '登入失敗！',
+      timer: 1000,
+      icon: 'error',
+      showConfirmButton: false,
+    });
+};
+
   return(
     <div className={className}>
       <Aclogo className='login-logo' width='40px' height='40px'/>
       <h1 className="login-title">後台登入</h1>
       <div className="login-input-area">
-        <StyledTextInput className='text-input' labelName='帳號' placeholder='請輸入帳號' type='text' width='356px' wordLimit={20}/>
-        <StyledTextInput className='text-input' labelName='密碼' placeholder='請輸入密碼' type='password' width='356px' wordLimit={16}/>
+        <StyledTextInput className='text-input' labelName='帳號' placeholder='請輸入帳號' type='text' value={email} width='356px' wordLimit='50' wordCount={email.length} onChange={(emailInputValue) => setEmail(emailInputValue)}/>
+        <StyledTextInput className='text-input' labelName='密碼' placeholder='請輸入密碼' type='password' value={password} width='356px' wordLimit='16' wordCount={password.length} onChange={(passwordInputValue) => setPassword(passwordInputValue)} />
       </div>
-      <StyledButton className='login-button filled' width='100%'>登入</StyledButton>
+      <StyledButton className='login-button filled' width='100%' onClick={handleClick} >登入</StyledButton>
       <div className="footer">
         <StyledTextLink link='/login'>前台登入</StyledTextLink>
       </div>

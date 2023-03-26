@@ -11,9 +11,9 @@ import { ReactComponent as NavExitIcon } from 'assets/icon/NavExitIcon.svg'
 
 //Usage: <StyledNavItem navTitle='設定' (className="selected")/> 
 
-const NavItem = ({ navTitle ,className }) => {
+const NavItem = ({ navTitle ,className, onClick}) => {
   return(
-    <div className={className}>
+    <div className={className} onClick={onClick}>
       <div className='pointer-area'>
         <div className='nav-icon'>
           { navTitle === "首頁" && !className.includes('selected') && <NavHomeIcon fill="#44444F" />}
