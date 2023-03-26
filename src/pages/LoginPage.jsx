@@ -24,13 +24,12 @@ const LoginPage = ({ className }) => {
   const handleClick = async () => {
  if (email.length === 0 || password.length === 0) return;
    
-  const { success, authToken } = await login({
+  const { success, token } = await login({
     email,
     password,
   });
   if (success) {
-      localStorage.setItem('authToken', authToken);
-
+      localStorage.setItem('token', token);
       // 登入成功訊息
       Swal.fire({
         position: 'top',

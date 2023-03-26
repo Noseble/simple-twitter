@@ -12,7 +12,7 @@ import StyledTextLink from "components/StyledTextLink"
 import { ReactComponent as Aclogo } from "assets/icon/AcLogo.svg"
 
 // api
-import { login } from "api/auth"
+import { AdminLogin } from "api/auth"
 
 const AdminLoginPage = ({ className }) => {
 
@@ -23,12 +23,12 @@ const AdminLoginPage = ({ className }) => {
   const handleClick = async () => {
  if (email.length === 0 || password.length === 0) return;
    
-  const { success, authToken } = await login({
+  const { success, token } = await AdminLogin({
     email,
     password,
   });
   if (success) {
-      localStorage.setItem('authToken', authToken);
+      localStorage.setItem('token', token);
 
       // 登入成功訊息
       Swal.fire({

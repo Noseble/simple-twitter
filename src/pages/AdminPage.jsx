@@ -1,5 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
 
@@ -10,6 +11,12 @@ import StyledNavItem from "components/StyledNavItem";
 import { ReactComponent as AcLogo } from 'assets/icon/AcLogo.svg'
 
 const AdminPage = ({className}) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    localStorage.removeItem('token')
+    navigate('/admin_login')
+  }
 
   return(
     <div className={clsx('admin-web-container', className)}>
@@ -23,7 +30,7 @@ const AdminPage = ({className}) => {
             <Link to='/admin/users' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'使用者列表'} /></Link>
           </div>
         </div>
-        <StyledNavItem className='exit-nav-item' navTitle='登出' />
+        <StyledNavItem className='exit-nav-item' onClick={handleClick} navTitle='登出' />
       </nav>
       <div className="main-list-scrollbar">
         <div className="main-list-container">

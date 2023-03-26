@@ -12,7 +12,7 @@ const HomePage = ({className}) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    localStorage.removeItem('authToken')
+    localStorage.removeItem('token')
     navigate('login')
   }
   return(
