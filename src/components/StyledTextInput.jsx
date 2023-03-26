@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 //Usage: <StyledTextInput (className='focus/error/disabled') width="360px" labelName='名稱' placeholder='請輸入名稱' (wordLimit="50") />
 
-const TextInput = ({ labelName,defaultValue, placeholder, wordLimit, className})=>{
+const TextInput = ({ textAreaType, labelName, onChange, defaultValue, placeholder, wordLimit, className})=>{
   let alertMessage = ""
   let wordCount = 0
 
@@ -12,7 +12,10 @@ const TextInput = ({ labelName,defaultValue, placeholder, wordLimit, className})
     <div className={ className }>
       <div className='input_block'>
         <label className='input_label'>{labelName ? labelName : "Label"}</label>
-        <input disabled={ className.includes('disabled') ? true : false } defaultValue={defaultValue} type='text' placeholder={placeholder ? placeholder : "Placeholder"}/>
+        {textAreaType?
+        <textarea disabled={ className.includes('disabled') ? true : false } onChange={onChange} value={defaultValue} type='textarea' placeholder={placeholder ? placeholder : "Placeholder"}/> :
+        <input disabled={ className.includes('disabled') ? true : false } value={defaultValue} onChange={onChange} type='text' placeholder={placeholder ? placeholder : "Placeholder"}/>}
+
       </div>
       <div className='input_info'>
         {alertMessage.trim().length > 0 ? <span className="input_message">{alertMessage}</span> : null}
@@ -34,7 +37,6 @@ const StyledTextInput = styled(TextInput)`
     flex-direction: column;
     
     /* box model */
-    height:54px;
     padding: 2px 16px 4px;
     border:none;
     background-color:#F5F8FA;
@@ -58,6 +60,23 @@ const StyledTextInput = styled(TextInput)`
     border: none;
     background-color: #F5F8FA;
     
+    &::placeholder{
+      color: #B5B5BE;
+    }
+
+    &:focus{
+      outline: none;
+    }
+  }
+
+  textarea{
+    height:120px;
+    font-size: 16px;
+    line-height: 26px;
+    background-color:#F5F8FA;
+    border:none;
+    resize:none;
+
     &::placeholder{
       color: #B5B5BE;
     }

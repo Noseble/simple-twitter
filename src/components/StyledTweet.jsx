@@ -1,4 +1,5 @@
-import React from 'react';
+import { React, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import clsx from 'clsx';
 import StyledUserAvatar from './StyledUserAvatar';
@@ -14,6 +15,7 @@ import { ReactComponent as Reply } from 'assets/icon/reply.svg';
 import { ReactComponent as LikeButton } from 'assets/icon/likeButton.svg';
 
 const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, isLiked, className }) => {
+	
 	return (
 		<div className={ className }>
 			<StyledUserAvatar userImageSrc={userImageSrc} />
@@ -26,7 +28,7 @@ const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, i
          {tweetContent}
 				</p>
 				<div className='footer'>
-					<button><Reply className='icon' fill='#6C757D' height='14px'/><label>13</label></button>
+					 <Link to='/tweet/:tweetId' style={{ textDecoration: 'none' }}><button><Reply className='icon' fill='#6C757D' height='14px' /><label>13</label></button></Link>
 					<button><LikeButton className={clsx('icon','like-icon',{liked: isLiked})} fill='none' stroke='#6C757D' strokeWidth='2px' height='14px' /><label>76</label></button>					
 				</div>
 			</div>

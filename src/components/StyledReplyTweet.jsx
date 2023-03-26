@@ -4,29 +4,29 @@ import styled, { css } from 'styled-components';
 import StyledUserAvatar from './StyledUserAvatar';
 import StyledButton from './StyledButton';
 
-//Usage: <StyledPostTweet (modalUsed) userImageSrc='https://picsum.photos/300/300?text=1'/> 
+//Usage: <StyledReplyTweet (modalUsed) userImageSrc='https://picsum.photos/300/300?text=1'/> 
 
-const PostTweet = ({ userImageSrc,className }) => {
+const ReplyTweet = ({ userImageSrc,className }) => {
   let alertMessage = ''
 
   alertMessage='內容不可為空白'
   
   return(
     <div className={className}>
-      <div className='post-tweet-area'>
+      <div className='reply-tweet-area'>
         <StyledUserAvatar className='user-avatar' userImageSrc={userImageSrc}/>
-        <textarea className="tweet-input-area" type="textarea" placeholder='有什麼新鮮事?'/>
+        <textarea className="tweet-input-area" type="textarea" placeholder='推你的回覆'/>
       </div>
       <div className='footer-area'>
         {alertMessage.trim().length > 0 && <span className='alert-message'>{alertMessage}</span>}
-        <StyledButton className="tweet-button filled">推文</StyledButton>
+        <StyledButton className="tweet-button filled">回復 </StyledButton>
       </div>
       
     </div>
   )
 }
 
-const StyledPostTweet = styled(PostTweet)`
+const StyledReplyTweet = styled(ReplyTweet)`
   /* display */
   display:flex;
   flex-direction: column;
@@ -37,7 +37,7 @@ const StyledPostTweet = styled(PostTweet)`
   height:136px;
   padding: 16px 24px;
   
-  .post-tweet-area{
+  .reply-tweet-area{
     display: flex;
     height:100%;
   }
@@ -75,6 +75,7 @@ const StyledPostTweet = styled(PostTweet)`
       color: #FC5A5A;
       font-size: 15px;
       line-height: 15px;
+
     }
 
   }
@@ -90,4 +91,4 @@ const StyledPostTweet = styled(PostTweet)`
   `}
 `
 
-export default StyledPostTweet
+export default StyledReplyTweet

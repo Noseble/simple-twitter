@@ -1,3 +1,4 @@
+import { React, useState } from 'react';
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import clsx from "clsx";
@@ -9,9 +10,14 @@ import { ReactComponent as ReturnIcon } from 'assets/icon/returnArrow.svg';
 import { ReactComponent as Reply } from 'assets/icon/reply.svg';
 import { ReactComponent as LikeButton } from 'assets/icon/likeButton.svg';
 import StyledReply from "components/StyledReply"
+import StyledReplyModal from 'modals/StyledReplyModal';
 
 const HomePageTweetArea = ({isLiked, className}) => {
   const { tweetId } = useParams()
+
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => setShowModal(true);
+	
 
   return(
     <div className={className}>
@@ -41,7 +47,8 @@ const HomePageTweetArea = ({isLiked, className}) => {
         </div>
         <hr />
         <div className="reply-like-icon">
-          <Reply className='icon' fill='#6C757D' height='24px' />
+          <Reply className='icon' fill='#6C757D' height='24px' onClick={handleShowModal}/>
+          <StyledReplyModal show={showModal} setShow={setShowModal} title="My Modal" />
           <LikeButton className='icon liked' fill='none' stroke='#6C757D' strokeWidth='2px' height='24px'/>
         </div>
       </div>

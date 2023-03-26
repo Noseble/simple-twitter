@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
@@ -7,11 +7,15 @@ import StyledButton from "components/StyledButton";
 import StyledNavItem from "components/StyledNavItem";
 import {ReactComponent as AcLogo} from 'assets/icon/AcLogo.svg'
 import StyledPopularUser from "components/StyledPopularUser";
+import StyledTweetModal from "modals/StyledTweetModal";
 
 const HomePage = ({className}) => {
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => setShowModal(true);
+
   return(
     <div className={clsx('web-container', className)}>
-      
+
       <nav className="nav-column">
         <div className="nav-main">
           <div className="aclogo">
@@ -22,9 +26,11 @@ const HomePage = ({className}) => {
             <Link to='/user/:userId' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='個人資料' /></Link>
             <Link to='/setting' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='設定' /></Link>
           </div>
-          <StyledButton className='filled' width='100%'>推文</StyledButton>
+          <StyledButton className='filled' width='100%' onClick={handleShowModal}>推文</StyledButton>
+          <StyledTweetModal show={showModal} setShow={setShowModal} title="My Modal" />
         </div>
         <StyledNavItem className='exit-nav-item' navTitle='登出' />
+        
       </nav>
 
       <div className='main-scrollbar'>
@@ -52,11 +58,20 @@ const HomePage = ({className}) => {
           </div>
         </div>
       </div>
+
     </div>
   )
 }
 
 const StyledHomepage= styled(HomePage)`
+  .modal-portal{
+    position:absolute;
+    top: 56px;
+    left: 205px;
+    width: 635px;
+    border: 1px solid red;
+  }
+
   .popular-list-area{
     width:100%;
     height: 731px;

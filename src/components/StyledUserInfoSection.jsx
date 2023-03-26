@@ -1,12 +1,18 @@
+import { useState } from 'react';
+
 import styled from "styled-components";
 import StyledUserAvatar from "./StyledUserAvatar";
 import StyledButton from "./StyledButton";
 import StyledUserTitle from "./StyledUserTitle";
 import StyledOtherButtonArea from "./StyledOtherButtonArea";
+import StyledUserEditModal from "modals/StyledUserEditModal";
 
 //Usage : <StyledUserInfoSection isSelf={true}/>
 
 const UserInfoSection = ({ isSelf, className }) => {
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => setShowModal(true);
+
   return(
     <div className={className}>
       <div className="user-image-area">
@@ -14,7 +20,10 @@ const UserInfoSection = ({ isSelf, className }) => {
         <StyledUserAvatar className='user-avatar' userImageSrc="https://picsum.photos/300/300?text=1" />
         <div className="user-button">
           {isSelf ?
-          <StyledButton>編輯個人資料</StyledButton> :
+          <>
+            <StyledButton onClick={handleShowModal}>編輯個人資料</StyledButton>
+            <StyledUserEditModal show={showModal} setShow={setShowModal} title="My Modal" />
+          </> :
           <StyledOtherButtonArea isNotified={true} isFollowing={true}/>} 
         </div>
       </div>
