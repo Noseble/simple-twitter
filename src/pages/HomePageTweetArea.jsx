@@ -30,7 +30,7 @@ const HomePageTweetArea = ({isLiked, className}) => {
       <div className="main-tweet">
         <div className="user-title">
           <StyledUserAvatar userImageSrc="https://picsum.photos/300/300?text=1"/>
-          <StyledUserTitle className='user-info' columnArrange userName='Kevin Chou' userAccount='@kevinchou'/>
+          <StyledUserTitle className='user-info' columnArrange userName='Kevin Chou' userAccount='kevinchou'/>
         </div>
         <div className="tweet-content">
           Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt. Nulla Lorem mollit cupidatat irure. Laborum duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt. 
@@ -56,9 +56,9 @@ const HomePageTweetArea = ({isLiked, className}) => {
       </div>
       <hr className="main-header-line"/>
       <ul className="reply-list">
-        <StyledReply userName='John' userAccount='@heyjohn' userImageSrc='https://picsum.photos/300/300?text=1' replyTime='3小時' replyTo='@apple' replyContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero.'/> 
+        <StyledReply userName='John' userAccount='heyjohn' userImageSrc='https://picsum.photos/300/300?text=1' replyTime='3小時' replyTo='apple' replyContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero.'/> 
         <hr className="main-header-line"/>
-        <StyledReply userName='John' userAccount='@heyjohn' userImageSrc='https://picsum.photos/300/300?text=1' replyTime='3小時' replyTo='@apple' replyContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero.'/> 
+        <StyledReply userName='John' userAccount='heyjohn' userImageSrc='https://picsum.photos/300/300?text=1' replyTime='3小時' replyTo='apple' replyContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero.'/> 
       </ul>
 
     </div>

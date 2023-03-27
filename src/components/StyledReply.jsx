@@ -13,10 +13,10 @@ const Reply = ({ userName, userAccount, userImageSrc, replyTime, replyTo, replyC
 		  <StyledUserAvatar userImageSrc={userImageSrc}/>
 			<div className="reply-area">
 				<div className="reply-title">
-					<StyledUserTitle userName={userName} userAccount={userAccount}/>
+					<StyledUserTitle userName={userName} userAccount={`@${userAccount}`}/>
           <span className='reply-time'>．{replyTime}</span>
 				</div>
-          <label className='reply-to-area'>回覆 <a href='#' className='target-user'>{replyTo}</a></label>
+          <label className='reply-to-area'>回覆 <a href='#' className='target-user'>{`@${replyTo}`}</a></label>
 				<p className='reply-content'>
           {replyContent}
 				</p>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import defaultUserImg from 'assets/image/defaultUserImg.svg';
@@ -6,7 +7,9 @@ import defaultUserImg from 'assets/image/defaultUserImg.svg';
 
 const UserAvatar = ({ userImageSrc, className }) => {
   return(
-    <img className={className} src={userImageSrc} />
+    <Link to='/user/:userId' style={{ textDecoration: 'none' }}>
+      <img className={className} src={userImageSrc} />
+    </Link>
   )
 }
 

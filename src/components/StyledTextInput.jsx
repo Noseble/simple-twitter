@@ -3,23 +3,21 @@ import styled, { css } from 'styled-components'
 
 //Usage: <StyledTextInput (className='focus/error/disabled') width="360px" labelName='名稱' placeholder='請輸入名稱' (wordLimit="50") />
 
-const TextInput = ({ textAreaType, labelName, onChange, defaultValue, placeholder, wordLimit, className})=>{
-  let alertMessage = ""
-  let wordCount = 0
+const TextInput = ({ textAreaType, labelName, type, value, placeholder, wordLimit, wordCount, onChange, className})=>{
+  let alertMessage = "超過字數上線"
 
-  alertMessage = "超過字數上線"
   return(
     <div className={ className }>
       <div className='input_block'>
         <label className='input_label'>{labelName ? labelName : "Label"}</label>
         {textAreaType?
-        <textarea disabled={ className.includes('disabled') ? true : false } onChange={onChange} value={defaultValue} type='textarea' placeholder={placeholder ? placeholder : "Placeholder"}/> :
-        <input disabled={ className.includes('disabled') ? true : false } value={defaultValue} onChange={onChange} type='text' placeholder={placeholder ? placeholder : "Placeholder"}/>}
-
+          <textarea disabled={ className.includes('disabled') ? true : false }  value={value || ''} placeholder={placeholder || "Placeholder"} onChange={(event) => onChange?.(event.target.value)} /> :
+          <input disabled={ className.includes('disabled') ? true : false } type={type || 'text'}  value={value || ''} placeholder={placeholder || "Placeholder"} onChange={(event) => onChange?.(event.target.value)} />
+        }
       </div>
       <div className='input_info'>
-        {alertMessage.trim().length > 0 ? <span className="input_message">{alertMessage}</span> : null}
-        {wordLimit ? <span>{wordCount} / {wordLimit}</span> : null}
+        { wordCount > wordLimit ? <span className="input_message">{alertMessage}</span> : null}
+        { wordLimit ? <span className='limit' onChange={(event) => onChange?.(event.target.value)}>{wordCount} / {wordLimit}</span> : null}
       </div>
     </div>
 
@@ -100,7 +98,7 @@ const StyledTextInput = styled(TextInput)`
     line-height:20px;
     color:#696974;
   }
-  
+
   /* focus 樣式 */
   &.focus{
     .input_block{

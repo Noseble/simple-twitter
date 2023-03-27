@@ -1,5 +1,5 @@
-import {React, useState} from "react";
-import { Link, Outlet } from "react-router-dom";
+import { React, useState } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
 
@@ -10,8 +10,15 @@ import StyledPopularUser from "components/StyledPopularUser";
 import StyledTweetModal from "modals/StyledTweetModal";
 
 const HomePage = ({className}) => {
+  const navigate = useNavigate();
+
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
+
+  const handleClick = () => {
+    localStorage.removeItem('token')
+    navigate('login')
+  }
 
   return(
     <div className={clsx('web-container', className)}>
@@ -29,8 +36,7 @@ const HomePage = ({className}) => {
           <StyledButton className='filled' width='100%' onClick={handleShowModal}>推文</StyledButton>
           <StyledTweetModal show={showModal} setShow={setShowModal} title="My Modal" />
         </div>
-        <StyledNavItem className='exit-nav-item' navTitle='登出' />
-        
+        <StyledNavItem className='exit-nav-item' onClick={handleClick} navTitle='登出' />
       </nav>
 
       <div className='main-scrollbar'>
@@ -45,16 +51,16 @@ const HomePage = ({className}) => {
           <h2 className="popular-list-title">推薦跟隨</h2>
           <hr className="popular-list-hr"/>
           <div className="popular-list">
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={true}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={true}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={true}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={true}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ const AdminTweet = ({userImageSrc, userName, userAccount, tweetTime, tweetConten
       <div className="tweet-area">
         <div className="header">
           <div className="user-info">
-            <StyledUserTitle userName={userName} userAccount={userAccount}/>
+            <StyledUserTitle userName={userName} userAccount={`@${userAccount}`}/>
             <span className='tweet-time'>．{tweetTime}</span>
           </div>
         </div>

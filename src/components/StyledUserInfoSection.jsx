@@ -28,7 +28,7 @@ const UserInfoSection = ({ isSelf, className }) => {
         </div>
       </div>
       <div className='user-info-area'>
-        <StyledUserTitle className='user-' columnArrange userName='Kevin Chou' userAccount='@kevinchou' /> 
+        <StyledUserTitle className='user-' columnArrange userName='Kevin Chou' userAccount='kevinchou' /> 
         <p className="user-introduction">
           Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. 
         </p>

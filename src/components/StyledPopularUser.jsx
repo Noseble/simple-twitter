@@ -13,7 +13,7 @@ const PopularUser = ({userName,userAccount,isFollowing,className}) => {
     <div className={className}>
       <div className={ clsx('popular-user', {small:isFollowing}, {large: !isFollowing})}>
         <StyledUserAvatar className="popular-user-avatar"/>
-        <StyledUserTitle className="popular-user-info" columnArrange userName={userName} userAccount={userAccount} />
+        <StyledUserTitle className="popular-user-info" columnArrange userName={userName} userAccount={`${userAccount}`} />
       </div>
       <StyledButton className={clsx('popular-user-button',{filled: isFollowing})} width={isFollowing ? '96px' : 'fit-content'} > {isFollowing ? '正在跟隨' : '跟隨'}</StyledButton>
     </div>

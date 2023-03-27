@@ -21,7 +21,7 @@ const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, i
 	
 	return (
 		<>
-		  <Link to='/tweet/:tweetId' style={{ textDecoration: 'none' }}>
+		  
 				<div className={ className }>
 					<StyledUserAvatar userImageSrc={userImageSrc} />
 					<div className='tweet-area'>
@@ -29,9 +29,11 @@ const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, i
 							<StyledUserTitle userName={userName} userAccount={userAccount}/>
 							<span className='tweet-time'>．{tweetTime}</span>
 						</div>
-						<p className='tweet-content'>
-						{tweetContent}
-						</p>
+						<Link to='/tweet/:tweetId' style={{ textDecoration: 'none' }}>
+							<p className='tweet-content'>
+							{tweetContent}
+							</p>
+						</Link>
 						<div className='footer'>
 							<button onClick={handleShowModal}><Reply className='icon' fill='#6C757D' height='14px' /><label>13</label></button>
 							<StyledReplyModal show={showModal} setShow={setShowModal}/>
@@ -39,7 +41,7 @@ const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, i
 						</div>
 					</div>
 				</div>
-			</Link>
+			
 			
 			<hr className='main-header-line'/>
 		</>

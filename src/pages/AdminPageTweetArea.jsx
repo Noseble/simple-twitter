@@ -10,91 +10,91 @@ const AdminPageTweetsArea = ({ className }) => {
         <hr className="main-header-line"/>
         <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'SNulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum. Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum.Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum.  '}
         />
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />  
                 <StyledAdminTweet 
           userName={'Adam'}
-          userAccount={'@adam666'} 
+          userAccount={'adam666'} 
           tweetTime={'三小時'} 
           tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
         />        
