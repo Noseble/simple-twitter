@@ -4,8 +4,19 @@ import StyledUserCard from "components/StyledUserCard"
 import { getAdminUsers } from "api/api";
 
 const AdminPageUsersArea = ({ className }) => {
-  const [users, setUsers] = useState([]);
-  console.log(getAdminUsers)
+  const [AdminUsers, setAdminUsers] = useState([]);
+
+   useEffect(() => {
+      const getAdminUsersAsync = async() => {
+        try {
+          const AdminUsers = await getAdminUsers();
+          setAdminUsers(AdminUsers.map((AdminUser) => ({ ...AdminUser})));
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      getAdminUsersAsync();
+    }, []);
 
   return (
     
@@ -15,204 +26,21 @@ const AdminPageUsersArea = ({ className }) => {
         </div>
         <hr className="main-header-line"/>
         <div className='user-card-list'>
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
-
-        <StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        /><StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        /><StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        /><StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        /><StyledUserCard 
-        bgImageSrc={'https://is.gd/HLYrRZ'}
-        userImageSrc={'https://is.gd/3z1Ubr'}
-        userName={'Adam'}
-        userAccount={'adam666'}
-        userTweetsCount={'5000'}
-        userLikesCounts={'2000'}
-        userFollowingCount={'100'}
-        userFollowerCount={'110'}
-        />
+        {AdminUsers.map(({...AdminUser})=>{
+          return(
+            <StyledUserCard 
+              key={AdminUser.id}
+              bgImageSrc={AdminUser.image}
+              userImageSrc={AdminUser.avatar}
+              userName={AdminUser.name}
+              userAccount={AdminUser.account}
+              userTweetsCount={AdminUser.TweetsCount}
+              userLikesCounts={AdminUser.TweetsLikedCount}
+              userFollowingCount={AdminUser.FollowingsCount}
+              userFollowerCount={AdminUser.TweetsLikedCount} />
+          )
+        })}  
+        
       </div>
     </div>
   )

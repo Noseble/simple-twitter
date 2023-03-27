@@ -2,11 +2,12 @@ import axios from 'axios';
 
 const authURL = 'https://mysterious-basin-96824.herokuapp.com';
 
-export const login = async ({ email, password }) => {
+export const login = async ({ email, password, role }) => {
   try {
     const { data } = await axios.post(`${authURL}/api/login`, {
       email,
       password,
+      role
     });
     const { token } = data.data;
     if (token) {
@@ -18,21 +19,6 @@ export const login = async ({ email, password }) => {
   }
 };
 
-export const AdminLogin = async ({ email, password }) => {
-  try {
-    const { data } = await axios.post(`${authURL}/api/login`, {
-      email,
-      password,
-    });
-    const { token } = data.data;
-    if (token) {
-      return { role: admin, ...data.data };
-    }
-    return data;
-  } catch (error) {
-    console.error('[Admin Login Failed]:', error);
-  }
-};
 
  
 export const register = async ({ account, email, name, password, passwordCheck }) => {
@@ -43,20 +29,16 @@ export const register = async ({ account, email, name, password, passwordCheck }
       name,
       email,
       password,
-      passwordCheck
+      passwordCheck,
     });
-    console.log(data)
-    const { token } = data;
 
-    if (token) {
+    const { success } = data;
+
+    if (success) {
       return { success: true, ...data};
     }
     return data;
   } catch (error) {
-    console.error('[Register Failed]:',error )
+    console.error('[Register Failed]:',error );
   }
 } 
-
-// export const checkPermission = async (authToken) => {
-//   axios.get(`${authURL}/api/auth/test-token`)
-// }

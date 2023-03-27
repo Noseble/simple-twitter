@@ -1,5 +1,4 @@
 import { Outlet, Link } from "react-router-dom";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
@@ -10,6 +9,8 @@ import StyledNavItem from "components/StyledNavItem";
 // svg
 import { ReactComponent as AcLogo } from 'assets/icon/AcLogo.svg'
 
+
+
 const AdminPage = ({className}) => {
   const navigate = useNavigate();
 
@@ -17,6 +18,7 @@ const AdminPage = ({className}) => {
     localStorage.removeItem('token')
     navigate('/admin_login')
   }
+
 
   return(
     <div className={clsx('admin-web-container', className)}>

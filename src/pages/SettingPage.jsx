@@ -9,7 +9,14 @@ import StyledTextInput from "components/StyledTextInput";
 
 import { ReactComponent as AcLogo } from 'assets/icon/AcLogo.svg'
 
+// api 
+import { getUserSetting } from "api/api";
+import { putUserSetting } from "api/api";
+
+
 const HomePage = ({className}) => {
+
+  console.log(getUserSetting(284))
   return(
     <div className={clsx('web-container', className)}>
       
