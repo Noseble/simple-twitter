@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import clsx from "clsx";
@@ -22,7 +23,8 @@ const HomePageTweetArea = ({isLiked, className}) => {
   return(
     <div className={className}>
       <div className='main-header'>
-        <ReturnIcon className="return-icon" /><h2>推文</h2>
+        <Link to="#" onClick={() => { window.history.back() }}><ReturnIcon className="return-icon" /></Link>
+        <h2>推文</h2>
       </div>
       <hr className='main-header-line' />
       <div className="main-tweet">

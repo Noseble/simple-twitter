@@ -13,35 +13,45 @@ import StyledUserTitle from './StyledUserTitle';
 /* 導入svg圖檔 */
 import { ReactComponent as Reply } from 'assets/icon/reply.svg';
 import { ReactComponent as LikeButton } from 'assets/icon/likeButton.svg';
+import StyledReplyModal from 'modals/StyledReplyModal';
 
 const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, isLiked, className }) => {
+	const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => setShowModal(true);
 	
 	return (
-		<div className={ className }>
-			<StyledUserAvatar userImageSrc={userImageSrc} />
-			<div className='tweet-area'>
-				<div className="tweet-title">
-					<StyledUserTitle userName={userName} userAccount={userAccount}/>
-          <span className='tweet-time'>．{tweetTime}</span>
+		<>
+		  <Link to='/tweet/:tweetId' style={{ textDecoration: 'none' }}>
+				<div className={ className }>
+					<StyledUserAvatar userImageSrc={userImageSrc} />
+					<div className='tweet-area'>
+						<div className="tweet-title">
+							<StyledUserTitle userName={userName} userAccount={userAccount}/>
+							<span className='tweet-time'>．{tweetTime}</span>
+						</div>
+						<p className='tweet-content'>
+						{tweetContent}
+						</p>
+						<div className='footer'>
+							<button onClick={handleShowModal}><Reply className='icon' fill='#6C757D' height='14px' /><label>13</label></button>
+							<StyledReplyModal show={showModal} setShow={setShowModal}/>
+							<button><LikeButton className={clsx('icon','like-icon',{liked: isLiked})} fill='none' stroke='#6C757D' strokeWidth='2px' height='14px' /><label>76</label></button>					
+						</div>
+					</div>
 				</div>
-				<p className='tweet-content'>
-         {tweetContent}
-				</p>
-				<div className='footer'>
-					 <Link to='/tweet/:tweetId' style={{ textDecoration: 'none' }}><button><Reply className='icon' fill='#6C757D' height='14px' /><label>13</label></button></Link>
-					<button><LikeButton className={clsx('icon','like-icon',{liked: isLiked})} fill='none' stroke='#6C757D' strokeWidth='2px' height='14px' /><label>76</label></button>					
-				</div>
-			</div>
-		</div>
+			</Link>
+			
+			<hr className='main-header-line'/>
+		</>
+
 	);
 };
 
 const StyledTweet = styled(Tweet)`
 	display: flex;
 	justify-content: space-between;
-	padding: 16px 24px;
-	width: 640px;
-	border-bottom: 1px solid #E6ECF0;
+	margin: 16px 24px;
+	width: 592px;
 	
   .tweet-area{
     display: flex;
