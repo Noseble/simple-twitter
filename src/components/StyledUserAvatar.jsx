@@ -5,9 +5,9 @@ import defaultUserImg from 'assets/image/defaultUserImg.svg';
 
 //Usage:<StyledUserAvatar userAvatar="https://picsum.photos/300/300?text=1" /> 
 
-const UserAvatar = ({ userAvatar, className }) => {
+const UserAvatar = ({ userId, userAvatar, className }) => {
   return(
-    <Link to='/user/:userId' style={{ textDecoration: 'none' }}>
+    <Link to={`/user/${userId}`} style={{ textDecoration: 'none' }}>
       <img className={className} src={userAvatar} />
     </Link>
   )

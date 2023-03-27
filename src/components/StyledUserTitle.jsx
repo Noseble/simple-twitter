@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 
 //Usage: <StyledUserTitle (columnArrange) userName='Kevin Chou' userAccount='@kevinchou' /> 
 
-const UserTitle = ({ userName, userAccount, className }) => {
+const UserTitle = ({ userId, userName, userAccount, className }) => {
   return(
-    <a href="/user/:userId" className={ className }>
+    <a href={`/user/${userId}`} className={ className }>
      <p className='user-name'>{userName}</p>
      <p className='user-account'>{`@${userAccount}`}</p>
     </a>

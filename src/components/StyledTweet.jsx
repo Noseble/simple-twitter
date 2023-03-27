@@ -15,7 +15,7 @@ import { ReactComponent as Reply } from 'assets/icon/reply.svg';
 import { ReactComponent as LikeButton } from 'assets/icon/likeButton.svg';
 import StyledReplyModal from 'modals/StyledReplyModal';
 
-const Tweet = ({ userAvatar, userName, userAccount, tweetTime, tweetDescription, isLiked, className }) => {
+const Tweet = ({ tweetId, userId, userAvatar, userName, userAccount, tweetTime, tweetDescription, isLiked, className }) => {
 	const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
 	
@@ -23,13 +23,13 @@ const Tweet = ({ userAvatar, userName, userAccount, tweetTime, tweetDescription,
 		<>
 		  
 				<div className={ className }>
-					<StyledUserAvatar userAvatar={userAvatar} />
+					<StyledUserAvatar userId={userId} userAvatar={userAvatar} />
 					<div className='tweet-area'>
 						<div className="tweet-title">
-							<StyledUserTitle userName={userName} userAccount={userAccount}/>
+							<StyledUserTitle userId={userId} userName={userName} userAccount={userAccount}/>
 							<span className='tweet-time'>．{tweetTime}</span>
 						</div>
-						<Link to='/tweet/:tweetId' style={{ textDecoration: 'none' }}>
+						<Link to={`/tweet/${tweetId}`} style={{ textDecoration: 'none' }}>
 							<p className='tweet-content'>
 							{tweetDescription}
 							</p>
@@ -78,6 +78,7 @@ const StyledTweet = styled(Tweet)`
 			font-size: 16px;
 			line-height: 26px;
 			margin: 0 auto;
+			overflow-x: hidden;
 		}
  
 		.footer {

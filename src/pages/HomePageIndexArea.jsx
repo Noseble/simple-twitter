@@ -14,14 +14,16 @@ const HomePageIndexArea = ({className}) => {
     useEffect(() => {
       const getTweetsAsync = async() => {
         try {
-          const tweets = await getTweets();
-          setTweets(tweets.map((tweet) => ({ ...tweet})));
+          const newTweets = await getTweets();
+          setTweets(newTweets);
         } catch (error) {
           console.error(error);
         }
       };
       getTweetsAsync();
     }, []);
+  
+  // console.log(tweets[0])
 
   return(
     <div className={className}>
@@ -36,6 +38,8 @@ const HomePageIndexArea = ({className}) => {
             return(
               <li key={tweet.id}>
                 <StyledTweet
+                  tweetId={tweet.id}
+                  userId={tweet.User.id}
                   userAvatar={tweet.User.avatar} 
                   userName={tweet.User.name} 
                   userAccount={tweet.User.account}

@@ -6,16 +6,16 @@ import StyledUserAvatar from './StyledUserAvatar';
 import StyledUserTitle from './StyledUserTitle';
 import StyledButton from './StyledButton';
 
-//Usage: <StyledPopularUser userName='Pizza Hut' userAccount='@pizzahut' isFollowing={true} /> 
+//Usage: <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowed={true} /> 
 
-const PopularUser = ({userName,userAccount,isFollowing,className}) => {
+const PopularUser = ({ userId, userAvatar, userName, userAccount, isFollowed, className }) => {
   return(
     <div className={className}>
-      <div className={ clsx('popular-user', {small:isFollowing}, {large: !isFollowing})}>
-        <StyledUserAvatar className="popular-user-avatar"/>
-        <StyledUserTitle className="popular-user-info" columnArrange userName={userName} userAccount={`${userAccount}`} />
+      <div className={ clsx('popular-user', {small:isFollowed}, {large: !isFollowed})}>
+        <StyledUserAvatar userId={userId} userAvatar={userAvatar} className="popular-user-avatar"/>
+        <StyledUserTitle className="popular-user-info" columnArrange userId={userId} userName={userName} userAccount={`${userAccount}`} />
       </div>
-      <StyledButton className={clsx('popular-user-button',{filled: isFollowing})} width={isFollowing ? '96px' : 'fit-content'} > {isFollowing ? '正在跟隨' : '跟隨'}</StyledButton>
+      <StyledButton className={clsx('popular-user-button',{filled: isFollowed})} width={isFollowed ? '96px' : 'fit-content'} > {isFollowed ? '正在跟隨' : '跟隨'}</StyledButton>
     </div>
   )
 }
@@ -34,6 +34,7 @@ const StyledPopularUser = styled( PopularUser )`
   .popular-user{
     display:flex;
     align-items:center;
+    overflow: hidden;
 
     &.small{
       width: 140px;

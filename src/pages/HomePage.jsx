@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
@@ -9,16 +9,34 @@ import {ReactComponent as AcLogo} from 'assets/icon/AcLogo.svg'
 import StyledPopularUser from "components/StyledPopularUser";
 import StyledTweetModal from "modals/StyledTweetModal";
 
+import { getTopTen, getUser } from "api/api";
+
 const HomePage = ({className}) => {
+  const MyId = localStorage.getItem('MyId')
   const navigate = useNavigate();
+  const [showTweetModal, setShowTweetModal] = useState(false);
+  const [topTenList, setTopTenList] = useState([]);
 
-  const [showModal, setShowModal] = useState(false);
-  const handleShowModal = () => setShowModal(true);
-
-  const handleClick = () => {
+  const handleShowTweetModal = () => setShowTweetModal(true);
+  
+  const handleLogOutClick = () => {
     localStorage.removeItem('token')
     navigate('login')
   }
+
+  useEffect(() => {
+    const getTopTenAsync = async() => {
+      try {
+        const res = await getTopTen();
+        const newTopTenIds = res.users.map(user=>user.id);
+        const newTopTenUsers = await Promise.all(newTopTenIds.map(userId => getUser(userId)));
+        setTopTenList(newTopTenUsers);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getTopTenAsync();
+  }, []);
 
   return(
     <div className={clsx('web-container', className)}>
@@ -30,13 +48,13 @@ const HomePage = ({className}) => {
           </div>
           <div className="nav-list">
             <Link to='/' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='首頁' /></Link>
-            <Link to='/user/:userId' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='個人資料' /></Link>
+            <Link to={`/user/${MyId}`} style={{ textDecoration: 'none' }}><StyledNavItem navTitle='個人資料' /></Link>
             <Link to='/setting' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='設定' /></Link>
           </div>
-          <StyledButton className='filled' width='100%' onClick={handleShowModal}>推文</StyledButton>
-          <StyledTweetModal show={showModal} setShow={setShowModal} title="My Modal" />
+          <StyledButton className='filled' width='100%' onClick={handleShowTweetModal}>推文</StyledButton>
+          <StyledTweetModal show={showTweetModal} setShow={setShowTweetModal} />
         </div>
-        <StyledNavItem className='exit-nav-item' onClick={handleClick} navTitle='登出' />
+        <StyledNavItem className='exit-nav-item' onClick={handleLogOutClick} navTitle='登出' />
       </nav>
 
       <div className='main-scrollbar'>
@@ -51,16 +69,11 @@ const HomePage = ({className}) => {
           <h2 className="popular-list-title">推薦跟隨</h2>
           <hr className="popular-list-hr"/>
           <div className="popular-list">
-            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={true}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={true}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
-            <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowing={false}/>
+            {topTenList.map((user) => {
+              return(
+                <StyledPopularUser key={user.id} userId={user.id} userAvatar={user.avatar} userName={user.name} userAccount={user.account} isFollowed={user.isFollowed}/>
+              )
+            })}
           </div>
         </div>
       </div>
@@ -80,7 +93,7 @@ const StyledHomepage= styled(HomePage)`
 
   .popular-list-area{
     width:100%;
-    height: 731px;
+    max-height: 731px;
     background-color: #FAFAFB;
     border-radius: 16px;
     margin-top: 16px;
@@ -98,6 +111,7 @@ const StyledHomepage= styled(HomePage)`
 
   .popular-list{
     width: 100%;
+    height: fit-content;
   }
 `
 

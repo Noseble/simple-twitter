@@ -9,28 +9,28 @@ import StyledUserEditModal from "modals/StyledUserEditModal";
 
 //Usage : <StyledUserInfoSection isSelf={true}/>
 
-const UserInfoSection = ({ isSelf, className }) => {
+const UserInfoSection = ({ userImage, userAvatar, userName, userAccount, userIntroduction, isSelf, isFollowed, className }) => {
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
 
   return(
     <div className={className}>
       <div className="user-image-area">
-        <img className="user-background-image" src='https://i.imgur.com/gerdVUX.png'/>
-        <StyledUserAvatar className='user-avatar' userImageSrc="https://picsum.photos/300/300?text=1" />
+        <img className="user-background-image" src={userImage}/>
+        <StyledUserAvatar className='user-avatar' userAvatar={userAvatar} />
         <div className="user-button">
           {isSelf ?
           <>
             <StyledButton onClick={handleShowModal}>編輯個人資料</StyledButton>
             <StyledUserEditModal show={showModal} setShow={setShowModal} title="My Modal" />
           </> :
-          <StyledOtherButtonArea isNotified={true} isFollowing={true}/>} 
+          <StyledOtherButtonArea isNotified={true} isFollowing={isFollowed}/>} 
         </div>
       </div>
       <div className='user-info-area'>
-        <StyledUserTitle className='user-' columnArrange userName='Kevin Chou' userAccount='kevinchou' /> 
+        <StyledUserTitle columnArrange userName={userName} userAccount={userAccount} /> 
         <p className="user-introduction">
-          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. 
+          {userIntroduction}
         </p>
         <div className="user-followship">
           <a href='/user/:userId/following' className="following">34個<span className='followship-unit'>跟隨中</span></a>
