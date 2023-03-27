@@ -16,19 +16,19 @@ import { login } from "api/auth"
 
 
 const LoginPage = ({ className }) => {
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
-
+  
   const handleClick = async () => {
- if (email.length === 0 || password.length === 0) return;
+    if (email.length === 0 || password.length === 0) return;
    
-  const { success, token } = await login({
-    email,
-    password,
-  });
-  if (success) {
+    const { success, token } = await login({
+      email,
+      password,
+    });
+
+    if (success) {
       localStorage.setItem('token', token);
       // 登入成功訊息
       Swal.fire({
@@ -50,7 +50,8 @@ const LoginPage = ({ className }) => {
       icon: 'error',
       showConfirmButton: false,
     });
-};
+    return
+  };
 
 
   return(
@@ -58,8 +59,8 @@ const LoginPage = ({ className }) => {
       <AcLogo className='login-logo' width='40px' height='40px'/>
       <h1 className="login-title">登入 Alphitter</h1>
       <div className="login-input-area">
-        <StyledTextInput className='text-input' labelName='帳號' value={email}   placeholder='請輸入帳號' width='356px' wordLimit='50'  wordCount={email.length} onChange={(emailInputValue) => setEmail(emailInputValue)}/>
-        <StyledTextInput className='text-input' labelName='密碼' value={password}  placeholder='請輸入密碼' type='password' width='356px' wordLimit='16' wordCount={password.length} onChange={(passwordInputValue) => setPassword(passwordInputValue)}/>
+        <StyledTextInput className='text-input' labelName='帳號' value={email}   placeholder='請輸入帳號' width='356px' onChange={(emailInputValue) => setEmail(emailInputValue)}/>
+        <StyledTextInput className='text-input' labelName='密碼' value={password}  placeholder='請輸入密碼' type='password' width='356px' onChange={(passwordInputValue) => setPassword(passwordInputValue)}/>
       </div>
       <StyledButton className='login-button filled' width='100%' onClick={handleClick}>登入</StyledButton>
       <div className="footer">

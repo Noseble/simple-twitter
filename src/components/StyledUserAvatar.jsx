@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 import defaultUserImg from 'assets/image/defaultUserImg.svg';
 
-//Usage:<StyledUserAvatar userImageSrc="https://picsum.photos/300/300?text=1" /> 
+//Usage:<StyledUserAvatar userAvatar="https://picsum.photos/300/300?text=1" /> 
 
-const UserAvatar = ({ userImageSrc, className }) => {
+const UserAvatar = ({ userAvatar, className }) => {
   return(
     <Link to='/user/:userId' style={{ textDecoration: 'none' }}>
-      <img className={className} src={userImageSrc} />
+      <img className={className} src={userAvatar} />
     </Link>
   )
 }

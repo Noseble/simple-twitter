@@ -1,22 +1,26 @@
-import React from 'react';
-import styled, { css } from 'styled-components'
+import {React, useState } from 'react';
+import styled, { css } from 'styled-components';
 
 //Usage: <StyledTextInput (className='focus/error/disabled') width="360px" labelName='名稱' placeholder='請輸入名稱' (wordLimit="50") />
 
 const TextInput = ({ textAreaType, labelName, type, value, placeholder, wordLimit, wordCount, onChange, className})=>{
-  let alertMessage = "超過字數上線"
+  const [alertMessage, setAlertMessage]  = useState('')
+  
+  if(wordCount > wordLimit){
+    setAlertMessage('超過字數上線')
+  }
 
   return(
-    <div className={ className }>
-      <div className='input_block'>
-        <label className='input_label'>{labelName ? labelName : "Label"}</label>
+    <div className={className}>
+      <div className='input-block'>
+        <label className='input-label'>{labelName ? labelName : "Label"}</label>
         {textAreaType?
           <textarea disabled={ className.includes('disabled') ? true : false }  value={value || ''} placeholder={placeholder || "Placeholder"} onChange={(event) => onChange?.(event.target.value)} /> :
           <input disabled={ className.includes('disabled') ? true : false } type={type || 'text'}  value={value || ''} placeholder={placeholder || "Placeholder"} onChange={(event) => onChange?.(event.target.value)} />
         }
       </div>
-      <div className='input_info'>
-        { wordCount > wordLimit ? <span className="input_message">{alertMessage}</span> : null}
+      <div className='input-info'>
+        <span className="input-message">{alertMessage}</span>
         { wordLimit ? <span className='limit' onChange={(event) => onChange?.(event.target.value)}>{wordCount} / {wordLimit}</span> : null}
       </div>
     </div>
@@ -28,8 +32,14 @@ const StyledTextInput = styled(TextInput)`
   ${props=>css`
     width:${props.width};
   `}
+
+  .input-block:has(input:focus){
+    &+.input-info{
+      visibility:visible;
+    }
+  }
   
-  .input_block{
+  .input-block{
     /* display */
     display:flex;
     flex-direction: column;
@@ -46,7 +56,7 @@ const StyledTextInput = styled(TextInput)`
     }
   }
 
-  .input_label{
+  .input-label{
     font-size: 14px;
     line-height: 22px;
     color: #696974;
@@ -84,10 +94,12 @@ const StyledTextInput = styled(TextInput)`
     }
   }
 
-  .input_info{
+  .input-info{
     /* display */
+    visibility: hidden;
     display:flex;
     justify-content: space-between;
+    height: 20px;
 
     /* box model */
     margin-top:4px;
@@ -96,29 +108,32 @@ const StyledTextInput = styled(TextInput)`
     font-size:12px;
     font-weight:500;
     line-height:20px;
-    color:#696974;
+    
+    span{
+      color: #696974;
+    }
   }
 
   /* focus 樣式 */
   &.focus{
-    .input_block{
+    .input-block{
         border-bottom: 2px solid #50B5FF;
     }
   }
 
   /* error 樣式 */
   &.error{
-    .input_block{
+    .input-block{
       border-bottom: 2px solid #FC5A5A;
     }
-    .input_message{
+    .input-message{
       color: #FC5A5A;
     }
   }
   
   /* disabled 樣式 */
   &.disabled{
-    .input_block{
+    .input-block{
       border-bottom: 2px solid #D5D5DC;
 
       &:hover{

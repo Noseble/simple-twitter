@@ -6,7 +6,7 @@ import StyledUserAvatar from './StyledUserAvatar';
 
 import StyledUserTitle from './StyledUserTitle';
 
-//Usage: <StyledTweet userImageSrc='https://picsum.photos/300/300?text=1' userName='John' userAccount='@heyjohn' tweetTime='3小時' tweetContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isLiked={true}/> 
+//Usage: <StyledTweet userImageSrc='https://picsum.photos/300/300?text=1' userName='John' userAccount='@heyjohn' tweetTime='3小時' tweetDescription='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isLiked={true}/> 
 
 
 //  { avatar, name, account, time, reply, like, id }
@@ -15,7 +15,7 @@ import { ReactComponent as Reply } from 'assets/icon/reply.svg';
 import { ReactComponent as LikeButton } from 'assets/icon/likeButton.svg';
 import StyledReplyModal from 'modals/StyledReplyModal';
 
-const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, isLiked, className }) => {
+const Tweet = ({ userAvatar, userName, userAccount, tweetTime, tweetDescription, isLiked, className }) => {
 	const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
 	
@@ -23,7 +23,7 @@ const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, i
 		<>
 		  
 				<div className={ className }>
-					<StyledUserAvatar userImageSrc={userImageSrc} />
+					<StyledUserAvatar userAvatar={userAvatar} />
 					<div className='tweet-area'>
 						<div className="tweet-title">
 							<StyledUserTitle userName={userName} userAccount={userAccount}/>
@@ -31,7 +31,7 @@ const Tweet = ({ userImageSrc, userName, userAccount, tweetTime, tweetContent, i
 						</div>
 						<Link to='/tweet/:tweetId' style={{ textDecoration: 'none' }}>
 							<p className='tweet-content'>
-							{tweetContent}
+							{tweetDescription}
 							</p>
 						</Link>
 						<div className='footer'>
@@ -57,6 +57,7 @@ const StyledTweet = styled(Tweet)`
 	
   .tweet-area{
     display: flex;
+		width: 100%;
     flex-direction: column;
     margin-left: 8px;
 

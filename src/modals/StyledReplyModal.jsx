@@ -27,7 +27,7 @@ const ReplyModal = ({ show, setShow, className }) => {
         <StyledUserAvatar userImageSrc='https://picsum.photos/300/300?text=1' />
         <div className='tweet-area'>          
           <div className="tweet-title">
-            <StyledUserTitle userName='Kevin Chou' userAccount='@kevinchou'/>
+            <StyledUserTitle userName='Kevin Chou' userAccount='kevinchou'/>
             <span className='tweet-time'>．3小時</span>
           </div>
           <p className='tweet-content'>
