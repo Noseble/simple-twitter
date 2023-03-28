@@ -14,7 +14,7 @@ const UserCard = ({ bgImageSrc, userImageSrc, userName, userAccount, userTweetsC
   return(
     <div className={className}>
       <img src={bgImageSrc} className='user-background-image'/>
-      <StyledUserAvatar className='user-avatar' userImageSrc={userImageSrc}/>
+      <StyledUserAvatar className='user-avatar' userAvatar={userImageSrc}/>
       <div className="user-info">
         <StyledUserTitle className='user-title' columnArrange userName={userName} userAccount={`${userAccount}`}/>
         <div className="tweets-likes-count">

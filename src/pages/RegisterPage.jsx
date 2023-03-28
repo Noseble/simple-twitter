@@ -26,32 +26,28 @@ const RegisterPage = ({ className }) => {
     if( account.length === 0 || name.length === 0 || email.length === 0 || password.length === 0 || passwordCheck.length === 0 ) return
     if (password !== passwordCheck ) return
     
-    const {success, authToken } = await register({ account, name,  email , password, passwordCheck });
+   const {success, message} = await register({ account, name,  email , password, passwordCheck });
 
-   if (success) {
-      localStorage.setItem('authToken', authToken);
-
-      // 登入成功訊息
-      Swal.fire({
-        position: 'top',
-        title: '註冊成功！',
-        timer: 1000,
-        icon: 'success',
-        showConfirmButton: false,
-      });
-      navigate('/login')
-      return;
-    }
-    
-    // 登入失敗訊息
-    Swal.fire({
-      position: 'top',
-      title: '註冊失敗！',
-      timer: 1000,
-      icon: 'error',
-      showConfirmButton: false,
-    });
-  }
+if (success) {
+  // 登入成功訊息
+  Swal.fire({
+    position: 'top',
+    title: '註冊成功！',
+    timer: 1000,
+    icon: 'success',
+    showConfirmButton: false,
+  });
+  navigate('/login')
+} else {
+  // 登入失敗訊息
+  Swal.fire({
+    position: 'top',
+    title: '註冊失敗！',
+    text: message, // 顯示錯誤訊息
+    timer: 1000,
+    icon: 'error',
+    showConfirmButton: false,
+  });}}
 
 
 

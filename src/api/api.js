@@ -1,14 +1,13 @@
 import axios from 'axios';
 
 const baseUrl = 'https://mysterious-basin-96824.herokuapp.com'
-const token = localStorage.getItem('token')
+
+const headers =  { Authorization: `Bearer ${localStorage.getItem('token')}`}
 
 export const getUser = async( userId ) => {
   try{
     const res = await axios.get(`${baseUrl}/api/users/${userId}`, {
-      headers:{
-        Authorization: `Bearer ${token}`,
-      },
+      headers,
     });
     return res.data;
   }catch(error){
@@ -19,9 +18,7 @@ export const getUser = async( userId ) => {
 export const getTopTen = async () => {
   try{
     const res = await axios.get(`${baseUrl}/api/followships10`, {
-      headers:{
-        Authorization: `Bearer ${token}`,
-      },
+      headers,
     });
     return res.data;
   }catch(error){
@@ -32,9 +29,7 @@ export const getTopTen = async () => {
 export const getTweets = async () => {
   try {
     const res = await axios.get(`${baseUrl}/api/tweets`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers
     });
     return res.data;
   } catch (error) {
@@ -42,10 +37,37 @@ export const getTweets = async () => {
   }
 };
 
-export const getAdminTweets = async ()=> {
+export const getUserSetting = async () => {
   try {
-    const res = await axios.get(`${baseUrl}/api/admin/tweets`);
+    const res = await axios.get(`${baseUrl}/api/users/${id}`,{
+      headers
+    });
+    return res.data.result
+  } catch (error) {
+    console.error('[Get User Setting failed]：', error);
+  }
+}
+
+export const putUserSetting = async (payload) => {
+  const {id, email, name, account, password} = payload;
+  try {
+    const res = await axios.put(`${baseUrl}/api/users/${id}`, {
+       headers,email, name, account, password
+    });
     return res.data
+  } catch (error) {
+    console.error('[Put User Setting failed]:',error)
+  }
+}
+
+
+
+export const getAdminTweets = async () => {
+  try {
+    const res = await axios.get(`${baseUrl}/api/admin/tweets`,{
+      headers
+    });
+    return res.data.result
   } catch (error) {
     console.error('[Get Admin Tweet failed]：', error);
   }
@@ -53,7 +75,9 @@ export const getAdminTweets = async ()=> {
 
 export const getAdminUsers = async ()=> {
   try {
-    const res = await axios.get(`${baseUrl}/api/admin/users`);
+    const res = await axios.get(`${baseUrl}/api/admin/users`,{
+      headers
+    });
     return res.data
   } catch (error) {
     console.error('[Get Admin Users failed]：', error);

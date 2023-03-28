@@ -12,7 +12,7 @@ import StyledTextLink from "components/StyledTextLink"
 import { ReactComponent as Aclogo } from "assets/icon/AcLogo.svg"
 
 // api
-import { AdminLogin } from "api/auth"
+import { login } from "api/auth"
 
 const AdminLoginPage = ({ className }) => {
 
@@ -21,13 +21,15 @@ const AdminLoginPage = ({ className }) => {
   const navigate = useNavigate();
 
   const handleClick = async () => {
- if (email.length === 0 || password.length === 0) return;
-   
-  const { success, token } = await AdminLogin({
+  if (email.length === 0 || password.length === 0) return;
+
+  const { success, token, user } = await login({
     email,
     password,
   });
+
   if (success) {
+    if (user.role === 'admin') {
       localStorage.setItem('token', token);
 
       // 登入成功訊息
@@ -38,10 +40,20 @@ const AdminLoginPage = ({ className }) => {
         icon: 'success',
         showConfirmButton: false,
       });
-      navigate('/admin')
+      navigate('/admin');
       return;
+    } else {
+      // 阻止使用者登入並顯示錯誤訊息
+      Swal.fire({
+        position: 'top',
+        title: '權限不足！',
+        text: '您的角色不是管理員，無法登入。',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
-    
+  } else {
     // 登入失敗訊息
     Swal.fire({
       position: 'top',
@@ -50,7 +62,9 @@ const AdminLoginPage = ({ className }) => {
       icon: 'error',
       showConfirmButton: false,
     });
+  }
 };
+
 
   return(
     <div className={className}>

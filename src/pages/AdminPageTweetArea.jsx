@@ -1,103 +1,45 @@
 import StyledAdminTweet from "components/StyledAdminTweet";
 import styled from "styled-components";
+import { useState,useEffect } from "react";
+// api
+import { getAdminTweets } from "api/api";
 
 const AdminPageTweetsArea = ({ className }) => {
+
+  const [adminTweets,setAdminTweets] = useState([])
+
+    useEffect(() => {
+    const getAdminTweetsAsync = async () => {
+      try {
+        const adminTweets = await getAdminTweets();
+        setAdminTweets(adminTweets.map((adminTweet) => ({ ...adminTweet})));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getAdminTweetsAsync();
+  }, []);
+
   return(
       <div className={className}>
         <div className="main-header">
           <h2>推文清單</h2>
         </div>
         <hr className="main-header-line"/>
-        <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'SNulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum. Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum.Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum.  '}
-        />
+        <ul className="admin-tweet-list">
+          {adminTweets.map(({...adminTweet}) => {
+            return(
+              <li key={adminTweet.id}>
                 <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />  
-                <StyledAdminTweet 
-          userName={'Adam'}
-          userAccount={'adam666'} 
-          tweetTime={'三小時'} 
-          tweetContent={'ASasd45wa64sr89qw4d65a4sd654'}
-        />        
+                    userName={adminTweet.User.name}
+                    userAccount={adminTweet.User.account} 
+                    tweetTime={`${Math.floor(Number(new Date() - new Date(adminTweet.createdAt)) / (1000 * 60 * 60))}小時`} 
+                    tweetContent={adminTweet.description}/>
+              </li>
+            )
+          })}
+        
+        </ul>
       </div>
   )
 }

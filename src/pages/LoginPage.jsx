@@ -28,7 +28,8 @@ const LoginPage = ({ className }) => {
       password,
     });
 
-    if (success) {
+if (success) {
+    if (user.role === 'user') {
       localStorage.setItem('token', token);
       localStorage.setItem('MyId', user.id);
       // 登入成功訊息
@@ -39,10 +40,20 @@ const LoginPage = ({ className }) => {
         icon: 'success',
         showConfirmButton: false,
       });
-      navigate('/')
+      navigate('/');
       return;
+    } else {
+      // 阻止使用者登入並顯示錯誤訊息
+      Swal.fire({
+        position: 'top',
+        title: '權限不足！',
+        text: '您的角色是管理員，無法登入。',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
-    
+  } else {
     // 登入失敗訊息
     Swal.fire({
       position: 'top',
@@ -51,7 +62,7 @@ const LoginPage = ({ className }) => {
       icon: 'error',
       showConfirmButton: false,
     });
-    return
+  }
   };
 
 
