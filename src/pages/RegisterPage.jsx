@@ -62,7 +62,7 @@ const RegisterPage = ({ className }) => {
         <StyledTextInput className='text-input' labelName='名稱' value={name} placeholder='請輸入使用者名稱' width='356px' wordLimit={20} wordCount={name.length} onChange={(nameInputValue) => setName(nameInputValue)}/>
         <StyledTextInput className='text-input' labelName='Email' value={email} placeholder='請輸入Email' width='356px' wordLimit={20} wordCount={email.length} onChange={(emailInputValue) => setEmail(emailInputValue)} />
         <StyledTextInput className='text-input' labelName='密碼' value={password} type='password' placeholder='請設定密碼' width='356px' wordLimit={20} wordCount={password.length} onChange={(passwordInputValue) => setPassword(passwordInputValue)} />
-        <StyledTextInput className='text-input' labelName='密碼確認'  value={passwordCheck} type='password' placeholder='請再次輸入密碼' width='356px' wordLimit={16} wordCount={passwordCheck.length} onChange={(passwordCheckInputValue) => setPasswordCheck(passwordCheckInputValue)} />
+        <StyledTextInput className='text-input' labelName='密碼確認'  value={passwordCheck} type='password' placeholder='請再次輸入密碼' width='356px' wordLimit={16} wordCount={passwordCheck.length} passwordWrong={password !== passwordCheck} onChange={(passwordCheckInputValue) => setPasswordCheck(passwordCheckInputValue)} />
       </div>
       <StyledButton className='register-button filled' width='100%' onClick={handleClick} >註冊</StyledButton>
       <div className="footer">
