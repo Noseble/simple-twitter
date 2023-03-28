@@ -28,10 +28,11 @@ const LoginPage = ({ className }) => {
       password,
     });
 
+
 if (success) {
     if (user.role === 'user') {
       localStorage.setItem('token', token);
-
+      localStorage.setItem('id', user.id);
       // 登入成功訊息
       Swal.fire({
         position: 'top',

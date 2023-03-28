@@ -15,7 +15,7 @@ const HomePage = ({className}) => {
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
 
-  const handleClick = () => {
+  const handleLogout = () => {
     localStorage.removeItem('token')
     navigate('login')
   }
@@ -36,7 +36,7 @@ const HomePage = ({className}) => {
           <StyledButton className='filled' width='100%' onClick={handleShowModal}>推文</StyledButton>
           <StyledTweetModal show={showModal} setShow={setShowModal} title="My Modal" />
         </div>
-        <StyledNavItem className='exit-nav-item' onClick={handleClick} navTitle='登出' />
+        <StyledNavItem className='exit-nav-item' onClick={handleLogout} navTitle='登出' />
       </nav>
 
       <div className='main-scrollbar'>

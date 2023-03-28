@@ -4,12 +4,8 @@ import styled, { css } from 'styled-components';
 //Usage: <StyledTextInput (className='focus/error/disabled') width="360px" labelName='名稱' placeholder='請輸入名稱' (wordLimit="50") />
 
 const TextInput = ({ textAreaType, labelName, type, value, placeholder, wordLimit, wordCount, onChange, className})=>{
-  const [alertMessage, setAlertMessage]  = useState('')
+  const alertMessage = '超過字數上線'
   
-  if(wordCount > wordLimit){
-    setAlertMessage('超過字數上線')
-  }
-
   return(
     <div className={className}>
       <div className='input-block'>
@@ -20,7 +16,7 @@ const TextInput = ({ textAreaType, labelName, type, value, placeholder, wordLimi
         }
       </div>
       <div className='input-info'>
-        <span className="input-message">{alertMessage}</span>
+        <span className="input-message">{ wordCount > wordLimit ? alertMessage : null }</span>
         { wordLimit ? <span className='limit' onChange={(event) => onChange?.(event.target.value)}>{wordCount} / {wordLimit}</span> : null}
       </div>
     </div>

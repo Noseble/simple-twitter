@@ -15,26 +15,27 @@ export const getTweets = async () => {
   }
 };
 
-export const getUserSetting = async () => {
+export const getUserSetting = async (id) => {
   try {
     const res = await axios.get(`${baseUrl}/api/users/${id}`,{
       headers
     });
-    return res.data.result
+    return res.data;
   } catch (error) {
     console.error('[Get User Setting failed]：', error);
   }
 }
 
 export const putUserSetting = async (payload) => {
-  const {id, email, name, account, password} = payload;
   try {
-    const res = await axios.put(`${baseUrl}/api/users/${id}`, {
-       headers,email, name, account, password
+    const {id,account, name,  email , password,passwordCheck} = payload
+    const  res  = await axios.put(`${baseUrl}/api/users/${id}`, {
+       headers,id,account, name,  email , password, passwordCheck
     });
     return res.data
   } catch (error) {
     console.error('[Put User Setting failed]:',error)
+    console.log(error)
   }
 }
 
