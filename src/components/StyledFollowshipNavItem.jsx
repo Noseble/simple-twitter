@@ -1,19 +1,30 @@
 import React from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 //Usage: <StyledFollowshipNavItem/>
 
 const FollowshipNavItem = ({ className }) => {
+	const { userId } = useParams()
+	const currentUrl = useLocation().pathname
+	
+	//取得現有Url最後一個字串
+  const lastSegmentOfUrl = currentUrl.substring(currentUrl.lastIndexOf('/')+ 1)
+	
 	return (
 		<div className={className}>
 			<ul>
 				<li>
-					<input type='radio' id='followshipChoice1' name='contact' />
-					<label htmlFor='followshipChoice1'>追隨者</label>
+					<Link to={`/user/${userId}/follower`} style={{ textDecoration: 'none' }}>
+						<input type='radio' id='followshipChoice1' name='contact' defaultChecked={lastSegmentOfUrl==='follower'}/>
+						<label htmlFor='followshipChoice1'>追隨者</label>
+					</Link>
 				</li>
 				<li>
-					<input type='radio' id='followshipChoice2' name='contact' />
-					<label htmlFor='followshipChoice2'>正在追隨</label>
+					<Link to={`/user/${userId}/following`} style={{ textDecoration: 'none' }}>
+						<input type='radio' id='followshipChoice2' name='contact' defaultChecked={lastSegmentOfUrl==='following'}/>
+						<label htmlFor='followshipChoice2'>正在追隨</label>
+					</Link>
 				</li>
 			</ul>
 		</div>

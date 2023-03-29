@@ -11,19 +11,19 @@ import { getTweets } from "api/api"
 const HomePageIndexArea = ({className}) => {
   const [tweets,setTweets] = useState([])
 
-    useEffect(() => {
-      const getTweetsAsync = async() => {
-        try {
-          const newTweets = await getTweets();
-          setTweets(newTweets);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      getTweetsAsync();
-    }, []);
-  
-  // console.log(tweets[0])
+  useEffect(() => {
+    const getTweetsAsync = async() => {
+      try {
+        const newTweets = await getTweets();
+        setTweets(newTweets);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getTweetsAsync();
+  }, []);
+
+// console.log(tweets[0])
 
   return(
     <div className={className}>
@@ -43,7 +43,7 @@ const HomePageIndexArea = ({className}) => {
                   userAvatar={tweet.User.avatar} 
                   userName={tweet.User.name} 
                   userAccount={tweet.User.account}
-                  tweetTime={`${Math.floor(Number(new Date() - new Date(tweet.createdAt)) / (1000 * 60 * 60))}小時`}
+                  tweetTime={tweet.createdAt}
                   tweetDescription={tweet.description} 
                   isLiked={true}/> 
               </li>

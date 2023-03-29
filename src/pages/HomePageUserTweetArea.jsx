@@ -1,47 +1,50 @@
 import { React, useState, useEffect } from 'react';
 import StyledTweet from "components/StyledTweet"
-import { useParams } from "react-router"
 import StyledUserNavItem from "components/StyledUserNavItem"
 import styled from "styled-components"
-import StyledUserInfoSection from "components/StyledUserInfoSection"
-
-import { getUser } from 'api/api';
+import { getUser, getUserTweets } from 'api/api';
+import { useParams } from 'react-router';
 
 const HomePageUserTweetArea = ({ className }) => {
-  const { userId } = useParams();
-  const MyId = localStorage.getItem('MyId')
-
-  const [user, setUser] = useState({});
+  const { userId } = useParams()
+  const [ tweets, setTweets ] = useState([])
+  const [ user, setUser ] = useState({})
   
   useEffect(() => {
-    const getCurrentUser = async() => {
+    const getCurrentUser = async(id) => {
       try {
-        const res = await getUser(userId);
+        const res = await getUser(id);
         setUser(res);
       } catch (error) {
         console.error(error);
       }
+    }
+    
+    const getTweetsAsync = async(id) => {
+      try {
+        const newTweets = await getUserTweets( id );
+        setTweets(newTweets);
+      } catch (error) {
+        console.error(error);
+      }
     };
-    getCurrentUser();
-  }, [userId]);
 
-  // console.log(user);
+    getCurrentUser(userId);
+    getTweetsAsync(userId);
+  }, [userId]);
 
   return(  
     <div className={className}>
-      <StyledUserInfoSection userImage={user.image} userAvatar={user.avatar} userName={user.name} userAccount={user.name} userIntroduction={user.introduction} isSelf={(userId === MyId)} isFollowed={user.isFollowed}/>
       <StyledUserNavItem/>
       <hr className="main-header-line"/>
       <ul className="tweet-list">
-        <li>      
-          <StyledTweet userAvatar='https://picsum.photos/300/300?text=1' userName='John' userAccount='heyjohn' tweetTime='3小時' tweetDescription='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isLiked={false}/>     
-        </li>
-        <li>      
-          <StyledTweet userAvatar='https://picsum.photos/300/300?text=1' userName='John' userAccount='heyjohn' tweetTime='3小時' tweetDescription='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isLiked={false}/>     
-        </li>
-        <li>      
-          <StyledTweet userAvatar='https://picsum.photos/300/300?text=1' userName='John' userAccount='heyjohn' tweetTime='3小時' tweetDescription='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isLiked={false}/>     
-        </li>
+        {tweets.map((tweet) =>{
+          return(
+            <li key={tweet.id}>
+              <StyledTweet tweetId={tweet.id} userId={tweet.userId} userAvatar={user.avatar} userName={user.name} userAccount={user.account} tweetTime={tweet.createdAt} tweetDescription={tweet.description} isLiked={tweet.isLiked}/>   
+            </li>
+          )
+        })}
       </ul>
     </div>
   )

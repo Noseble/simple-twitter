@@ -2,24 +2,52 @@ import styled from "styled-components"
 
 import StyledReply from "components/StyledReply"
 import StyledUserNavItem from "components/StyledUserNavItem"
-import StyledUserInfoSection from "components/StyledUserInfoSection"
+import { useParams } from "react-router"
+import { useEffect, useState } from "react"
+import { getUser, getUserReplies } from "api/api"
 
 const HomePageUserReplyArea = ({ className }) => {
+  const { userId } = useParams()
+  const [ user, setUser] = useState({})
+  const [ replyTweet, setReplyTweet ] = useState({})
+  const [ userReplies, setUserReplies ] = useState([])
+
+  useEffect(()=>{
+
+    const getCurrentUser = async(id) =>{
+      try{
+        const res = await getUser(id)
+        setUser(res)
+      }catch(error){
+        console.error(error)
+      }
+    }
+
+    const getCurrentUserReplies = async(id) => {
+      try{
+        const res = await getUserReplies(id)
+        setUserReplies(res)
+      }catch(error){
+        console.error(error)
+      }
+    }
+
+    getCurrentUser(userId)
+    getCurrentUserReplies(userId)
+  },[userId])
+  
   return(  
     <div className={className}>
-      <StyledUserInfoSection isSelf={true}/>
       <StyledUserNavItem/>
       <hr className="main-header-line"/>
       <ul className="tweet-list">
-        <li>      
-          <StyledReply userName='John' userAccount='heyjohn' userImageSrc='https://picsum.photos/300/300?text=1' replyTime='3小時' replyTo='@apple' replyContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero.'/>     
-        </li>
-        <li>      
-          <StyledReply userName='John' userAccount='heyjohn' userImageSrc='https://picsum.photos/300/300?text=1' replyTime='3小時' replyTo='@apple' replyContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero.'/>     
-        </li>
-        <li>      
-         <StyledReply userName='John' userAccount='heyjohn' userImageSrc='https://picsum.photos/300/300?text=1' replyTime='3小時' replyTo='@apple' replyContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero.'/>      
-        </li>
+        {userReplies.map((userReply)=>{
+          return(
+            <li key={userReply.id}>      
+              <StyledReply userId={userReply.UserId} userName='john Hey' userAccount='heyjohn' userAvatar='https://picsum.photos/300/300?text=1' replyTime={userReply.createdAt} replyTo='@apple' replyContent={userReply.comment}/>     
+            </li>
+          )
+        })}
       </ul>
     </div>
   )

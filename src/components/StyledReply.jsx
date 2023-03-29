@@ -5,18 +5,18 @@ import styled from 'styled-components';
 import StyledUserAvatar from './StyledUserAvatar';
 import StyledUserTitle from './StyledUserTitle';
 
-//Usage: <StyledReply userName='John' userAccount='@heyjohn' userImageSrc='https://picsum.photos/300/300?text=1' replyTime='3小時' replyTo='@apple' replyContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero.'/> 
+//Usage: <StyledReply userName='John' userAccount='@heyjohn' userAvatar='https://picsum.photos/300/300?text=1' replyTime='3小時' replyTo='@apple' replyContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero.'/> 
 
-const Reply = ({ userName, userAccount, userImageSrc, replyTime, replyTo, replyContent, className }) => {
+const Reply = ({ userId, userName, userAccount, userAvatar, replyTime, replyToId, replyToAccount, replyContent, className }) => {
   return(
     <div className={ className }>
-		  <StyledUserAvatar userImageSrc={userImageSrc}/>
+		  <StyledUserAvatar userId={userId} userAvatar={userAvatar}/>
 			<div className="reply-area">
 				<div className="reply-title">
-					<StyledUserTitle userName={userName} userAccount={`${userAccount}`}/>
-          <span className='reply-time'>．{replyTime}</span>
+					<StyledUserTitle userName={userName} userAccount={userAccount}/>
+          <span className='reply-time'>．{`${Math.floor(Number(new Date() - new Date(replyTime)) / (1000 * 60 * 60))}小時`}</span>
 				</div>
-          <label className='reply-to-area'>回覆 <a href='#' className='target-user'>{`@${replyTo}`}</a></label>
+          <label className='reply-to-area'>回覆 <a href={`/user/${replyToId}`} className='target-user'>{`@${replyToAccount}`}</a></label>
 				<p className='reply-content'>
           {replyContent}
 				</p>
@@ -30,11 +30,11 @@ const StyledReply = styled(Reply)`
 	justify-content: space-between;
   padding: 16px 24px;
 	width: 640px;
-  height: 148px;
   
   .reply-area{
     display: flex;
     flex-direction: column;
+    width: 100%
     margin-left: 8px;
 
     .reply-title{
@@ -69,6 +69,7 @@ const StyledReply = styled(Reply)`
 		font-size: 16px;
 		line-height: 26px;
 		margin: 0 auto;
+    width: 534px;
 	  }
 
 

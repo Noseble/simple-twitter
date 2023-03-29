@@ -15,6 +15,61 @@ export const getUser = async( userId ) => {
   }
 }
 
+export const getUserTweets = async( userId ) => {
+  try{
+    const res = await axios.get(`${baseUrl}/api/users/${userId}/tweets`, {
+      headers,
+    });
+    return res.data;
+  }catch(error){
+    console.error('[Get User Tweets failed]:', error)
+  }
+}
+
+export const getUserReplies = async( userId ) => {
+  try{
+    const res = await axios.get(`${baseUrl}/api/users/${userId}/replied_tweets`, {
+      headers,
+    });
+    return res.data;
+  }catch(error){
+    console.error('[Get User Replies failed]:', error)
+  }
+}
+
+export const getUserLikes = async() =>{
+  try{
+    const res = await axios.get(`${baseUrl}/api/users/${userId}/tweets`, {
+      headers,
+    });
+    return res.data;
+  }catch(error){
+    console.error('[Get User Tweets failed]:', error)
+  }
+}
+
+export const getUserFollowers = async ( userId ) => {
+  try{
+    const res = await axios.get(`${baseUrl}/api/users/${userId}/followers`, {
+      headers,
+    });
+    return res.data;
+  }catch(error){
+    console.error('[Get User Followers failed]:', error)
+  }
+}
+
+export const getUserFollowings = async ( userId ) => {
+  try{
+    const res = await axios.get(`${baseUrl}/api/users/${userId}/followings`, {
+      headers,
+    });
+    return res.data;
+  }catch(error){
+    console.error('[Get User Followings failed]:', error)
+  }
+}
+
 export const getTopTen = async () => {
   try{
     const res = await axios.get(`${baseUrl}/api/followships10`, {
@@ -26,6 +81,17 @@ export const getTopTen = async () => {
   }
 };
 
+export const getTweet = async ( tweetId ) => {
+    try {
+    const res = await axios.get(`${baseUrl}/api/tweets/${tweetId}`, {
+      headers
+    });
+    return res.data;
+  } catch (error) {
+    console.error('[Get Tweet failed]:', error);
+  }
+}
+
 export const getTweets = async () => {
   try {
     const res = await axios.get(`${baseUrl}/api/tweets`, {
@@ -33,7 +99,7 @@ export const getTweets = async () => {
     });
     return res.data;
   } catch (error) {
-    console.error('[Get Tweet failed]：', error);
+    console.error('[Get Tweets failed]:', error);
   }
 };
 
@@ -44,7 +110,7 @@ export const getUserSetting = async () => {
     });
     return res.data.result
   } catch (error) {
-    console.error('[Get User Setting failed]：', error);
+    console.error('[Get User Setting failed]:', error);
   }
 }
 
@@ -69,7 +135,7 @@ export const getAdminTweets = async () => {
     });
     return res.data.result
   } catch (error) {
-    console.error('[Get Admin Tweet failed]：', error);
+    console.error('[Get Admin Tweet failed]:', error);
   }
 }
 
@@ -80,6 +146,6 @@ export const getAdminUsers = async ()=> {
     });
     return res.data
   } catch (error) {
-    console.error('[Get Admin Users failed]：', error);
+    console.error('[Get Admin Users failed]:', error);
   }
 }

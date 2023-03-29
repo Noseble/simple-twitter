@@ -47,8 +47,8 @@ function App() {
             <Route path="follower" element={<HomePageUserFollowerArea/>}/>
             <Route path="following" element={<HomePageUserFollowingArea/>} />
           </Route>
+          <Route path="setting" element={<SettingPage />} />
         </Route>
-        <Route path="setting" element={<SettingPage />} />
         {/*未找到路由*/}
         <Route path="*" element={<NotFoundPage />}/>
       </Routes>

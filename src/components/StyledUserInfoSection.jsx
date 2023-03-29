@@ -9,7 +9,7 @@ import StyledUserEditModal from "modals/StyledUserEditModal";
 
 //Usage : <StyledUserInfoSection isSelf={true}/>
 
-const UserInfoSection = ({ userImage, userAvatar, userName, userAccount, userIntroduction, isSelf, isFollowed, className }) => {
+const UserInfoSection = ({ userId, userImage, userAvatar, userName, userAccount, userIntroduction, isSelf, isFollowed, isNotified, followersCount, followingsCount, className }) => {
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
 
@@ -24,7 +24,7 @@ const UserInfoSection = ({ userImage, userAvatar, userName, userAccount, userInt
             <StyledButton onClick={handleShowModal}>編輯個人資料</StyledButton>
             <StyledUserEditModal show={showModal} setShow={setShowModal} title="My Modal" />
           </> :
-          <StyledOtherButtonArea isNotified={true} isFollowing={isFollowed}/>} 
+          <StyledOtherButtonArea isNotified={isNotified} isFollowing={isFollowed}/>} 
         </div>
       </div>
       <div className='user-info-area'>
@@ -33,8 +33,8 @@ const UserInfoSection = ({ userImage, userAvatar, userName, userAccount, userInt
           {userIntroduction}
         </p>
         <div className="user-followship">
-          <a href='/user/:userId/following' className="following">34個<span className='followship-unit'>跟隨中</span></a>
-          <a href='/user/:userId/follower' className="follower">59位<span className='followship-unit'>跟隨者</span></a>
+          <a href={`/user/${userId}/following`} className="following">{followersCount || '0'}個<span className='followship-unit'>跟隨中</span></a>
+          <a href={`/user/${userId}/follower`} className="follower">{followingsCount || '0'}位<span className='followship-unit'>跟隨者</span></a>
         </div>
       </div>
     </div>
@@ -81,8 +81,6 @@ const StyledUserInfoSection = styled(UserInfoSection)`
     }
   }
 
-
-
   .user-followship{
     display: flex;
     margin-top: 8px;
@@ -107,6 +105,10 @@ const StyledUserInfoSection = styled(UserInfoSection)`
     .following{
       margin-right: 20px;
     }
+  }
+
+  &.hidden{
+    display:none
   }
 
 `

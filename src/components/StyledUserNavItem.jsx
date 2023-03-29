@@ -1,24 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link, useLocation, useParams } from 'react-router-dom'; 
 import styled from 'styled-components';
 
 //Usage: <StyledUserNavItem />
 
 const UserNavItem = ({ className }) => {
+	const { userId } = useParams()
+	const currentUrl = useLocation().pathname
+	
+	//取得現有Url最後一個字串
+  const lastSegmentOfUrl = currentUrl.substring(currentUrl.lastIndexOf('/')+ 1)
+
 	return (
 		<div className={className}>
 			<ul>
 				<li>
-						<input type='radio' id='contactChoice1' name='contact' />
-						<label htmlFor='contactChoice1'>推文</label>
+				    <Link to={`/user/${userId}/tweet`} style={{ textDecoration: 'none' }}>
+							<input type='radio' id='contactChoice1' name='contact' defaultChecked={lastSegmentOfUrl==='tweet' || typeof(Number(lastSegmentOfUrl))=== 'number'} />
+							<label htmlFor='contactChoice1'>推文</label>
+						</Link>
 				</li>
 				<li>
-						<input type='radio' id='contactChoice2' name='contact' />
-						<label htmlFor='contactChoice2'>回覆</label>
+						<Link to={`/user/${userId}/reply`} style={{ textDecoration: 'none' }}>
+							<input type='radio' id='contactChoice2' name='contact' defaultChecked={lastSegmentOfUrl==='reply'}/>
+							<label htmlFor='contactChoice2'>回覆</label>
+						</Link>
 				</li>
 				<li>
-						<input type='radio' id='contactChoice3' name='contact' />
-						<label htmlFor='contactChoice3'>喜歡的內容</label>
+				    <Link to={`/user/${userId}/like`} style={{ textDecoration: 'none' }}>
+							<input type='radio' id='contactChoice3' name='contact' defaultChecked={lastSegmentOfUrl==='like'}/>
+							<label htmlFor='contactChoice3'>喜歡的內容</label>
+						</Link>
 				</li>
 			</ul>
 		</div>
@@ -66,12 +78,17 @@ const StyledUserNavItem = styled(UserNavItem)`
 	input {
 		display:none;
 
-		&:checked ~label{
+		&:checked ~label,
+		&:hover ~ label{
 			color: #ff6600;
 		}		
 	}
 
 	li:has(input:checked){
+		border-bottom: 2px solid #ff6600;
+	}
+
+	li:has(input:hover){
 		border-bottom: 2px solid #ff6600;
 	}
 `;

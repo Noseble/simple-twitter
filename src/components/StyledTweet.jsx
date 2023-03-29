@@ -27,7 +27,7 @@ const Tweet = ({ tweetId, userId, userAvatar, userName, userAccount, tweetTime, 
 					<div className='tweet-area'>
 						<div className="tweet-title">
 							<StyledUserTitle userId={userId} userName={userName} userAccount={userAccount}/>
-							<span className='tweet-time'>．{tweetTime}</span>
+							<span className='tweet-time'>．{`${Math.floor(Number(new Date() - new Date(tweetTime)) / (1000 * 60 * 60))}小時`}</span>
 						</div>
 						<Link to={`/tweet/${tweetId}`} style={{ textDecoration: 'none' }}>
 							<p className='tweet-content'>

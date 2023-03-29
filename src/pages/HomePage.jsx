@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
 
@@ -16,6 +16,7 @@ const HomePage = ({className}) => {
   const navigate = useNavigate();
   const [showTweetModal, setShowTweetModal] = useState(false);
   const [topTenList, setTopTenList] = useState([]);
+  const currentUrlPath = useLocation().pathname
 
   const handleShowTweetModal = () => setShowTweetModal(true);
   
@@ -47,9 +48,9 @@ const HomePage = ({className}) => {
             <AcLogo className="website-logo" />
           </div>
           <div className="nav-list">
-            <Link to='/' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='首頁' /></Link>
-            <Link to={`/user/${MyId}`} style={{ textDecoration: 'none' }}><StyledNavItem navTitle='個人資料' /></Link>
-            <Link to='/setting' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='設定' /></Link>
+            <Link to='/' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='首頁' className={clsx({selected: currentUrlPath==='/'})}/></Link>
+            <Link to={`/user/${MyId}`} style={{ textDecoration: 'none' }}><StyledNavItem navTitle='個人資料' className={clsx({selected: currentUrlPath.includes('user')})}/></Link>
+            <Link to='/setting' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='設定' className={clsx({selected: currentUrlPath==='/setting'})}/></Link>
           </div>
           <StyledButton className='filled' width='100%' onClick={handleShowTweetModal}>推文</StyledButton>
           <StyledTweetModal show={showTweetModal} setShow={setShowTweetModal} />
@@ -65,7 +66,7 @@ const HomePage = ({className}) => {
 
 
       <div className='side-column'>
-        <div className='popular-list-area'>
+        <div className={clsx('popular-list-area',{hidden: currentUrlPath==='/setting'})}>
           <h2 className="popular-list-title">推薦跟隨</h2>
           <hr className="popular-list-hr"/>
           <div className="popular-list">
@@ -97,6 +98,10 @@ const StyledHomepage= styled(HomePage)`
     background-color: #FAFAFB;
     border-radius: 16px;
     margin-top: 16px;
+
+    &.hidden{
+      visibility: hidden;
+    }
   }
   
   .popular-list-title{

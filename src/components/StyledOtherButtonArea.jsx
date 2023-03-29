@@ -19,9 +19,11 @@ const OtherButtonArea = ({ isNotified, isFollowing, className }) => {
 		  <button className='icon'>
 		  	<img className="mail-icon" src={MailButton}/>
 			</button>
-			<div className={clsx('icon',{active : isNotified})}>
-				<img src={isNotified? NotifyButtonFilled:NotifyButton} />
-			</div>
+			{isFollowing &&
+				<div className={clsx('icon',{active : isNotified})}>
+					<img src={isNotified? NotifyButtonFilled:NotifyButton} />
+				</div>
+			}
 			<StyledButton className={ clsx("follow-icon", { filled: isFollowing }) }> {isFollowing ? '正在跟隨':'跟隨'} </StyledButton>
 		</div>
 	);

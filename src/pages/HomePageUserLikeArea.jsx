@@ -1,12 +1,12 @@
 import StyledTweet from "components/StyledTweet"
 import StyledUserNavItem from "components/StyledUserNavItem"
 import styled from "styled-components"
-import StyledUserInfoSection from "components/StyledUserInfoSection"
+import { useState } from "react"
 
 const HomePageUserLikeArea = ({ className }) => {
+   
   return(  
     <div className={className}>
-      <StyledUserInfoSection isSelf={true}/>
       <StyledUserNavItem/>
       <hr className="main-header-line"/>
       <ul className="tweet-list">
