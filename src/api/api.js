@@ -4,9 +4,9 @@ const baseUrl = 'https://mysterious-basin-96824.herokuapp.com'
 
 const headers =  { Authorization: `Bearer ${localStorage.getItem('token')}`}
 
-export const getUser = async( userId ) => {
+export const getUser = async( id ) => {
   try{
-    const res = await axios.get(`${baseUrl}/api/users/${userId}`, {
+    const res = await axios.get(`${baseUrl}/api/users/${id}`, {
       headers,
     });
     return res.data;
@@ -15,9 +15,9 @@ export const getUser = async( userId ) => {
   }
 }
 
-export const getUserTweets = async( userId ) => {
+export const getUserTweets = async( id ) => {
   try{
-    const res = await axios.get(`${baseUrl}/api/users/${userId}/tweets`, {
+    const res = await axios.get(`${baseUrl}/api/users/${id}/tweets`, {
       headers,
     });
     return res.data;
@@ -26,9 +26,9 @@ export const getUserTweets = async( userId ) => {
   }
 }
 
-export const getUserReplies = async( userId ) => {
+export const getUserReplies = async( id ) => {
   try{
-    const res = await axios.get(`${baseUrl}/api/users/${userId}/replied_tweets`, {
+    const res = await axios.get(`${baseUrl}/api/users/${id}/replied_tweets`, {
       headers,
     });
     return res.data;
@@ -37,20 +37,20 @@ export const getUserReplies = async( userId ) => {
   }
 }
 
-export const getUserLikes = async() =>{
+export const getUserLikes = async( id ) =>{
   try{
-    const res = await axios.get(`${baseUrl}/api/users/${userId}/tweets`, {
+    const res = await axios.get(`${baseUrl}/api/users/${id}/likes`, {
       headers,
     });
     return res.data;
   }catch(error){
-    console.error('[Get User Tweets failed]:', error)
+    console.error('[Get User Liked Tweets failed]:', error)
   }
 }
 
-export const getUserFollowers = async ( userId ) => {
+export const getUserFollowers = async ( id ) => {
   try{
-    const res = await axios.get(`${baseUrl}/api/users/${userId}/followers`, {
+    const res = await axios.get(`${baseUrl}/api/users/${id}/followers`, {
       headers,
     });
     return res.data;
@@ -59,9 +59,9 @@ export const getUserFollowers = async ( userId ) => {
   }
 }
 
-export const getUserFollowings = async ( userId ) => {
+export const getUserFollowings = async ( id ) => {
   try{
-    const res = await axios.get(`${baseUrl}/api/users/${userId}/followings`, {
+    const res = await axios.get(`${baseUrl}/api/users/${id}/followings`, {
       headers,
     });
     return res.data;
@@ -110,7 +110,7 @@ export const getUserSetting = async (id) => {
   }
 }
 
-export const putUserSetting = async (payload) => {
+export const putUserSetting = async (id,payload) => {
   try {
     const {id,account, name,  email , password} = payload
     const  res   = await axios.put(`${baseUrl}/api/users/${id}`, {

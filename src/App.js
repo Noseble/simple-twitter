@@ -18,7 +18,7 @@ import HomePageUserReplyArea from 'pages/HomePageUserReplyArea';
 import HomePageUserLikeArea from 'pages/HomePageUserLikeArea';
 import HomePageUserFollowerArea from 'pages/HomePageUserFollowerArea';
 import HomePageUserFollowingArea from 'pages/HomePageUserFollowingArea';
-import SettingPage from 'pages/SettingPage';
+import HomePageSettingArea from 'pages/HomePageSettingArea';
 import NotFoundPage from 'pages/NotFoundPage';
 
 
@@ -47,7 +47,7 @@ function App() {
             <Route path="follower" element={<HomePageUserFollowerArea/>}/>
             <Route path="following" element={<HomePageUserFollowingArea/>} />
           </Route>
-          <Route path="setting" element={<SettingPage />} />
+          <Route path="setting" element={<HomePageSettingArea />} />
         </Route>
         {/*未找到路由*/}
         <Route path="*" element={<NotFoundPage />}/>

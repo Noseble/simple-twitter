@@ -9,7 +9,6 @@ import { getUser, getUserReplies } from "api/api"
 const HomePageUserReplyArea = ({ className }) => {
   const { userId } = useParams()
   const [ user, setUser] = useState({})
-  const [ replyTweet, setReplyTweet ] = useState({})
   const [ userReplies, setUserReplies ] = useState([])
 
   useEffect(()=>{
@@ -44,7 +43,7 @@ const HomePageUserReplyArea = ({ className }) => {
         {userReplies.map((userReply)=>{
           return(
             <li key={userReply.id}>      
-              <StyledReply userId={userReply.UserId} userName='john Hey' userAccount='heyjohn' userAvatar='https://picsum.photos/300/300?text=1' replyTime={userReply.createdAt} replyTo='@apple' replyContent={userReply.comment}/>     
+              <StyledReply userId={userReply.UserId} userName={user.name} userAccount={user.account} userAvatar={user.avatar} replyTime={userReply.createdAt} replyToId={userReply.Tweet.User.id} replyToAccount={userReply.Tweet.User.account} replyContent={userReply.comment}/>     
             </li>
           )
         })}

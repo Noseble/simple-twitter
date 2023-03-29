@@ -1,22 +1,41 @@
 import StyledUserRow from "components/StyledUserRow"
 import StyledFollowshipNavItem from "components/StyledFollowshipNavItem"
 import styled from "styled-components"
+import { useParams } from "react-router"
+import { useEffect, useState } from "react"
+import { getUserFollowings } from "api/api"
 
 const HomePageUserFollowingArea = ({ className }) => {
+  const { userId } = useParams()
+  const [ userFollowings, setUserFollowings ] = useState([])
+  
+  
+  useEffect(() => {
+    
+    const getCurrentUserFollowings = async(id) => {
+      try {
+        const currentUserFollowings = await getUserFollowings( id );
+        setUserFollowings(currentUserFollowings);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getCurrentUserFollowings(userId);
+  }, [userId]);
+  
   return(  
     <div className={className}>
       <StyledFollowshipNavItem/>
       <hr className="main-header-line"/>
       <ul className="follower-list">
-        <li>      
-          <StyledUserRow userImageSrc='https://picsum.photos/300/300?text=1' userName='John' userContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isFollowing={true}/>
-        </li>
-        <li>      
-          <StyledUserRow userImageSrc='https://picsum.photos/300/300?text=1' userName='John' userContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isFollowing={true}/>
-        </li>
-        <li>      
-          <StyledUserRow userImageSrc='https://picsum.photos/300/300?text=1' userName='John' userContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isFollowing={true}/>
-        </li>
+        {userFollowings.map((userFollowing)=>{
+          return(
+            <li key={userFollowing.id}>      
+              <StyledUserRow userId={userFollowing.followingId} userAvatar={userFollowing.avatar} userName={userFollowing.name} userIntroduction={userFollowing.introduction} isFollowed={userFollowing.currentUserIsFollowing}/>
+            </li>
+          )
+        })}
       </ul>
     </div>
   )

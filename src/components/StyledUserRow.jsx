@@ -4,20 +4,21 @@ import clsx from 'clsx';
 
 import StyledButton from './StyledButton';
 import StyledUserAvatar from './StyledUserAvatar';
+import { Link } from 'react-router-dom';
 
-//Usage: <StyledUserRow userImageSrc='https://picsum.photos/300/300?text=1' userName='John' userContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isFollowing={false}/>
+//Usage: <StyledUserRow userAvatar='https://picsum.photos/300/300?text=1' userName='John' userIntroduction='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isFollowed={false}/>
 
-const UserRow = ({ userImageSrc, userName, userContent, isFollowing, className }) => {
+const UserRow = ({ userId, userAvatar, userName, userIntroduction, isFollowed, className }) => {
 	return (
 		<div className={ className }>
-			<StyledUserAvatar userImageSrc={userImageSrc} />
+			<StyledUserAvatar userId={userId} userAvatar={userAvatar} />
 			<div className='user-area'>
 				<div className='user-header'>
-					<label>{userName}</label>
-          <StyledButton className={clsx({filled: isFollowing})}>{isFollowing? '正在跟隨' : '跟隨'}</StyledButton>
+					<Link to={`/user/${userId}`} style={{ textDecoration: 'none' }}><label>{userName}</label></Link>
+          <StyledButton className={clsx({filled: isFollowed})}>{isFollowed? '正在跟隨' : '跟隨'}</StyledButton>
 				</div>
 				<p className='user-content'>
-				  {userContent}
+				  {userIntroduction}
 				</p>
 			</div>
 		</div>
@@ -42,6 +43,7 @@ const StyledUserRow = styled(UserRow)`
 		display: flex;
 		flex-direction: column;
 		margin-left: 8px;
+		width: 100%;
 
 		.user-content{
 			margin-top: 8px;
@@ -60,6 +62,7 @@ const StyledUserRow = styled(UserRow)`
 			font-size: 16px;
 			line-height:26px;
 			font-weight: 700;
+			cursor: pointer;
 		}
 	}
 `;
