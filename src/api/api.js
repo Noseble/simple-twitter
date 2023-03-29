@@ -110,11 +110,10 @@ export const getUserSetting = async (id) => {
   }
 }
 
-export const putUserSetting = async (id,payload) => {
+export const putUserSetting = async (id,account, name,  email , password, introduction, image, avatar) => {
   try {
-    const {id,account, name,  email , password} = payload
     const  res   = await axios.put(`${baseUrl}/api/users/${id}`, {
-      account, name,  email , password
+      account, name,  email , password, introduction, image, avatar
     },{headers});
 
     return res
@@ -124,6 +123,45 @@ export const putUserSetting = async (id,payload) => {
   }
 }
 
+export const setUserSetting = async (id, name, introduction, image, avatar) => {
+  try {
+    const formData = new FormData();
+    formData.append('image', image);
+    formData.append('avatar', avatar);
+    const  res   = await axios.put(`${baseUrl}/api/users/${id}`, formData, {
+    headers: {
+    ...headers,
+    'Content-Type': 'multipart/form-data',
+    },
+    data: {
+        id, name, introduction
+    }
+    });
+
+    return res
+  } catch (error) {
+    console.error('[Set User Setting failed]:',error)
+    return error.response.data;
+  }
+}
+
+export const addTweet = async ({ description }) => {
+
+  try {
+    const { data } = await axios.post(`${baseUrl}/api/tweets`, {
+      description
+    },{headers});
+    const { success } = data;
+
+    if (success) {
+      return { success: true, ...data};
+    }
+    return data;
+  } catch (error) {
+    console.error('[Add Tweet Failed]:',error );
+    return error.response.data;
+  }
+} 
 
 
 export const getAdminTweets = async () => {

@@ -1,3 +1,4 @@
+import {React,useState,useEffect} from "react";
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 
@@ -5,13 +6,92 @@ import {ReactComponent as Cross} from 'assets/icon/cross.svg'
 import StyledPostTweet from 'components/StyledPostTweet';
 import StyledUserAvatar from 'components/StyledUserAvatar';
 import StyledTextInput from 'components/StyledTextInput';
+import StyledButton from "components/StyledButton";
 
 import defaultUserImg from 'assets/image/defaultUserImg.svg';
 import { ReactComponent as UpdatePhoto } from 'assets/icon/updatePhotoIcon.svg'
 import { ReactComponent as DeleteButton } from 'assets/icon/cross.svg'
 
+// api 
+import { getUserSetting } from "api/api";
+import { setUserSetting } from "api/api";
+
 const UserEditModal = ({show, setShow, className}) => {
+  const MyId = localStorage.getItem('MyId')
+  const [name , setName] = useState('')
+  const [oldAvatar , setOldAvatar] = useState('')
+  const [introduction, setIntroduction] = useState('')
+  const [oldImage, setOldImage] = useState('')
+  const [image, setImage] = useState(null);
+  const [avatar, setAvatar] = useState(null);
   const handleClose = () => setShow(false);
+
+  useEffect(() => {
+    const getUserSettingAsync = async(MyId) => {
+      try {
+        const currentSettings = await getUserSetting(MyId);
+        setName(currentSettings.name);
+        setIntroduction(currentSettings.introduction);
+        setOldAvatar(currentSettings.avatar);
+        setOldImage(currentSettings.image);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUserSettingAsync(MyId);
+  }, [MyId]);
+
+  const handleUpdate = async( )=> {
+    try {
+      const res = await setUserSetting( MyId, name, introduction, image, avatar)
+      handleClose()
+    //   if (message === undefined) {
+    //   // 修改成功訊息
+    //   Swal.fire({
+    //     position: 'top',
+    //     title: '修改成功！',
+    //     timer: 1000,
+    //     icon: 'success',
+    //     showConfirmButton: false,
+    //   });
+    //   navigate('/')
+    // } else {
+    //   // 修改失敗訊息
+    //   Swal.fire({
+    //     position: 'top',
+    //     title: '修改失敗！',
+    //     text: message, // 顯示錯誤訊息
+    //     timer: 1000,
+    //     icon: 'error',
+    //     showConfirmButton: false,
+    //   });
+    // }
+    } catch (error) {
+    console.error(error);
+  }
+  }
+
+  const handleUploadFile = (e) => {
+    if (!e.target.files[0]) return;
+    let reader = new FileReader();
+    reader.onload = function () {
+      if(e.target.className ===  'file-upload-bg') {
+        setImage(reader.result);
+      } else if ( e.target.className ===  'file-upload-avatar')
+        setAvatar(reader.result);
+    };
+    reader?.readAsDataURL(e?.target?.files[0]);
+    e.target.value = "";
+  };
+
+  const handleClear = (e) => {
+    if(e.target.className ===  'delete-upload-bg') {
+        setImage(null);
+      } else if ( e.target.className ===  'delete-upload-avatar'){
+        setAvatar(null);
+    }
+  };
+
 
   return (
     <ReactModal 
@@ -26,21 +106,28 @@ const UserEditModal = ({show, setShow, className}) => {
 
       <div className='modal-header'>
         <Cross className='exit-button' fill='#FF6600' onClick={handleClose} />
+        <StyledButton onClick={handleUpdate}>儲存</StyledButton>
       </div>
       <hr className='main-header-line'/>
       <div className='modal-body'>
         <div className='bg-image-area'>
-          <img className='user-bg-image' src='https://i.imgur.com/gerdVUX.png' />
-          <UpdatePhoto className='update-bg' fill='#FFFFFF'/>
+          <img className='user-bg-image' src={oldImage} />
+          {image !== null ? null : <UpdatePhoto className='update-bg' fill='#FFFFFF' /> }
+            <input className="file-upload-bg" type="file"  accept="image/png, image/jpeg" onChange={handleUploadFile} />
           <Cross className='delete-bg' fill='#FFFFFF'/>
+            <button className="delete-upload-bg" onClick={handleClear} />
+          
         </div>
         <div className='avatar-image-area'>
-          <img className='user-avatar-image' src="https://picsum.photos/300/300?text=1" />
-          <UpdatePhoto className='update-avatar' fill='#FFFFFF' />
+          <img className='user-avatar-image' src={oldAvatar} />
+          {avatar !== null ? <Cross className='delete-avatar' fill='#FFFFFF'/> : <UpdatePhoto className='update-avatar' fill='#FFFFFF' /> }
+          {avatar === null ? <input className="file-upload-avatar" type="file"  accept="image/png, image/jpeg" onChange={handleUploadFile} /> : <button className="delete-upload-avatar" onClick={handleClear} /> }
+          
+          
         </div>
         <div className='input-area'>
-          <StyledTextInput className='text-input' width="100%" labelName='名稱' placeholder='請輸入名稱' wordLimit="50" defaultValue='Kevin Chou'/>
-          <StyledTextInput textAreaType className='text-input' width="100%" labelName='自我介紹' placeholder='請輸入自我介紹' wordLimit="160" defaultValue='Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.' />
+          <StyledTextInput className='text-input' width="100%" labelName='名稱' placeholder='請輸入名稱' wordLimit="50" value={name} onChange={(nameInputValue) => setName(nameInputValue)} />
+          <StyledTextInput textAreaType className='text-input' width="100%" labelName='自我介紹' placeholder='請輸入自我介紹' wordLimit="160" value={introduction} onChange={(introductionInputValue) => setIntroduction(introductionInputValue)} />
         </div>
       </div>
 
@@ -56,8 +143,13 @@ const StyledUserEditModal = styled(UserEditModal)`
   margin-top: 59px;
   margin-left: calc(50vw - 364px);
 
+  input[type=file]::-webkit-file-upload-button{
+      cursor: pointer; 
+  }
 
   .modal-header{
+    display: flex;
+    justify-content: space-between;
     width:100%;
     height: 54px;
     display: flex;
@@ -100,7 +192,16 @@ const StyledUserEditModal = styled(UserEditModal)`
         left: 279px;
         width: 20px;
         height: 20px;
-        cursor: pointer;
+      }
+
+      .file-upload-bg {
+        opacity: 0;
+        position: absolute;
+        width: 25px;
+        top: 45%;
+        left: 44%;
+        transform: translate(-50%, -50%);
+        transform: rotate(90deg);
       }
 
       .delete-bg{
@@ -109,8 +210,18 @@ const StyledUserEditModal = styled(UserEditModal)`
         left: 337.5px;
         width: 15px;
         height: 15px;
-        cursor: pointer;
       }
+
+      .delete-upload-bg{
+        opacity: 0;
+        position: absolute;
+        padding: 10px;
+        top: 50%;
+        left: 54%;
+        transform: translate(-50%, -50%);
+        cursor: pointer; 
+      }
+      
     }
     
     .avatar-image-area{
@@ -142,6 +253,36 @@ const StyledUserEditModal = styled(UserEditModal)`
         height: 20px;
         cursor: pointer;
       }
+
+      .file-upload-avatar{
+        opacity: 0;
+        position: absolute;
+        width: 25px;
+        top: 45%;
+        left: 44%;
+        transform: translate(-50%, -50%);
+        transform: rotate(90deg);
+      }
+
+      .delete-avatar{
+        position: absolute;
+        top: 60px;
+        left: 60px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+
+      .delete-upload-avatar{
+        opacity: 0;
+        position: absolute;
+        top: 60px;
+        left: 60px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+
     }
     
     .input-area{

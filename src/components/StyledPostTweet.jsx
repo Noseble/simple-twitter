@@ -1,25 +1,41 @@
 import styled, { css } from 'styled-components';
 
+
 /* import shared components */
 import StyledUserAvatar from './StyledUserAvatar';
 import StyledButton from './StyledButton';
 
+/* import api */
+import { addTweet } from 'api/api';
+import { useState } from 'react';
+
 //Usage: <StyledPostTweet (modalUsed) userImageSrc='https://picsum.photos/300/300?text=1'/> 
 
-const PostTweet = ({ userImageSrc,className }) => {
+const PostTweet = ({ userImageSrc,  className }) => {
   let alertMessage = ''
-
   alertMessage='內容不可為空白'
-  
+  const [description, setDescription] = useState('')
+  const [empty, setEmpty] = useState(false)
+
+  const handleAddTweet = async () => {
+    if(description.length === 0) {return setEmpty(true)}
+
+    const {success} = await addTweet({description})
+
+    if (success) {
+      window.location.reload()
+      }
+  }
+
   return(
     <div className={className}>
       <div className='post-tweet-area'>
         <StyledUserAvatar className='user-avatar' userImageSrc={userImageSrc}/>
-        <textarea className="tweet-input-area" type="textarea" placeholder='有什麼新鮮事?'/>
+        <textarea className="tweet-input-area" type="textarea" placeholder='有什麼新鮮事?' onChange={(e) => setDescription(e.target.value)}/>
       </div>
       <div className='footer-area'>
-        {alertMessage.trim().length > 0 && <span className='alert-message'>{alertMessage}</span>}
-        <StyledButton className="tweet-button filled">推文</StyledButton>
+        <span className='alert-message'>{empty ? alertMessage : ''}</span>
+        <StyledButton className="tweet-button filled" onClick={handleAddTweet}>推文</StyledButton>
       </div>
       
     </div>

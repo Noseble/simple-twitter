@@ -22,7 +22,22 @@ const HomePageSettingArea = ({className}) => {
   const [password , setPassword] = useState('')
   const [passwordCheck, setPasswordCheck] = useState('')
   
-  const handleUpdate = async()=> {
+  useEffect(() => {
+    const getUserSettingAsync = async(MyId) => {
+      try {
+        const currentSettings = await getUserSetting(MyId);
+        setSettings(currentSettings);
+        setAccount(currentSettings.account);
+        setName(currentSettings.name);
+        setEmail(currentSettings.email);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUserSettingAsync(MyId);
+  }, [MyId]);
+  
+  const handleUpdate = async( )=> {
     // if( account.length === 0 || name.length === 0 || email.length === 0 || password.length === 0 || passwordCheck.length === 0 ) return
     try {
       if (password !== passwordCheck ) return 
@@ -54,20 +69,7 @@ const HomePageSettingArea = ({className}) => {
   }
   }
 
-  useEffect(() => {
-    const getUserSettingAsync = async(id) => {
-      try {
-        const currentSettings = await getUserSetting(id);
-        setSettings(currentSettings);
-        setAccount(currentSettings.account);
-        setName(currentSettings.name);
-        setEmail(currentSettings.email);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getUserSettingAsync(MyId);
-  }, [MyId]);
+  
 
 
   return(
