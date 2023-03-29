@@ -18,7 +18,7 @@
         "react",
         "prettier"
     ],
-    "parser":"babel-eslint",
+    "parser":"@babel/eslint-parser",
     "rules": {
       "eqeqeq":2, //必須使用 === 和 !==
       "no-empty-function":2, //禁止使用空函數
