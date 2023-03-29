@@ -9,7 +9,7 @@ import {ReactComponent as DeleteButton} from "assets/icon/cross.svg"
 const AdminTweet = ({userImageSrc, userName, userAccount, tweetTime, tweetContent, className}) => {
   return(
     <div className={className}>
-      <StyledUserAvatar className='user-avatar' userImageSrc={userImageSrc}/>
+      <StyledUserAvatar className='user-avatar' userAvatar={userImageSrc}/>
       <div className="tweet-area">
         <div className="header">
           <div className="user-info">

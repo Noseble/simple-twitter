@@ -3,13 +3,9 @@ import styled, { css } from 'styled-components';
 
 //Usage: <StyledTextInput (className='focus/error/disabled') width="360px" labelName='名稱' placeholder='請輸入名稱' (wordLimit="50") />
 
-const TextInput = ({ textAreaType, labelName, type, value, placeholder, wordLimit, wordCount, onChange, className})=>{
-  const [alertMessage, setAlertMessage]  = useState('')
-  
-  if(wordCount > wordLimit){
-    setAlertMessage('超過字數上線')
-  }
-
+const TextInput = ({ textAreaType, labelName, type, value, placeholder, wordLimit, wordCount, onChange,passwordWrong, className})=>{
+  const alertMessage = '超過字數上線'
+  const alertMessage2 = '兩次密碼輸入不一樣'
   return(
     <div className={className}>
       <div className='input-block'>
@@ -20,7 +16,8 @@ const TextInput = ({ textAreaType, labelName, type, value, placeholder, wordLimi
         }
       </div>
       <div className='input-info'>
-        <span className="input-message">{alertMessage}</span>
+        <span className="input-message">{ wordCount > wordLimit ? alertMessage : null }</span>
+        <span className="input-message">{ passwordWrong ? alertMessage2 : null }</span>
         { wordLimit ? <span className='limit' onChange={(event) => onChange?.(event.target.value)}>{wordCount} / {wordLimit}</span> : null}
       </div>
     </div>
@@ -128,6 +125,9 @@ const StyledTextInput = styled(TextInput)`
     }
     .input-message{
       color: #FC5A5A;
+    }
+    .input-none {
+      display: none;
     }
   }
   

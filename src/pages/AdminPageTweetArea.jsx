@@ -32,6 +32,7 @@ const AdminPageTweetsArea = ({ className }) => {
               <li key={adminTweet.id}>
                 <StyledAdminTweet 
                     userName={adminTweet.User.name}
+                    userImageSrc={adminTweet.User.avatar}
                     userAccount={adminTweet.User.account} 
                     tweetTime={`${Math.floor(Number(new Date() - new Date(adminTweet.createdAt)) / (1000 * 60 * 60))}小時`} 
                     tweetContent={adminTweet.description}/>

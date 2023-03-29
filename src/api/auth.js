@@ -9,13 +9,16 @@ export const login = async ({ email, password, role }) => {
       password,
       role
     });
+
     const { token } = data.data;
     if (token) {
       return { success: true, ...data.data };
     }
     return data;
+    
   } catch (error) {
     console.error('[Login Failed]:', error);
+    return error.response.data;
   }
 };
 
@@ -40,5 +43,6 @@ export const register = async ({ account, email, name, password, passwordCheck }
     return data;
   } catch (error) {
     console.error('[Register Failed]:',error );
+    return error.response.data;
   }
 } 

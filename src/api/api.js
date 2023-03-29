@@ -94,35 +94,33 @@ export const getTweet = async ( tweetId ) => {
 
 export const getTweets = async () => {
   try {
-    const res = await axios.get(`${baseUrl}/api/tweets`, {
-      headers
-    });
+    const res = await axios.get(`${baseUrl}/api/tweets`, { headers });
     return res.data;
   } catch (error) {
     console.error('[Get Tweets failed]:', error);
   }
 };
 
-export const getUserSetting = async () => {
+export const getUserSetting = async (id) => {
   try {
-    const res = await axios.get(`${baseUrl}/api/users/${id}`,{
-      headers
-    });
-    return res.data.result
+    const res = await axios.get(`${baseUrl}/api/users/${id}`,{ headers });
+    return res.data;
   } catch (error) {
     console.error('[Get User Setting failed]:', error);
   }
 }
 
 export const putUserSetting = async (payload) => {
-  const {id, email, name, account, password} = payload;
   try {
-    const res = await axios.put(`${baseUrl}/api/users/${id}`, {
-       headers,email, name, account, password
-    });
-    return res.data
+    const {id,account, name,  email , password} = payload
+    const  res   = await axios.put(`${baseUrl}/api/users/${id}`, {
+      account, name,  email , password
+    },{headers});
+
+    return res
   } catch (error) {
     console.error('[Put User Setting failed]:',error)
+    return error.response.data;
   }
 }
 
@@ -130,9 +128,7 @@ export const putUserSetting = async (payload) => {
 
 export const getAdminTweets = async () => {
   try {
-    const res = await axios.get(`${baseUrl}/api/admin/tweets`,{
-      headers
-    });
+    const res = await axios.get(`${baseUrl}/api/admin/tweets`,{ headers });
     return res.data.result
   } catch (error) {
     console.error('[Get Admin Tweet failed]:', error);
@@ -141,9 +137,7 @@ export const getAdminTweets = async () => {
 
 export const getAdminUsers = async ()=> {
   try {
-    const res = await axios.get(`${baseUrl}/api/admin/users`,{
-      headers
-    });
+    const res = await axios.get(`${baseUrl}/api/admin/users`,{ headers });
     return res.data
   } catch (error) {
     console.error('[Get Admin Users failed]:', error);

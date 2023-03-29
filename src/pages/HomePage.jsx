@@ -20,7 +20,7 @@ const HomePage = ({className}) => {
 
   const handleShowTweetModal = () => setShowTweetModal(true);
   
-  const handleLogOutClick = () => {
+  const handleLogOut = () => {
     localStorage.removeItem('token')
     navigate('login')
   }
@@ -55,7 +55,7 @@ const HomePage = ({className}) => {
           <StyledButton className='filled' width='100%' onClick={handleShowTweetModal}>推文</StyledButton>
           <StyledTweetModal show={showTweetModal} setShow={setShowTweetModal} />
         </div>
-        <StyledNavItem className='exit-nav-item' onClick={handleLogOutClick} navTitle='登出' />
+        <StyledNavItem className='exit-nav-item' onClick={handleLogout} navTitle='登出' />
       </nav>
 
       <div className='main-scrollbar'>
