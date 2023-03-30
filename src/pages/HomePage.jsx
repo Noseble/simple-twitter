@@ -24,6 +24,7 @@ const HomePage = ({className}) => {
   
   const handleLogOut = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('MyId')
     navigate('login')
   }
 

@@ -9,6 +9,7 @@ import StyledTweet from "components/StyledTweet"
 import { getTweets } from "api/api"
 
 import { UserInfoContext } from "contexts/UserInfoContext"
+import { TweetIdContext } from "contexts/TweetIdContext"
 
 const HomePageIndexArea = ({className}) => {
   const userInfo = useContext(UserInfoContext)
@@ -35,9 +36,11 @@ const HomePageIndexArea = ({className}) => {
       <StyledPostTweet userId={userInfo.id} userAvatar={userInfo.avatar}/>
       <hr className="post-tweet-underline"/>
       <ul className='tweet-list'> 
+      
         {tweets.map(({...tweet}) => {
             return(
               <li key={tweet.id}>
+                <TweetIdContext.Provider value={tweet.id}>
                 <StyledTweet
                   tweetId={tweet.id}
                   tweetUserId={tweet.User.id}
@@ -52,9 +55,11 @@ const HomePageIndexArea = ({className}) => {
                   replyCounts={tweet.replyCounts}
                   likeCounts={tweet.likeCounts}
                   />
+                  </TweetIdContext.Provider>
               </li>
             )
           })}
+          
       </ul>
     </div>
 

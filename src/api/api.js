@@ -37,6 +37,16 @@ export const getUserReplies = async( id ) => {
   }
 }
 
+export const addReplies = async ( id, tweetId, comment ) => {
+  try {
+    const res = await axios.post(`${baseUrl}/api/tweets/${id === undefined ? tweetId : id}/replies`, 
+    {comment},{headers})
+    return res
+  } catch(error) {
+    console.error('[Add Replies failed]:', error)
+  }
+}
+
 export const getUserLikes = async( id ) =>{
   try{
     const res = await axios.get(`${baseUrl}/api/users/${id}/likes`, {

@@ -1,3 +1,4 @@
+import { React, useState,useContext } from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 
@@ -5,10 +6,25 @@ import {ReactComponent as Cross} from 'assets/icon/cross.svg'
 import StyledReplyTweet from 'components/StyledReplyTweet';
 import StyledUserAvatar from 'components/StyledUserAvatar';
 import StyledUserTitle from 'components/StyledUserTitle';
+import { TweetIdContext } from 'contexts/TweetIdContext';
 
-const ReplyModal = ({ tweetUserId, tweetUserAvatar, tweetUserName, tweetUserAccount, tweetTime, tweetDescription, userAvatar, userId, show, setShow, className }) => {
+// api
+import { addReplies } from 'api/api';
+
+const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUserAccount, tweetTime, tweetDescription, userAvatar, userId, show, setShow, className }) => {
   const handleClose = () => setShow(false);
+  const tweetId = useContext(TweetIdContext)
+  const [comment, setComment ] = useState('')
 
+  const handleAddRepliesAsync = async() => {
+    if(comment.length > 140 || comment.length === 0) return
+    try {
+      const res = await addReplies( id, tweetId, comment)
+      handleClose()
+    } catch(error){
+      console.error(error)
+    }
+  }
   return (
     <ReactModal 
       isOpen={show} 
@@ -19,7 +35,7 @@ const ReplyModal = ({ tweetUserId, tweetUserAvatar, tweetUserName, tweetUserAcco
       }} 
       portalClassName="modal-portal"
     >
-      <div className='modal-header'>
+      <div className='modal-header' id={tweetUserId}>
         <Cross className='exit-button' fill='#FF6600' onClick={handleClose} />
       </div>
       <hr className='main-header-line'/>
@@ -37,7 +53,7 @@ const ReplyModal = ({ tweetUserId, tweetUserAvatar, tweetUserName, tweetUserAcco
         </div>
         <div className='connect-line'></div>
 			</div>
-      <StyledReplyTweet modalUsed userAvatar={userAvatar} userId={userId}/>
+      <StyledReplyTweet modalUsed userAvatar={userAvatar} userId={userId} error={comment.length} onChange={(commentInputValue) => setComment(commentInputValue)} onClick={handleAddRepliesAsync}/>
     </ReactModal>
   );
 }
