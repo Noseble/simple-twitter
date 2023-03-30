@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 //Usage: <StyledTextInput (className='focus/error/disabled') width="360px" labelName='名稱' placeholder='請輸入名稱' (wordLimit="50") />
 
-const TextInput = ({ textAreaType, labelName, type, value, placeholder, wordLimit, wordCount, onChange,passwordWrong, className})=>{
+const TextInput = ({ textAreaType, width, labelName, type, value, placeholder, wordLimit, wordCount, onChange,passwordWrong, className})=>{
   const alertMessage = '超過字數上線'
   const alertMessage2 = '兩次密碼輸入不一樣'
   return(

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { useState,useEffect } from "react"
+import { React, useState, useEffect, useContext } from "react"
 
 //shared components
 import StyledPostTweet from "components/StyledPostTweet"
@@ -8,7 +8,10 @@ import StyledTweet from "components/StyledTweet"
 // api
 import { getTweets } from "api/api"
 
+import { UserInfoContext } from "contexts/UserInfoContext"
+
 const HomePageIndexArea = ({className}) => {
+  const userInfo = useContext(UserInfoContext)
   const [tweets,setTweets] = useState([])
 
   useEffect(() => {
@@ -23,15 +26,13 @@ const HomePageIndexArea = ({className}) => {
     getTweetsAsync();
   }, []);
 
-// console.log(tweets[0])
-
   return(
     <div className={className}>
       <div className='main-header'>
         <h2>首頁</h2>
       </div>
       <hr className='main-header-line' />
-      <StyledPostTweet />
+      <StyledPostTweet userId={userInfo.id} userAvatar={userInfo.avatar}/>
       <hr className="post-tweet-underline"/>
       <ul className='tweet-list'> 
         {tweets.map(({...tweet}) => {
@@ -39,13 +40,18 @@ const HomePageIndexArea = ({className}) => {
               <li key={tweet.id}>
                 <StyledTweet
                   tweetId={tweet.id}
-                  userId={tweet.User.id}
-                  userAvatar={tweet.User.avatar} 
-                  userName={tweet.User.name} 
-                  userAccount={tweet.User.account}
+                  tweetUserId={tweet.User.id}
+                  tweetUserAvatar={tweet.User.avatar} 
+                  tweetUserName={tweet.User.name} 
+                  tweetUserAccount={tweet.User.account}
                   tweetTime={tweet.createdAt}
                   tweetDescription={tweet.description} 
-                  isLiked={true}/> 
+                  isLiked={tweet.currentUserLikes}
+                  userId={userInfo.id}
+                  userAvatar={userInfo.avatar}
+                  replyCounts={tweet.replyCounts}
+                  likeCounts={tweet.likeCounts}
+                  />
               </li>
             )
           })}

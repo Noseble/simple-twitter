@@ -11,8 +11,8 @@ const AdminPageTweetsArea = ({ className }) => {
     useEffect(() => {
     const getAdminTweetsAsync = async () => {
       try {
-        const adminTweets = await getAdminTweets();
-        setAdminTweets(adminTweets.map((adminTweet) => ({ ...adminTweet})));
+        const res = await getAdminTweets();
+        setAdminTweets(res);
       } catch (error) {
         console.error(error);
       }

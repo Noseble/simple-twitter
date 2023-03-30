@@ -1,8 +1,8 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState,useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import clsx from "clsx";
+import moment from 'moment/moment';
 
 import StyledUserAvatar from "components/StyledUserAvatar";
 import StyledUserTitle from "components/StyledUserTitle";
@@ -13,12 +13,34 @@ import { ReactComponent as LikeButton } from 'assets/icon/likeButton.svg';
 import StyledReply from "components/StyledReply"
 import StyledReplyModal from 'modals/StyledReplyModal';
 
-const HomePageTweetArea = ({isLiked, className}) => {
-  const { tweetId } = useParams()
+import { getTweet } from 'api/api';
+import { UserInfoContext } from 'contexts/UserInfoContext';
 
+const HomePageTweetArea = ({ className }) => {
+  const userInfo = useContext(UserInfoContext)
+  const { tweetId } = useParams()
+  const [tweet, setTweet] = useState({})
+  const [tweetUser, setTweetUser] = useState({})
+  const [replies, setReplies] = useState([])
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
 	
+  useEffect(()=>{
+
+    const getCurrentTweet = async(id) => {
+      try{
+        const res = await getTweet(id);
+        setTweet(res);
+        setTweetUser(res.User);
+        setReplies(res.Replies);
+      }catch(error){
+        console.error(error)
+      }
+    }
+
+    getCurrentTweet(tweetId)
+  },[tweetId])
+  
 
   return(
     <div className={className}>
@@ -29,36 +51,52 @@ const HomePageTweetArea = ({isLiked, className}) => {
       <hr className='main-header-line' />
       <div className="main-tweet">
         <div className="user-title">
-          <StyledUserAvatar userImageSrc="https://picsum.photos/300/300?text=1"/>
-          <StyledUserTitle className='user-info' columnArrange userName='Kevin Chou' userAccount='kevinchou'/>
+          <StyledUserAvatar userId={tweetUser.id} userAvatar={tweetUser.avatar} />
+          <StyledUserTitle className='user-info' columnArrange userId={tweetUser.id} userName={tweetUser.name} userAccount={tweetUser.account}   />
         </div>
         <div className="tweet-content">
-          Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt. Nulla Lorem mollit cupidatat irure. Laborum duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt. 
+          {tweet.description} 
         </div>
         <div className="tweet-time">
-          上午 10:05・2021年11月10日
+          {moment(new Date(tweet.createdAt)).format('a h:mm・YYYY年MM月DD日').replace('am', '上午').replace('pm', '下午')}
         </div>
         <hr/>
         <div className="reply-like-count">
           <div className="count">
-            34<span> 回覆</span>
+            {tweet.replyCounts}<span> 回覆</span>
           </div>
           <div className="count">
-            808<span> 喜歡次數</span>
+            {tweet.likeCounts}<span> 喜歡次數</span>
           </div>
         </div>
         <hr />
         <div className="reply-like-icon">
           <Reply className='icon' fill='#6C757D' height='24px' onClick={handleShowModal}/>
-          <StyledReplyModal show={showModal} setShow={setShowModal} title="My Modal" />
+          <StyledReplyModal
+            tweetUserId={tweetUser.id} 
+            tweetUserAvatar={tweetUser.avatar}
+            tweetUserName={tweetUser.name}
+            tweetUserAccount={tweetUser.account}
+            tweetTime={tweet.createdAt}
+            tweetDescription={tweet.description}
+            userId={userInfo.id}
+            userAvatar={userInfo.avatar} 
+            show={showModal} 
+            setShow={setShowModal} 
+          />
           <LikeButton className='icon liked' fill='none' stroke='#6C757D' strokeWidth='2px' height='24px'/>
         </div>
       </div>
       <hr className="main-header-line"/>
       <ul className="reply-list">
-        <StyledReply userName='John' userAccount='heyjohn' userImageSrc='https://picsum.photos/300/300?text=1' replyTime='3小時' replyTo='apple' replyContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero.'/> 
-        <hr className="main-header-line"/>
-        <StyledReply userName='John' userAccount='heyjohn' userImageSrc='https://picsum.photos/300/300?text=1' replyTime='3小時' replyTo='apple' replyContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero.'/> 
+        {replies.map((reply)=>{
+          return(
+            <li key={reply.id}>
+              <StyledReply userId ={reply.User.id} userName={reply.User.name} userAccount={reply.User.account} userAvatar={reply.User.avatar} replyTime={reply.createdAt} replyToId={tweetUser.id} replyToAccount={tweetUser.account} replyContent={reply.comment}/> 
+              <hr className="main-header-line"/>
+            </li>
+          )
+        })}
       </ul>
 
     </div>

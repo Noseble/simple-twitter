@@ -9,8 +9,8 @@ const AdminPageUsersArea = ({ className }) => {
    useEffect(() => {
       const getAdminUsersAsync = async() => {
         try {
-          const AdminUsers = await getAdminUsers();
-          setAdminUsers(AdminUsers.map((AdminUser) => ({ ...AdminUser})));
+          const res = await getAdminUsers();
+          setAdminUsers(res);
         } catch (error) {
           console.error(error);
         }

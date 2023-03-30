@@ -6,7 +6,7 @@ import StyledReplyTweet from 'components/StyledReplyTweet';
 import StyledUserAvatar from 'components/StyledUserAvatar';
 import StyledUserTitle from 'components/StyledUserTitle';
 
-const ReplyModal = ({ show, setShow, className }) => {
+const ReplyModal = ({ tweetUserId, tweetUserAvatar, tweetUserName, tweetUserAccount, tweetTime, tweetDescription, userAvatar, userId, show, setShow, className }) => {
   const handleClose = () => setShow(false);
 
   return (
@@ -24,20 +24,20 @@ const ReplyModal = ({ show, setShow, className }) => {
       </div>
       <hr className='main-header-line'/>
 			<div className='modal-body'>
-        <StyledUserAvatar userImageSrc='https://picsum.photos/300/300?text=1' />
+        <StyledUserAvatar userAvatar={tweetUserAvatar} />
         <div className='tweet-area'>          
           <div className="tweet-title">
-            <StyledUserTitle userName='Kevin Chou' userAccount='kevinchou'/>
-            <span className='tweet-time'>．3小時</span>
+            <StyledUserTitle userId={tweetUserId} userName={tweetUserName} userAccount={tweetUserAccount}/>
+            <span className='tweet-time'>．{`${Math.floor(Number(new Date() - new Date(tweetTime)) / (1000 * 60 * 60))}小時`}</span>
           </div>
           <p className='tweet-content'>
-            Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum. Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum. Nulla Lorem mollit cupidatat irure. 
+            {tweetDescription} 
           </p>
-          <label className='reply-to-area'>回覆給 <a href='#' className='target-user'>@kevinchou</a></label>
+          <label className='reply-to-area'>回覆給 <a href={`/user/${tweetUserId}`} className='target-user'>@{tweetUserName}</a></label>
         </div>
         <div className='connect-line'></div>
 			</div>
-      <StyledReplyTweet modalUsed/>
+      <StyledReplyTweet modalUsed userAvatar={userAvatar} userId={userId}/>
     </ReactModal>
   );
 }
@@ -74,6 +74,7 @@ const StyledReplyModal = styled(ReplyModal)`
       display: flex;
       flex-direction: column;
       margin-left: 8px;
+      width:100%;
 
       .tweet-title{
         display: flex;
@@ -92,6 +93,7 @@ const StyledReplyModal = styled(ReplyModal)`
         font-size: 16px;
         line-height: 26px;
         margin: 0 auto;
+        width: 100%;
       }
     }
 

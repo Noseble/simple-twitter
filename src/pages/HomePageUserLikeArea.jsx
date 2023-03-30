@@ -1,11 +1,15 @@
 import StyledTweet from "components/StyledTweet"
 import StyledUserNavItem from "components/StyledUserNavItem"
 import styled from "styled-components"
-import { React, useEffect, useState } from "react"
+import { React, useEffect, useState,useContext } from "react"
 import { useParams } from "react-router"
-import { getUser, getUserLikes } from "api/api"
+
+import { getUserLikes } from "api/api"
+import { UserInfoContext } from "contexts/UserInfoContext"
+
 
 const HomePageUserLikeArea = ({ className }) => {
+  const userInfo = useContext(UserInfoContext)
   const { userId } = useParams()
   const [ likedTweets, setLikedTweets ] = useState([])
   
@@ -13,8 +17,8 @@ const HomePageUserLikeArea = ({ className }) => {
     
     const getLikedTweetsAsync = async(id) => {
       try {
-        const newLikedTweets = await getUserLikes( id );
-        setLikedTweets(newLikedTweets);
+        const res = await getUserLikes( id );
+        setLikedTweets(res);
       } catch (error) {
         console.error(error);
       }
@@ -23,6 +27,7 @@ const HomePageUserLikeArea = ({ className }) => {
     getLikedTweetsAsync(userId);
   }, [userId]);
 
+  console.log(likedTweets)
  
   return(  
     <div className={className}>
@@ -30,9 +35,25 @@ const HomePageUserLikeArea = ({ className }) => {
       <hr className="main-header-line"/>
       <ul className="tweet-list">
         {likedTweets.map((likedTweet)=>{
+          const tweetInfo = likedTweet.Tweet
+          const tweetUser = tweetUser 
+          
           return(
             <li key={likedTweet.id}>      
-              <StyledTweet tweetId={likedTweet.TweetId} userId={likedTweet.Tweet.User.id} userAvatar={likedTweet.Tweet.User.avatar} userName='John hey' userAccount={likedTweet.Tweet.User.account} tweetTime={likedTweet.createdAt} tweetDescription='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isLiked={true}/>     
+              <StyledTweet 
+                tweetId={likedTweet.TweetId} 
+                tweetUserId={tweetUser.id}
+                tweetUserAvatar={tweetUser.avatar} 
+                tweetUserName={tweetUser.name} 
+                tweetUserAccount={tweetUser.account} 
+                tweetTime={likedTweet.createdAt} 
+                tweetDescription={tweetInfo.description} 
+                userId={userInfo.id}
+                userAvatar={userInfo.avatar}
+                isLiked={true} 
+                replyCounts={tweetInfo.replyCounts}
+                likeCounts={tweetInfo.likeCounts}
+                />     
             </li>
           )
         })}

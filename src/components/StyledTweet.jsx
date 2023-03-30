@@ -15,7 +15,7 @@ import { ReactComponent as Reply } from 'assets/icon/reply.svg';
 import { ReactComponent as LikeButton } from 'assets/icon/likeButton.svg';
 import StyledReplyModal from 'modals/StyledReplyModal';
 
-const Tweet = ({ tweetId, userId, userAvatar, userName, userAccount, tweetTime, tweetDescription, isLiked, className }) => {
+const Tweet = ({ tweetId, tweetUserId, tweetUserAvatar, tweetUserName, tweetUserAccount, tweetTime, tweetDescription, userId, userAvatar, isLiked, replyCounts, likeCounts, className }) => {
 	const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
 	
@@ -23,10 +23,10 @@ const Tweet = ({ tweetId, userId, userAvatar, userName, userAccount, tweetTime, 
 		<>
 		  
 				<div className={ className }>
-					<StyledUserAvatar userId={userId} userAvatar={userAvatar} />
+					<StyledUserAvatar userId={tweetUserId} userAvatar={tweetUserAvatar} />
 					<div className='tweet-area'>
 						<div className="tweet-title">
-							<StyledUserTitle userId={userId} userName={userName} userAccount={userAccount}/>
+							<StyledUserTitle userId={tweetUserId} userName={tweetUserName} userAccount={tweetUserAccount}/>
 							<span className='tweet-time'>．{`${Math.floor(Number(new Date() - new Date(tweetTime)) / (1000 * 60 * 60))}小時`}</span>
 						</div>
 						<Link to={`/tweet/${tweetId}`} style={{ textDecoration: 'none' }}>
@@ -35,14 +35,24 @@ const Tweet = ({ tweetId, userId, userAvatar, userName, userAccount, tweetTime, 
 							</p>
 						</Link>
 						<div className='footer'>
-							<button onClick={handleShowModal}><Reply className='icon' fill='#6C757D' height='14px' /><label>13</label></button>
-							<StyledReplyModal show={showModal} setShow={setShowModal}/>
-							<button><LikeButton className={clsx('icon','like-icon',{liked: isLiked})} fill='none' stroke='#6C757D' strokeWidth='2px' height='14px' /><label>76</label></button>					
+							<button onClick={handleShowModal}><Reply className='icon' fill='#6C757D' height='14px' /><label>{replyCounts}</label></button>
+							<StyledReplyModal 
+								tweetUserId={tweetUserId} 
+								tweetUserAvatar={tweetUserAvatar} 
+								tweetUserName={tweetUserName} 
+								tweetUserAccount={tweetUserAccount} 
+								tweetTime={tweetTime} 
+								tweetDescription={tweetDescription} 
+								userAvatar={userAvatar} 
+								userId={userId} 
+								show={showModal} 
+								setShow={setShowModal}
+							/>
+							<button><LikeButton className={clsx('icon','like-icon',{liked: isLiked})} fill='none' stroke='#6C757D' strokeWidth='2px' height='14px' /><label>{likeCounts}</label></button>					
 						</div>
 					</div>
 				</div>
-			
-			
+
 			<hr className='main-header-line'/>
 		</>
 

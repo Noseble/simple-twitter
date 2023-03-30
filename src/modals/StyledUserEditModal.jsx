@@ -2,9 +2,6 @@ import {React,useState,useEffect} from "react";
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 
-import {ReactComponent as Cross} from 'assets/icon/cross.svg'
-import StyledPostTweet from 'components/StyledPostTweet';
-import StyledUserAvatar from 'components/StyledUserAvatar';
 import StyledTextInput from 'components/StyledTextInput';
 import StyledButton from "components/StyledButton";
 
@@ -82,7 +79,7 @@ const UserEditModal = ({show, setShow, className}) => {
     >
 
       <div className='modal-header'>
-        <Cross className='exit-button' fill='#FF6600' onClick={handleClose} />
+        <DeleteButton className='exit-button' fill='#FF6600' onClick={handleClose} />
         <StyledButton onClick={handleUpdate}>儲存</StyledButton>
       </div>
       <hr className='main-header-line'/>
@@ -91,13 +88,13 @@ const UserEditModal = ({show, setShow, className}) => {
           <img className='user-bg-image' src={oldImage} />
           {image !== null ? null : <UpdatePhoto className='update-bg' fill='#FFFFFF' /> }
             <input className="file-upload-bg" type="file"  accept="image/png, image/jpeg" onChange={handleUploadFile} />
-          <Cross className='delete-bg' fill='#FFFFFF'/>
+          <DeleteButton className='delete-bg' fill='#FFFFFF'/>
             <button className="delete-upload-bg" onClick={handleClear} />
           
         </div>
         <div className='avatar-image-area'>
           <img className='user-avatar-image' src={oldAvatar} />
-          {avatar !== null ? <Cross className='delete-avatar' fill='#FFFFFF'/> : <UpdatePhoto className='update-avatar' fill='#FFFFFF' /> }
+          {avatar !== null ? <DeleteButton className='delete-avatar' fill='#FFFFFF'/> : <UpdatePhoto className='update-avatar' fill='#FFFFFF' /> }
           {avatar === null ? <input className="file-upload-avatar" type="file"  accept="image/png, image/jpeg" onChange={handleUploadFile} /> : <button className="delete-upload-avatar" onClick={handleClear} /> }
           
           
@@ -107,7 +104,7 @@ const UserEditModal = ({show, setShow, className}) => {
           <StyledTextInput textAreaType className='text-input' width="100%" labelName='自我介紹' placeholder='請輸入自我介紹' wordLimit="160" value={introduction} onChange={(introductionInputValue) => setIntroduction(introductionInputValue)} />
         </div>
       </div>
-
+      {/* labelName, type, value, placeholder, wordLimit, wordCount, onChange,passwordWrong */}
     </ReactModal>
   );
 }

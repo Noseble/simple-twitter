@@ -42,8 +42,8 @@ const HomePageUserReplyArea = ({ className }) => {
       <ul className="tweet-list">
         {userReplies.map((userReply)=>{
           return(
-            <li key={userReply.id}>      
-              <StyledReply userId={userReply.UserId} userName={user.name} userAccount={user.account} userAvatar={user.avatar} replyTime={userReply.createdAt} replyToId={userReply.Tweet.User.id} replyToAccount={userReply.Tweet.User.account} replyContent={userReply.comment}/>     
+            <li key={userReply.id}>
+              <StyledReply userId={userReply.UserId} userName={user.name} userAccount={user.account} userAvatar={user.avatar} replyTime={userReply.createdAt} replyToId={userReply.Tweet.User.id} replyToAccount={userReply.Tweet.User.account} replyContent={userReply.comment}/>
             </li>
           )
         })}

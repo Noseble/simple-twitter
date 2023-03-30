@@ -17,18 +17,18 @@ const UserInfoSection = ({ userId, userImage, userAvatar, userName, userAccount,
     <div className={className}>
       <div className="user-image-area">
         <img className="user-background-image" src={userImage}/>
-        <StyledUserAvatar className='user-avatar' userAvatar={userAvatar} />
+        <StyledUserAvatar className='user-avatar' userId={userId} userAvatar={userAvatar} />
         <div className="user-button">
           {isSelf ?
           <>
             <StyledButton onClick={handleShowModal}>編輯個人資料</StyledButton>
-            <StyledUserEditModal show={showModal} setShow={setShowModal} title="My Modal" />
+            <StyledUserEditModal userImage={userImage} userAvatar={userAvatar} userName={userName} userIntroduction={userIntroduction} show={showModal} setShow={setShowModal} title="My Modal" />
           </> :
           <StyledOtherButtonArea isNotified={isNotified} isFollowing={isFollowed}/>} 
         </div>
       </div>
       <div className='user-info-area'>
-        <StyledUserTitle columnArrange userName={userName} userAccount={userAccount} /> 
+        <StyledUserTitle columnArrange userId={userId} userName={userName} userAccount={userAccount} /> 
         <p className="user-introduction">
           {userIntroduction}
         </p>

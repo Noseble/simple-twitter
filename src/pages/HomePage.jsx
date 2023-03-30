@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect,useContext } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
@@ -10,11 +10,13 @@ import StyledPopularUser from "components/StyledPopularUser";
 import StyledTweetModal from "modals/StyledTweetModal";
 
 import { getTopTen, getUser } from "api/api";
+import { UserInfoContext } from "contexts/UserInfoContext";
 
 const HomePage = ({className}) => {
-  const MyId = localStorage.getItem('MyId')
   const navigate = useNavigate();
   const [showTweetModal, setShowTweetModal] = useState(false);
+  const myId = localStorage.getItem('MyId')
+  const [userInfo, setUserInfo] = useState({})
   const [topTenList, setTopTenList] = useState([]);
   const currentUrlPath = useLocation().pathname
 
@@ -26,6 +28,15 @@ const HomePage = ({className}) => {
   }
 
   useEffect(() => {
+    const getUserInfo = async(id)=>{
+      try{
+        const res = await getUser(id)
+        setUserInfo(res)
+      }catch(error){
+        console.error(error)
+      }
+    }
+
     const getTopTenAsync = async() => {
       try {
         const res = await getTopTen();
@@ -36,8 +47,10 @@ const HomePage = ({className}) => {
         console.error(error);
       }
     };
+
+    getUserInfo(myId)
     getTopTenAsync();
-  }, []);
+  }, [myId]);
 
   return(
     <div className={clsx('web-container', className)}>
@@ -49,21 +62,22 @@ const HomePage = ({className}) => {
           </div>
           <div className="nav-list">
             <Link to='/' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='首頁' className={clsx({selected: currentUrlPath==='/'})}/></Link>
-            <Link to={`/user/${MyId}`} style={{ textDecoration: 'none' }}><StyledNavItem navTitle='個人資料' className={clsx({selected: currentUrlPath.includes('user')})}/></Link>
+            <Link to={`/user/${myId}`} style={{ textDecoration: 'none' }}><StyledNavItem navTitle='個人資料' className={clsx({selected: currentUrlPath.includes('user')})}/></Link>
             <Link to='/setting' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='設定' className={clsx({selected: currentUrlPath==='/setting'})}/></Link>
           </div>
           <StyledButton className='filled' width='100%' onClick={handleShowTweetModal}>推文</StyledButton>
-          <StyledTweetModal show={showTweetModal} setShow={setShowTweetModal} />
+          <StyledTweetModal userId={userInfo.id} userAvatar={userInfo.avatar} show={showTweetModal} setShow={setShowTweetModal} />
         </div>
         <StyledNavItem className='exit-nav-item' onClick={handleLogOut} navTitle='登出' />
       </nav>
 
-      <div className='main-scrollbar'>
-        <div className='main-container'>
-          <Outlet/> {/* 子路由頁面由此放入 */}
+      <UserInfoContext.Provider value={userInfo}>      
+        <div className='main-scrollbar'>
+          <div className='main-container'>
+            <Outlet/> {/* 子路由頁面由此放入 */}
+          </div>
         </div>
-      </div>
-
+      </UserInfoContext.Provider>
 
       <div className='side-column'>
         <div className={clsx('popular-list-area',{hidden: currentUrlPath==='/setting'})}>
