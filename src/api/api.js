@@ -128,13 +128,13 @@ export const setUserSetting = async (id, name, introduction, image, avatar) => {
     const formData = new FormData();
     formData.append('image', image);
     formData.append('avatar', avatar);
+    formData.append('name', name);
+    formData.append('introduction', introduction);
+
     const  res   = await axios.put(`${baseUrl}/api/users/${id}`, formData, {
     headers: {
     ...headers,
     'Content-Type': 'multipart/form-data',
-    },
-    data: {
-        id, name, introduction
     }
     });
 
@@ -167,6 +167,7 @@ export const addTweet = async ({ description }) => {
 export const getAdminTweets = async () => {
   try {
     const res = await axios.get(`${baseUrl}/api/admin/tweets`,{ headers });
+
     return res.data.result
   } catch (error) {
     console.error('[Get Admin Tweet failed]:', error);
@@ -179,5 +180,16 @@ export const getAdminUsers = async ()=> {
     return res.data
   } catch (error) {
     console.error('[Get Admin Users failed]:', error);
+  }
+}
+
+export const delUserTweet = async (id) => {
+  try {
+    const res = await axios.delete(`${baseUrl}/api/admin/tweets/${id}`
+  ,{ headers })
+
+    return res.data.removedTweet
+  } catch (error) {
+    console.error('[Del User Tweet failed]:', error)
   }
 }

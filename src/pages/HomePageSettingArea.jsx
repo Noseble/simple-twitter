@@ -42,7 +42,6 @@ const HomePageSettingArea = ({className}) => {
     try {
       if (password !== passwordCheck ) return 
       const { message } = await putUserSetting( MyId, account, name, email, password)
-
       if (message === undefined) {
       // 修改成功訊息
       Swal.fire({

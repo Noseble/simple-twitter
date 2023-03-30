@@ -45,27 +45,9 @@ const UserEditModal = ({show, setShow, className}) => {
     try {
       const res = await setUserSetting( MyId, name, introduction, image, avatar)
       handleClose()
-    //   if (message === undefined) {
-    //   // 修改成功訊息
-    //   Swal.fire({
-    //     position: 'top',
-    //     title: '修改成功！',
-    //     timer: 1000,
-    //     icon: 'success',
-    //     showConfirmButton: false,
-    //   });
-    //   navigate('/')
-    // } else {
-    //   // 修改失敗訊息
-    //   Swal.fire({
-    //     position: 'top',
-    //     title: '修改失敗！',
-    //     text: message, // 顯示錯誤訊息
-    //     timer: 1000,
-    //     icon: 'error',
-    //     showConfirmButton: false,
-    //   });
-    // }
+      if (res.message === undefined) {
+     window.location.reload()
+    }
     } catch (error) {
     console.error(error);
   }
@@ -73,15 +55,10 @@ const UserEditModal = ({show, setShow, className}) => {
 
   const handleUploadFile = (e) => {
     if (!e.target.files[0]) return;
-    let reader = new FileReader();
-    reader.onload = function () {
       if(e.target.className ===  'file-upload-bg') {
-        setImage(reader.result);
+        setImage(e.target.files[0]);
       } else if ( e.target.className ===  'file-upload-avatar')
-        setAvatar(reader.result);
-    };
-    reader?.readAsDataURL(e?.target?.files[0]);
-    e.target.value = "";
+        setAvatar(e.target.files[0]);
   };
 
   const handleClear = (e) => {

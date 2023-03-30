@@ -22,8 +22,8 @@ const UserCard = ({ bgImageSrc, userImageSrc, userName, userAccount, userTweetsC
           <div className="likes-count"><Like className="icon"  fill='none' stroke='#6C757D' strokeWidth='2px' width='20px' height='19px'/>{userLikesCounts}</div>
         </div>
         <div className="followship-counts">
-          <a href='/user/:userId/following' className="following">{userFollowingCount}個<span className='followship-unit'>跟隨中</span></a>
-          <a href='/user/:userId/follower' className="follower">{userFollowerCount}位<span className='followship-unit'>跟隨者</span></a>
+          <a href='#' className="following">{userFollowingCount}個<span className='followship-unit'>跟隨中</span></a>
+          <a href='#' className="follower">{userFollowerCount}位<span className='followship-unit'>跟隨者</span></a>
         </div>
 
       </div>

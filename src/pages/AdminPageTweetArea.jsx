@@ -2,7 +2,7 @@ import StyledAdminTweet from "components/StyledAdminTweet";
 import styled from "styled-components";
 import { useState,useEffect } from "react";
 // api
-import { getAdminTweets } from "api/api";
+import { delUserTweet, getAdminTweets } from "api/api";
 
 const AdminPageTweetsArea = ({ className }) => {
 
@@ -20,6 +20,16 @@ const AdminPageTweetsArea = ({ className }) => {
     getAdminTweetsAsync();
   }, []);
 
+  const handleDelTweet = async (tweetId) => {
+  try {
+    const res = await delUserTweet(tweetId);
+    const adminTweets = await getAdminTweets();
+    setAdminTweets(adminTweets.map((adminTweet) => ({ ...adminTweet})));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   return(
       <div className={className}>
         <div className="main-header">
@@ -35,7 +45,9 @@ const AdminPageTweetsArea = ({ className }) => {
                     userImageSrc={adminTweet.User.avatar}
                     userAccount={adminTweet.User.account} 
                     tweetTime={`${Math.floor(Number(new Date() - new Date(adminTweet.createdAt)) / (1000 * 60 * 60))}小時`} 
-                    tweetContent={adminTweet.description}/>
+                    tweetContent={adminTweet.description}
+                    onClick={() => handleDelTweet(adminTweet.id)}
+                    />
               </li>
             )
           })}

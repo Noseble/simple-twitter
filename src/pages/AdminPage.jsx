@@ -15,6 +15,7 @@ const AdminPage = ({className}) => {
 
   const handleLogout = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('MyId')
     navigate('/admin_login')
   }
 

@@ -6,7 +6,7 @@ import {ReactComponent as DeleteButton} from "assets/icon/cross.svg"
 
 //Usage: <StyledAdminTweet userImageSrc='https://picsum.photos/300/300?text=1' userName='Kevin Chou' userAccount='@kevinchou' tweetTime='3小時' tweetContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?'/>
 
-const AdminTweet = ({userImageSrc, userName, userAccount, tweetTime, tweetContent, className}) => {
+const AdminTweet = ({userImageSrc, userName, userAccount, tweetTime, tweetContent,  onClick, className}) => {
   return(
     <div className={className}>
       <StyledUserAvatar className='user-avatar' userAvatar={userImageSrc}/>
@@ -21,7 +21,7 @@ const AdminTweet = ({userImageSrc, userName, userAccount, tweetTime, tweetConten
           {tweetContent}
         </p>
       </div>
-      <DeleteButton className="delete-icon" fill='#696974'/>
+      <DeleteButton className="delete-icon" fill='#696974'  onClick={onClick} />
     </div>
   )
 }
