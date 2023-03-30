@@ -25,6 +25,8 @@ const UserEditModal = ({show, setShow, className}) => {
 
   useEffect(() => {
     const getUserSettingAsync = async(MyId) => {
+      if(introduction.length > 160) return
+      if(name.length > 50) return
       try {
         const currentSettings = await getUserSetting(MyId);
         setName(currentSettings.name);

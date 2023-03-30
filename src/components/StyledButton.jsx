@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components'
 
 //Usage : <StyledButton (className="filled") (lg) (width="300px") onclick={onclickFunction} > 註冊 </StyledButton>
 
-const Button =({ className, onClick, children }) => {
+const Button =({ className, onClick,disabled, children }) => {
   return(
-    <button className={className} onClick={onClick}> {children} </button>
+    <button className={className} onClick={onClick} disabled={disabled}> {children} </button>
   )
 }
 
@@ -35,6 +35,13 @@ const StyledButton = styled(Button)`
     line-height: 30px;
   `}
   
+  /* 以.disabled 轉為樣式 */
+  .disabled{
+    background-color: #FFFFFF;
+    border: 1px solid #FF6600;
+    color: #FF6600;
+  }
+
   /* 以.outlined 轉為外框樣式 */
   &.filled{
     background-color:#FF6600;

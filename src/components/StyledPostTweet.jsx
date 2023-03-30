@@ -12,19 +12,22 @@ import { useState } from 'react';
 //Usage: <StyledPostTweet (modalUsed) userImageSrc='https://picsum.photos/300/300?text=1'/> 
 
 const PostTweet = ({ userId, userAvatar,  className }) => {
-  let alertMessage = ''
-  alertMessage='內容不可為空白'
+  let alertMessage = '內容不可為空白'
   const [description, setDescription] = useState('')
-  const [empty, setEmpty] = useState(false)
+
 
   const handleAddTweet = async () => {
-    if(description.length === 0) {return setEmpty(true)}
+    if(description.length === 0 || description.length > 140 ) return
 
+    try{
     const {success} = await addTweet({description})
 
     if (success) {
       window.location.reload()
       }
+    } catch(error){
+      console.error(error)
+    }
   }
 
   return(
@@ -34,8 +37,9 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
         <textarea className="tweet-input-area" type="textarea" placeholder='有什麼新鮮事?' onChange={(e) => setDescription(e.target.value)}/>
       </div>
       <div className='footer-area'>
-        <span className='alert-message'>{empty ? alertMessage : ''}</span>
-        <StyledButton className="tweet-button filled" onClick={handleAddTweet}>推文</StyledButton>
+        <span className='alert-message'>{description.length === 0 ? alertMessage : null }</span>
+        <StyledButton className={`tweet-button ${description.length === 0 ? 'disabled' : 'filled'}`} disabled={description.length === 0 ? 'disabled' : null} onClick={handleAddTweet}>推文</StyledButton>
+      
       </div>
       
     </div>

@@ -26,7 +26,6 @@ const HomePageTweetArea = ({ className }) => {
   const handleShowModal = () => setShowModal(true);
 	
   useEffect(()=>{
-
     const getCurrentTweet = async(id) => {
       try{
         const res = await getTweet(id);
@@ -37,7 +36,6 @@ const HomePageTweetArea = ({ className }) => {
         console.error(error)
       }
     }
-
     getCurrentTweet(tweetId)
   },[tweetId])
   
@@ -70,9 +68,12 @@ const HomePageTweetArea = ({ className }) => {
           </div>
         </div>
         <hr />
+        
         <div className="reply-like-icon">
           <Reply className='icon' fill='#6C757D' height='24px' onClick={handleShowModal}/>
+          
           <StyledReplyModal
+            id={tweetId}
             tweetUserId={tweetUser.id} 
             tweetUserAvatar={tweetUser.avatar}
             tweetUserName={tweetUser.name}
@@ -84,6 +85,7 @@ const HomePageTweetArea = ({ className }) => {
             show={showModal} 
             setShow={setShowModal} 
           />
+ 
           <LikeButton className='icon liked' fill='none' stroke='#6C757D' strokeWidth='2px' height='24px'/>
         </div>
       </div>

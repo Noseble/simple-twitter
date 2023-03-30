@@ -1,10 +1,10 @@
-import {React, useState } from 'react';
+import {React } from 'react';
 import styled, { css } from 'styled-components';
 
 //Usage: <StyledTextInput (className='focus/error/disabled') width="360px" labelName='名稱' placeholder='請輸入名稱' (wordLimit="50") />
 
 const TextInput = ({ textAreaType, width, labelName, type, value, placeholder, wordLimit, wordCount, onChange,passwordWrong, className})=>{
-  const alertMessage = '超過字數上線'
+  const alertMessage = '字數超過上線'
   const alertMessage2 = '兩次密碼輸入不一樣'
   return(
     <div className={className}>
@@ -109,17 +109,8 @@ const StyledTextInput = styled(TextInput)`
     span{
       color: #696974;
     }
-  }
 
-  /* focus 樣式 */
-  &.focus{
-    .input-block{
-        border-bottom: 2px solid #50B5FF;
-    }
-  }
-
-  /* error 樣式 */
-  &.error{
+    /* error 樣式 */
     .input-block{
       border-bottom: 2px solid #FC5A5A;
     }
@@ -128,6 +119,13 @@ const StyledTextInput = styled(TextInput)`
     }
     .input-none {
       display: none;
+    }
+  }
+
+  /* focus 樣式 */
+  &.focus{
+    .input-block{
+        border-bottom: 2px solid #50B5FF;
     }
   }
   
