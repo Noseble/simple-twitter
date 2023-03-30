@@ -6,7 +6,9 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "prettier",
+        "prettier/react"
     ],
     "overrides": [
     ],
@@ -18,7 +20,7 @@
         "react",
         "prettier"
     ],
-    "parser":"@babel/eslint-parser",
+    "parser":"react-scripts/node_modules/@babel/eslint-parser",
     "rules": {
       "eqeqeq":2, //必須使用 === 和 !==
       "no-empty-function":2, //禁止使用空函數

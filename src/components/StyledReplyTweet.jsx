@@ -4,9 +4,9 @@ import styled, { css } from 'styled-components';
 import StyledUserAvatar from './StyledUserAvatar';
 import StyledButton from './StyledButton';
 
-//Usage: <StyledReplyTweet (modalUsed) userImageSrc='https://picsum.photos/300/300?text=1'/> 
+//Usage: <StyledReplyTweet (modalUsed) userAvatar='https://picsum.photos/300/300?text=1'/> 
 
-const ReplyTweet = ({ userImageSrc,className }) => {
+const ReplyTweet = ({ userAvatar, userId, className }) => {
   let alertMessage = ''
 
   alertMessage='內容不可為空白'
@@ -14,7 +14,7 @@ const ReplyTweet = ({ userImageSrc,className }) => {
   return(
     <div className={className}>
       <div className='reply-tweet-area'>
-        <StyledUserAvatar className='user-avatar' userImageSrc={userImageSrc}/>
+        <StyledUserAvatar className='user-avatar' userAvatar={userAvatar} userId={userId} />
         <textarea className="tweet-input-area" type="textarea" placeholder='推你的回覆'/>
       </div>
       <div className='footer-area'>

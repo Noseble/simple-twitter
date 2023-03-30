@@ -1,15 +1,16 @@
 import { React, useState, useEffect } from 'react';
 import { useParams, Link, useLocation, Outlet } from "react-router-dom";
 import styled from "styled-components";
+import clsx from 'clsx';
 
 import StyledUserInfoSection from 'components/StyledUserInfoSection';
 
 import { ReactComponent as ReturnIcon } from 'assets/icon/returnArrow.svg';
 
 import { getUser, getUserFollowers, getUserFollowings, getUserTweets } from 'api/api';
-import clsx from 'clsx';
 
-const HomePageUserArea = ({className}) => {
+
+const HomePageUserArea = ({ myInfo, className}) => {
   const { userId } = useParams()
   const currentUrl = useLocation().pathname
   const MyId = localStorage.getItem('MyId')
@@ -76,7 +77,7 @@ const HomePageUserArea = ({className}) => {
       </div>
       <hr className='main-header-line' />
       <StyledUserInfoSection className={clsx({hidden: lastSegmentOfUrl === 'following' || lastSegmentOfUrl === 'follower'})} userId={userId} userImage={user.image} userAvatar={user.avatar} userName={user.name} userAccount={user.name} userIntroduction={user.introduction} isSelf={(userId === MyId)} followersCount={followersNumber} followingsCount={followingsNumber} isFollowed={user.isFollowed} isNotiFied={user.isNotiFied}/>
-      <Outlet />
+      <Outlet myInfo={myInfo}/>
     </div>
   )
 }

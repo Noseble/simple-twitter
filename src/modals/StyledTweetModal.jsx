@@ -2,9 +2,11 @@ import ReactModal from 'react-modal';
 import styled from 'styled-components';
 
 import {ReactComponent as Cross} from 'assets/icon/cross.svg'
+import React from 'react';
 import StyledPostTweet from 'components/StyledPostTweet';
 
-const TweetModal = ({show, setShow, className}) => {
+
+const TweetModal = ({ userId, userAvatar, show, setShow, className}) => {
   const handleClose = () => setShow(false);
 
   return (
@@ -22,7 +24,7 @@ const TweetModal = ({show, setShow, className}) => {
         <Cross className='exit-button' fill='#FF6600' onClick={handleClose} />
       </div>
       <hr className='main-header-line'/>
-      <StyledPostTweet modalUsed/>
+      <StyledPostTweet modalUsed userId={userId} userAvatar={userAvatar}/>
 
     </ReactModal>
   );

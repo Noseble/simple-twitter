@@ -1,16 +1,13 @@
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 
-import {ReactComponent as Cross} from 'assets/icon/cross.svg'
-import StyledPostTweet from 'components/StyledPostTweet';
-import StyledUserAvatar from 'components/StyledUserAvatar';
 import StyledTextInput from 'components/StyledTextInput';
 
 import defaultUserImg from 'assets/image/defaultUserImg.svg';
 import { ReactComponent as UpdatePhoto } from 'assets/icon/updatePhotoIcon.svg'
 import { ReactComponent as DeleteButton } from 'assets/icon/cross.svg'
 
-const UserEditModal = ({show, setShow, className}) => {
+const UserEditModal = ({userImage, userAvatar, userName, userIntroduction, show, setShow, className}) => {
   const handleClose = () => setShow(false);
 
   return (
@@ -25,25 +22,25 @@ const UserEditModal = ({show, setShow, className}) => {
     >
 
       <div className='modal-header'>
-        <Cross className='exit-button' fill='#FF6600' onClick={handleClose} />
+        <DeleteButton className='exit-button' fill='#FF6600' onClick={handleClose} />
       </div>
       <hr className='main-header-line'/>
       <div className='modal-body'>
         <div className='bg-image-area'>
-          <img className='user-bg-image' src='https://i.imgur.com/gerdVUX.png' />
+          <img className='user-bg-image' src={userImage} />
           <UpdatePhoto className='update-bg' fill='#FFFFFF'/>
-          <Cross className='delete-bg' fill='#FFFFFF'/>
+          <DeleteButton className='delete-bg' fill='#FFFFFF'/>
         </div>
         <div className='avatar-image-area'>
-          <img className='user-avatar-image' src="https://picsum.photos/300/300?text=1" />
+          <img className='user-avatar-image' src={userAvatar} />
           <UpdatePhoto className='update-avatar' fill='#FFFFFF' />
         </div>
         <div className='input-area'>
-          <StyledTextInput className='text-input' width="100%" labelName='名稱' placeholder='請輸入名稱' wordLimit="50" defaultValue='Kevin Chou'/>
-          <StyledTextInput textAreaType className='text-input' width="100%" labelName='自我介紹' placeholder='請輸入自我介紹' wordLimit="160" defaultValue='Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.' />
+          <StyledTextInput className='text-input' width="100%" labelName='名稱' placeholder='請輸入名稱' wordLimit="50" value={userName}/>
+          <StyledTextInput textAreaType className='text-input' width="100%" labelName='自我介紹' placeholder='請輸入自我介紹' wordLimit="160" value={userIntroduction} />
         </div>
       </div>
-
+      {/* labelName, type, value, placeholder, wordLimit, wordCount, onChange,passwordWrong */}
     </ReactModal>
   );
 }
