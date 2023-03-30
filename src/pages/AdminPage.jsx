@@ -7,6 +7,7 @@ import StyledNavItem from "components/StyledNavItem";
 
 // svg
 import { ReactComponent as AcLogo } from 'assets/icon/AcLogo.svg'
+import { useEffect } from "react";
 
 
 
@@ -18,6 +19,16 @@ const AdminPage = ({className}) => {
     localStorage.removeItem('MyId')
     navigate('/admin_login')
   }
+  
+  useEffect(()=>{
+
+    //若沒登入，則導至login頁面
+    const auth = localStorage.getItem('token')
+    if(auth===null){
+      navigate('/admin_login')
+    }
+
+  },[])
 
 
   return(

@@ -29,6 +29,12 @@ const HomePage = ({className}) => {
   }
 
   useEffect(() => {
+    //若沒登入，則導至login頁面
+    const auth = localStorage.getItem('token')
+    if(auth===null){
+      navigate('login')
+    }
+
     const getUserInfo = async(id)=>{
       try{
         const res = await getUser(id)
