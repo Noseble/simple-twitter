@@ -35,24 +35,21 @@ const HomePageUserLikeArea = ({ className }) => {
       <hr className="main-header-line"/>
       <ul className="tweet-list">
         {likedTweets.map((likedTweet)=>{
-          const tweetInfo = likedTweet.Tweet
-          const tweetUser = tweetUser 
-          
           return(
-            <li key={likedTweet.id}>      
+            <li key={likedTweet.id}>
               <StyledTweet 
                 tweetId={likedTweet.TweetId} 
-                tweetUserId={tweetUser.id}
-                tweetUserAvatar={tweetUser.avatar} 
-                tweetUserName={tweetUser.name} 
-                tweetUserAccount={tweetUser.account} 
+                tweetUserId={likedTweet.Tweet?.User?.id}
+                tweetUserAvatar={likedTweet.Tweet?.User?.avatar} 
+                tweetUserName={likedTweet.Tweet?.User?.name} 
+                tweetUserAccount={likedTweet.Tweet?.User?.account} 
                 tweetTime={likedTweet.createdAt} 
-                tweetDescription={tweetInfo.description} 
+                tweetDescription={likedTweet.Tweet?.description} 
                 userId={userInfo.id}
                 userAvatar={userInfo.avatar}
-                isLiked={true} 
-                replyCounts={tweetInfo.replyCounts}
-                likeCounts={tweetInfo.likeCounts}
+                isLiked={likedTweet.Tweet?.currentUserLikes} 
+                replyCounts={likedTweet.Tweet?.replyCounts}
+                likeCounts={likedTweet.Tweet?.likeCounts}
                 />     
             </li>
           )

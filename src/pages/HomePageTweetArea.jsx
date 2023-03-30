@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import moment from 'moment/moment';
+import {clsx} from 'clsx';
 
 import StyledUserAvatar from "components/StyledUserAvatar";
 import StyledUserTitle from "components/StyledUserTitle";
@@ -84,7 +85,7 @@ const HomePageTweetArea = ({ className }) => {
             show={showModal} 
             setShow={setShowModal} 
           />
-          <LikeButton className='icon liked' fill='none' stroke='#6C757D' strokeWidth='2px' height='24px'/>
+          <LikeButton className={clsx('icon',{liked: tweet.currentUserLikes})} fill='none' stroke='#6C757D' strokeWidth='2px' height='24px'/>
         </div>
       </div>
       <hr className="main-header-line"/>
