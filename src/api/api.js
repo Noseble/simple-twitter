@@ -196,10 +196,30 @@ export const getAdminUsers = async ()=> {
 export const delUserTweet = async (id) => {
   try {
     const res = await axios.delete(`${baseUrl}/api/admin/tweets/${id}`
-  ,{ headers })
+    ,{ headers })
 
     return res.data.removedTweet
   } catch (error) {
     console.error('[Del User Tweet failed]:', error)
+  }
+}
+
+export const likeTweet = async (id) => {
+  try{
+    const res = await axios.post(`${baseUrl}/api/tweets/${id}/like`,{}
+    ,{ headers })
+    return res.data.success
+  }catch(error){
+    console.log('[Like Tweet failed]:', error)
+  }
+}
+
+export const dislikeTweet = async ( id ) => {
+  try{
+    const res = await axios.post(`${baseUrl}/api/tweets/${id}/unlike`,{}
+    ,{ headers })
+    return res.data.success
+  }catch(error){
+    console.log('[DisLike Tweet failed]:', error)
   }
 }

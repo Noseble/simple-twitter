@@ -1,4 +1,4 @@
-import { React, useEffect, useState,useContext } from 'react';
+import { React, useEffect, useState,useContext,useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
@@ -14,7 +14,7 @@ import { ReactComponent as LikeButton } from 'assets/icon/likeButton.svg';
 import StyledReply from "components/StyledReply"
 import StyledReplyModal from 'modals/StyledReplyModal';
 
-import { getTweet } from 'api/api';
+import { dislikeTweet, getTweet, likeTweet } from 'api/api';
 import { UserInfoContext } from 'contexts/UserInfoContext';
 
 const HomePageTweetArea = ({ className }) => {
@@ -24,8 +24,55 @@ const HomePageTweetArea = ({ className }) => {
   const [tweetUser, setTweetUser] = useState({})
   const [replies, setReplies] = useState([])
   const [showModal, setShowModal] = useState(false);
+  const [updatedLikeCounts, setUpdatedLikeCounts] = useState(0);
+  const likeIconRef = useRef(null)
   const handleShowModal = () => setShowModal(true);
-	
+  
+  //判斷是否快速雙擊按鍵用
+  let lastClickTime = 0
+  
+  const handleLikeClick = (e) => {
+    const button = e.currentTarget
+		const tweetId = button.dataset.tweetid;
+		const likeIcon = likeIconRef.current
+
+		// 檢查上次事件觸發時間是否超過 500 毫秒
+		if (Date.now() - lastClickTime < 500) {
+			return;
+		}
+		
+		// 記錄本次事件觸發時間
+		lastClickTime = Date.now();
+
+    if(likeIcon.matches('.liked')){
+			const dislikeCurrentTweet = async() => {
+				try{
+          const res = await dislikeTweet(tweetId)
+					if(res){
+						likeIcon.classList.toggle('liked')
+						setUpdatedLikeCounts(n=>n-1)
+					}
+				}catch(error){
+					console.error(error)
+				}
+			}
+			dislikeCurrentTweet()
+		}else{
+			const likeCurrentTweet = async() => {
+				try{
+				const res = await likeTweet(tweetId)
+				if(res){
+					likeIcon.classList.toggle('liked')
+					setUpdatedLikeCounts(n=>n+1)
+				}
+				}catch(error){
+				console.error(error)
+				}
+			}
+			likeCurrentTweet();
+		};
+	}
+
   useEffect(()=>{
     const getCurrentTweet = async(id) => {
       try{
@@ -33,6 +80,7 @@ const HomePageTweetArea = ({ className }) => {
         setTweet(res);
         setTweetUser(res.User);
         setReplies(res.Replies);
+        setUpdatedLikeCounts(res.likeCounts);
       }catch(error){
         console.error(error)
       }
@@ -65,14 +113,13 @@ const HomePageTweetArea = ({ className }) => {
             {tweet.replyCounts}<span> 回覆</span>
           </div>
           <div className="count">
-            {tweet.likeCounts}<span> 喜歡次數</span>
+            {updatedLikeCounts}<span> 喜歡次數</span>
           </div>
         </div>
         <hr />
         
         <div className="reply-like-icon">
           <Reply className='icon' fill='#6C757D' height='24px' onClick={handleShowModal}/>
-          
           <StyledReplyModal
             id={tweetId}
             tweetUserId={tweetUser.id} 
@@ -86,7 +133,7 @@ const HomePageTweetArea = ({ className }) => {
             show={showModal} 
             setShow={setShowModal} 
           />
-          <LikeButton className={clsx('icon',{liked: tweet.currentUserLikes})} fill='none' stroke='#6C757D' strokeWidth='2px' height='24px'/>
+          <LikeButton data-tweetid={tweetId} ref={likeIconRef} className={clsx('icon',{liked: tweet.currentUserLikes})} fill='none' stroke='#6C757D' strokeWidth='2px' height='24px' onClick={handleLikeClick}/>
         </div>
       </div>
       <hr className="main-header-line"/>

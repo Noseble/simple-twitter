@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import clsx from 'clsx';
@@ -14,11 +14,59 @@ import StyledUserTitle from './StyledUserTitle';
 import { ReactComponent as Reply } from 'assets/icon/reply.svg';
 import { ReactComponent as LikeButton } from 'assets/icon/likeButton.svg';
 import StyledReplyModal from 'modals/StyledReplyModal';
+import { dislikeTweet, likeTweet } from 'api/api';
 
 const Tweet = ({ tweetId, tweetUserId, tweetUserAvatar, tweetUserName, tweetUserAccount, tweetTime, tweetDescription, userId, userAvatar, isLiked, replyCounts, likeCounts, className }) => {
 	const [showModal, setShowModal] = useState(false);
+	const likeIconRef = useRef(null)
+	const [updatedLikeCounts, setUpdatedLikeCounts] = useState(likeCounts)
   const handleShowModal = () => setShowModal(true);
 	
+	//判斷是否快速雙擊按鍵用
+	let lastClickTime = 0 
+
+  const handleLikeClick = (e) => {
+    const button = e.currentTarget
+		const tweetId = button.dataset.tweetid;
+		const likeIcon = likeIconRef.current
+    
+		// 檢查上次事件觸發時間是否超過 500 毫秒
+		if (Date.now() - lastClickTime < 500) {
+			return;
+		}
+		
+		// 記錄本次事件觸發時間
+		lastClickTime = Date.now();
+
+    if(likeIcon.matches('.liked')){
+			const dislikeCurrentTweet = async() => {
+				try{
+          const res = await dislikeTweet(tweetId)
+					if(res){
+						likeIcon.classList.toggle('liked')
+						setUpdatedLikeCounts(n=>n-1)
+					}
+				}catch(error){
+					console.error(error)
+				}
+			}
+			dislikeCurrentTweet()
+		}else{
+			const likeCurrentTweet = async() => {
+				try{
+				const res = await likeTweet(tweetId)
+				if(res){
+					likeIcon.classList.toggle('liked')
+					setUpdatedLikeCounts(n=>n+1)
+				}
+				}catch(error){
+				console.error(error)
+				}
+			}
+			likeCurrentTweet();
+		};
+	}
+
 	return (
 		<>
 		  
@@ -48,7 +96,7 @@ const Tweet = ({ tweetId, tweetUserId, tweetUserAvatar, tweetUserName, tweetUser
 								show={showModal} 
 								setShow={setShowModal}
 							/>
-							<button><LikeButton className={clsx('icon','like-icon',{liked: isLiked})} fill='none' stroke='#6C757D' strokeWidth='2px' height='14px' /><label>{likeCounts}</label></button>					
+							<button data-tweetid={tweetId} onClick={handleLikeClick} ><LikeButton ref={likeIconRef} className={clsx('icon','like-icon',{liked: isLiked})} fill='none' stroke='#6C757D' strokeWidth='2px' height='14px' /><label>{updatedLikeCounts}</label></button>					
 						</div>
 					</div>
 				</div>
