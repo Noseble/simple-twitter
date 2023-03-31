@@ -17,15 +17,15 @@ import { BaseUrlContext } from "contexts/BaseUrlContext";
 
 const AdminLoginPage = ({ className }) => {
   const baseUrl = useContext(BaseUrlContext)
-  const [email, setEmail] = useState('');
+  const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleClick = async () => {
-  if (email.length === 0 || password.length === 0) return;
+  if (account?.length === 0 || password?.length === 0) return;
 
   const { success, token, user } = await login({
-    email,
+    account,
     password,
   });
 
@@ -72,8 +72,8 @@ const AdminLoginPage = ({ className }) => {
       <Aclogo className='login-logo' width='40px' height='40px'/>
       <h1 className="login-title">後台登入</h1>
       <div className="login-input-area">
-        <StyledTextInput className='text-input' labelName='帳號' placeholder='請輸入帳號' type='text' value={email} width='356px' wordCount={email.length} onChange={(emailInputValue) => setEmail(emailInputValue)}/>
-        <StyledTextInput className='text-input' labelName='密碼' placeholder='請輸入密碼' type='password' value={password} width='356px' wordCount={password.length} onChange={(passwordInputValue) => setPassword(passwordInputValue)} />
+        <StyledTextInput className='text-input' labelName='帳號' placeholder='請輸入帳號' type='text' value={account} width='356px' wordCount={account?.length} onChange={(accountInputValue) => setAccount(accountInputValue)}/>
+        <StyledTextInput className='text-input' labelName='密碼' placeholder='請輸入密碼' type='password' value={password} width='356px' wordCount={password?.length} onChange={(passwordInputValue) => setPassword(passwordInputValue)} />
       </div>
       <StyledButton className='login-button filled' width='100%' onClick={handleClick} >登入</StyledButton>
       <div className="footer">

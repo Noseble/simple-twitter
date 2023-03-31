@@ -19,14 +19,14 @@ import { BaseUrlContext } from "contexts/BaseUrlContext";
 const LoginPage = ({ className }) => {
   const baseUrl = useContext(BaseUrlContext)
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   
   const handleClick = async () => {
-    if (email.length === 0 || password.length === 0) return;
+    if (account?.length === 0 || password?.length === 0) return;
    
     const { success, token, user } = await login({
-      email,
+      account,
       password,
     });
 
@@ -75,7 +75,7 @@ if (success) {
       <AcLogo className='login-logo' width='40px' height='40px'/>
       <h1 className="login-title">登入 Alphitter</h1>
       <div className="login-input-area">
-        <StyledTextInput className='text-input' labelName='帳號' value={email}   placeholder='請輸入帳號' width='356px' onChange={(emailInputValue) => setEmail(emailInputValue)}/>
+        <StyledTextInput className='text-input' labelName='帳號' value={account}   placeholder='請輸入帳號' width='356px' onChange={(accountInputValue) => setAccount(accountInputValue)}/>
         <StyledTextInput className='text-input' labelName='密碼' value={password}  placeholder='請輸入密碼' type='password' width='356px' onChange={(passwordInputValue) => setPassword(passwordInputValue)}/>
       </div>
       <StyledButton className='login-button filled' width='100%' onClick={handleClick}>登入</StyledButton>

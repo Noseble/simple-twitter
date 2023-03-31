@@ -38,9 +38,8 @@ const UserEditModal = ({show, setShow, className}) => {
     getUserSettingAsync(MyId);
   }, [MyId]);
 
-  const handleUpdate = async(name, introduction)=> {
-    if(introduction.length > 160) return
-    if(name.length > 50) return
+  const handleUpdate = async()=> {
+    if(introduction?.length > 160 || name?.length > 50) return
     
     try {
       const res = await setUserSetting( MyId, name, introduction, image, avatar)
@@ -103,8 +102,8 @@ const UserEditModal = ({show, setShow, className}) => {
           
         </div>
         <div className='input-area'>
-          <StyledTextInput className='text-input' width="100%" labelName='名稱' placeholder='請輸入名稱' wordLimit={50} wordCount={name.length} value={name} onChange={(nameInputValue) => setName(nameInputValue)} />
-          <StyledTextInput textAreaType className='text-input' width="100%" labelName='自我介紹' placeholder='請輸入自我介紹' wordLimit={160} value={introduction} onChange={(introductionInputValue) => setIntroduction(introductionInputValue)} />
+          <StyledTextInput className='text-input' width="100%" labelName='名稱' placeholder='請輸入名稱' wordLimit={50} wordCount={name?.length} value={name} onChange={(nameInputValue) => setName(nameInputValue)} />
+          <StyledTextInput textAreaType className='text-input' width="100%" labelName='自我介紹' placeholder='請輸入自我介紹' wordLimit={160} wordCount={introduction?.length} value={introduction} onChange={(introductionInputValue) => setIntroduction(introductionInputValue)} />
         </div>
       </div>
     </ReactModal>

@@ -17,7 +17,7 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
 
 
   const handleAddTweet = async () => {
-    if(description.length === 0 || description.length > 140 ) return
+    if(description?.length === 0 || description?.length > 140 ) return
 
     try{
     const {success} = await addTweet({description})
@@ -37,8 +37,8 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
         <textarea className="tweet-input-area" type="textarea" placeholder='有什麼新鮮事?' onChange={(e) => setDescription(e.target.value)}/>
       </div>
       <div className='footer-area'>
-        <span className='alert-message'>{description.length === 0 ? alertMessage : null }</span>
-        <StyledButton className={`tweet-button ${description.length === 0 ? 'disabled' : 'filled'}`} disabled={description.length === 0 ? 'disabled' : null} onClick={handleAddTweet}>推文</StyledButton>
+        <span className='alert-message'>{description?.length === 0 ? alertMessage : null }</span>
+        <StyledButton className={`tweet-button ${description?.length === 0 ? 'disabled' : 'filled'}`} disabled={description?.length === 0 ? 'disabled' : null} onClick={handleAddTweet}>推文</StyledButton>
       
       </div>
       
@@ -47,6 +47,7 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
 }
 
 const StyledPostTweet = styled(PostTweet)`
+  
   /* display */
   display:flex;
   flex-direction: column;
@@ -90,12 +91,14 @@ const StyledPostTweet = styled(PostTweet)`
     align-items: center;
     
     .alert-message{
+      visibility:hidden;
       width: fit-content;
       margin-right: 20px;
       color: #FC5A5A;
       font-size: 15px;
       line-height: 15px;
     }
+    
 
   }
 

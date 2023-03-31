@@ -35,6 +35,12 @@ const StyledTextInput = styled(TextInput)`
       visibility:visible;
     }
   }
+
+  .input-block:has(textarea:focus){
+    &+.input-info{
+      visibility:visible;
+    }
+  }
   
   .input-block{
     /* display */

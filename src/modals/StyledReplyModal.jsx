@@ -17,11 +17,12 @@ const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUse
   const [comment, setComment ] = useState('')
 
   const handleAddRepliesAsync = async() => {
-    if(comment.length > 140 || comment.length === 0) return
+    if(comment?.length > 140 || comment?.length === 0) return
     try {
       const res = await addReplies( id, tweetId, comment)
       if(res){
         handleClose()
+        window.location.reload()
       }
     } catch(error){
       console.error(error)
@@ -55,7 +56,7 @@ const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUse
         </div>
         <div className='connect-line'></div>
 			</div>
-      <StyledReplyTweet modalUsed userAvatar={userAvatar} userId={userId} error={comment.length} onChange={(commentInputValue) => setComment(commentInputValue)} onClick={handleAddRepliesAsync}/>
+      <StyledReplyTweet modalUsed userAvatar={userAvatar} userId={userId} error={comment?.length} onChange={(commentInputValue) => setComment(commentInputValue)} onClick={handleAddRepliesAsync}/>
     </ReactModal>
   );
 }
