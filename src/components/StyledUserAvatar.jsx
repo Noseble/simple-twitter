@@ -2,15 +2,18 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import defaultUserImg from 'assets/image/defaultUserImg.svg';
+import { useContext } from 'react';
+import { BaseUrlContext } from 'contexts/BaseUrlContext';
 
 //Usage:<StyledUserAvatar userAvatar="https://picsum.photos/300/300?text=1" /> 
 
 const UserAvatar = ({ userId, userAvatar, className }) => {
+  const baseUrl = useContext(BaseUrlContext)
   const location = useLocation()
   
   return(
-    <Link to={ userId === undefined ?  location.pathname : '/user/' + userId} style={{ textDecoration: 'none' }}>
-      <img className={className} src={userAvatar} />
+    <Link to={ userId === undefined ?  location.pathname : `${baseUrl}/user/` + userId} style={{ textDecoration: 'none' }}>
+      <img className={className} src={userAvatar} alt="" />
     </Link>
   )
 }
@@ -29,6 +32,14 @@ const StyledUserAvatar = styled( UserAvatar )`
 
   &:hover{
     box-shadow: 0 0 3px #171725;
+  }
+
+  &.admin{
+    cursor: default;
+    
+    &:hover{
+      box-shadow: none;
+    }
   }
 `
 

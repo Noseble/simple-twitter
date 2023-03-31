@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-/* 導入svg圖檔 */
+// icons
 import { ReactComponent as NavHomeIcon } from 'assets/icon/NavHomeIcon.svg';
 import { ReactComponent as NavUserIcon } from 'assets/icon/NavUserIcon.svg';
 import { ReactComponent as NavSettingIcon } from 'assets/icon/NavSettingIcon.svg';

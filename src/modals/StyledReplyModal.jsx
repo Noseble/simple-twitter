@@ -20,7 +20,9 @@ const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUse
     if(comment.length > 140 || comment.length === 0) return
     try {
       const res = await addReplies( id, tweetId, comment)
-      handleClose()
+      if(res){
+        handleClose()
+      }
     } catch(error){
       console.error(error)
     }

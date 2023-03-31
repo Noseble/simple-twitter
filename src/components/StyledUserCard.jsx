@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import StyledUserAvatar from "./StyledUserAvatar";
 import StyledUserTitle from "./StyledUserTitle";
 
@@ -13,17 +13,17 @@ import { ReactComponent as Like } from "assets/icon/likeButton.svg";
 const UserCard = ({ bgImageSrc, userImageSrc, userName, userAccount, userTweetsCount, userLikesCounts, userFollowingCount, userFollowerCount, className }) => {
   return(
     <div className={className}>
-      <img src={bgImageSrc} className='user-background-image'/>
-      <StyledUserAvatar className='user-avatar' userAvatar={userImageSrc}/>
+      <img src={bgImageSrc} className='user-background-image' alt="user-background"/>
+      <StyledUserAvatar className='user-avatar admin' userAvatar={userImageSrc}/>
       <div className="user-info">
-        <StyledUserTitle className='user-title' columnArrange userName={userName} userAccount={`${userAccount}`}/>
+        <StyledUserTitle className='user-title admin' columnArrange userName={userName} userAccount={`${userAccount}`}/>
         <div className="tweets-likes-count">
           <div className="tweets-count"><Pen className="icon" fill='#6C757D' width='24px' height='22px'/>{userTweetsCount}</div>
           <div className="likes-count"><Like className="icon"  fill='none' stroke='#6C757D' strokeWidth='2px' width='20px' height='19px'/>{userLikesCounts}</div>
         </div>
         <div className="followship-counts">
-          <a href='#' className="following">{userFollowingCount}個<span className='followship-unit'>跟隨中</span></a>
-          <a href='#' className="follower">{userFollowerCount}位<span className='followship-unit'>跟隨者</span></a>
+          <label className="following">{userFollowingCount}個<span className='followship-unit'>跟隨中</span></label>
+          <label className="follower">{userFollowerCount}位<span className='followship-unit'>跟隨者</span></label>
         </div>
 
       </div>
@@ -122,10 +122,6 @@ const StyledUserCard = styled(UserCard)`
       .following,
       .follower{
         text-decoration: none;
-
-        &:hover{
-          font-weight: 500;
-        }
       }
 
       .following{

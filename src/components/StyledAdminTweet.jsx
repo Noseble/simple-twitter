@@ -1,19 +1,23 @@
 import styled from "styled-components";
+
+//shared components
 import StyledUserAvatar from "./StyledUserAvatar";
 import StyledUserTitle from "./StyledUserTitle";
 
+//icons
 import {ReactComponent as DeleteButton} from "assets/icon/cross.svg"
+import clsx from "clsx";
 
-//Usage: <StyledAdminTweet userImageSrc='https://picsum.photos/300/300?text=1' userName='Kevin Chou' userAccount='@kevinchou' tweetTime='3小時' tweetContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?'/>
+//Usage: <StyledAdminTweet userAvatar='https://picsum.photos/300/300?text=1' userName='Kevin Chou' userAccount='@kevinchou' tweetTime= tweetContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?'/>
 
-const AdminTweet = ({userImageSrc, userName, userAccount, tweetTime, tweetContent,  onClick, className}) => {
+const AdminTweet = ({ userAvatar, userName, userAccount, tweetTime, tweetContent,  onClick, className}) => {
   return(
     <div className={className}>
-      <StyledUserAvatar className='user-avatar' userAvatar={userImageSrc}/>
+      <StyledUserAvatar className='user-avatar admin' userAvatar={userAvatar} />
       <div className="tweet-area">
         <div className="header">
           <div className="user-info">
-            <StyledUserTitle userName={userName} userAccount={`${userAccount}`}/>
+            <StyledUserTitle className='admin' userName={userName} userAccount={`${userAccount}`}/>
             <span className='tweet-time'>．{tweetTime}</span>
           </div>
         </div>

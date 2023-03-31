@@ -1,30 +1,83 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import { React, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import clsx from 'clsx';
 
-/* 導入共用元件 */
+//shared components
 import StyledButton from './StyledButton';
 
-/* 導入svg圖檔 */
+//icons
 import MailButton from 'assets/icon/MailButton.svg';
 import NotifyButton from 'assets/icon/NotifyButton.svg';
-import MailButtonFilled from 'assets/icon/MailButtonFilled.svg';
 import NotifyButtonFilled from 'assets/icon/NotifyButtonFilled.svg';
+
+//api
+import { followUser, unfollowUser } from 'api/api';
 
 //Usage: <StyledOtherButtonArea isNotified={true} isFollowing={true}/> 
 
-const OtherButtonArea = ({ isNotified, isFollowing, className }) => {
+const OtherButtonArea = ({ userId, isNotified, isFollowed, className }) => {
+	const [updateIsFollowed, setUpdateIsFollowed] = useState( isFollowed )
+	
+	useEffect(() => {
+    //確保isFollowed被改變實惠更新
+		setUpdateIsFollowed(isFollowed)
+  }, [isFollowed])
+
+	//判斷是否快速雙擊按鍵用
+  let lastClickTime = 0 
+
+  const handleFollowshipClick = (e) => {
+    const button = e.currentTarget //得到現在點擊按鈕
+    const currentUserId = button.dataset.id //得到按鈕綁定的userId
+
+    // 檢查上次事件觸發時間是否超過 500 毫秒
+		if (Date.now() - lastClickTime < 500) {
+			return
+		}
+		
+		// 記錄本次事件觸發時間
+		lastClickTime = Date.now()
+
+    if(button.className.includes('filled')){
+      //取消追蹤
+      const unfollowCurrentUser = async(id) => {
+        try{
+          const res = await unfollowUser(id)
+          if(res){
+            setUpdateIsFollowed(false)
+          }
+        }catch(error){
+          console.error(error)
+        }
+      }
+      unfollowCurrentUser(currentUserId)
+    }else{
+      //追蹤
+      const followCurrentUser = async(id) => {
+        try{
+          const res = await followUser(id)
+          if(res){
+            setUpdateIsFollowed(true)
+          }
+        }catch(error){
+          console.error(error)
+        }
+      }
+      followCurrentUser(currentUserId)
+    }
+  }
+
 	return (
 		<div className={className}>
 		  <button className='icon'>
-		  	<img className="mail-icon" src={MailButton}/>
+		  	<img className="mail-icon" src={MailButton} alt="mail button"/>
 			</button>
-			{isFollowing &&
+			{updateIsFollowed &&
 				<div className={clsx('icon',{active : isNotified})}>
-					<img src={isNotified? NotifyButtonFilled:NotifyButton} />
+					<img src={isNotified? NotifyButtonFilled : NotifyButton} alt="" />
 				</div>
 			}
-			<StyledButton className={ clsx("follow-icon", { filled: isFollowing }) }> {isFollowing ? '正在跟隨':'跟隨'} </StyledButton>
+			<StyledButton className={ clsx("follow-icon", { filled: updateIsFollowed }) } onClick={handleFollowshipClick} id={userId}> {updateIsFollowed ? '正在跟隨':'跟隨'} </StyledButton>
 		</div>
 	);
 };

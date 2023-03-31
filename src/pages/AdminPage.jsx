@@ -1,4 +1,4 @@
-import { Outlet, Link,useNavigate } from "react-router-dom";
+import { Outlet, Link,useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
 
@@ -13,6 +13,9 @@ import { useEffect } from "react";
 
 const AdminPage = ({className}) => {
   const navigate = useNavigate();
+  const currentUrlPath = useLocation().pathname
+
+  console.log(currentUrlPath)
 
   const handleLogout = () => {
     localStorage.removeItem('token')
@@ -28,7 +31,7 @@ const AdminPage = ({className}) => {
       navigate('/admin_login')
     }
 
-  },[])
+  },[navigate])
 
 
   return(
@@ -39,8 +42,8 @@ const AdminPage = ({className}) => {
             <AcLogo className="website-logo" />
           </div>
           <div className="nav-list">
-            <Link to='/admin/tweets' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'推文清單'} className='selected' /></Link>
-            <Link to='/admin/users' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'使用者列表'} /></Link>
+            <Link to='/admin/tweets' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'推文清單'} className={clsx({selected: currentUrlPath==='/admin/tweets'})} /></Link>
+            <Link to='/admin/users' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'使用者列表'} className={clsx({selected: currentUrlPath==='/admin/users'})}/></Link>
           </div>
         </div>
         <StyledNavItem className='exit-nav-item' onClick={handleLogout} navTitle='登出' />
@@ -61,4 +64,4 @@ const StyledAdminPage = styled(AdminPage)`
   }
 `
 
-export default AdminPage
+export default StyledAdminPage

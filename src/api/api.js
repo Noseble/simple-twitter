@@ -41,7 +41,7 @@ export const addReplies = async ( id, tweetId, comment ) => {
   try {
     const res = await axios.post(`${baseUrl}/api/tweets/${id === undefined ? tweetId : id}/replies`, 
     {comment},{headers})
-    return res
+    return res.data.success
   } catch(error) {
     console.error('[Add Replies failed]:', error)
   }
@@ -198,7 +198,7 @@ export const delUserTweet = async (id) => {
     const res = await axios.delete(`${baseUrl}/api/admin/tweets/${id}`
     ,{ headers })
 
-    return res.data.removedTweet
+    return res.data.success
   } catch (error) {
     console.error('[Del User Tweet failed]:', error)
   }
@@ -210,7 +210,7 @@ export const likeTweet = async (id) => {
     ,{ headers })
     return res.data.success
   }catch(error){
-    console.log('[Like Tweet failed]:', error)
+    console.error('[Like Tweet failed]:', error)
   }
 }
 
@@ -220,6 +220,26 @@ export const dislikeTweet = async ( id ) => {
     ,{ headers })
     return res.data.success
   }catch(error){
-    console.log('[DisLike Tweet failed]:', error)
+    console.error('[DisLike Tweet failed]:', error)
+  }
+}
+
+export const followUser = async ( id ) => {
+  try{
+    const res = await axios.post(`${baseUrl}/api/followships`,{ id }
+    ,{headers})
+    return res.data.success
+  }catch(error){
+    console.error('[Follow User failed]:', error)
+  }
+}
+
+export const unfollowUser = async ( id ) => {
+  try{
+    const res = await axios.delete(`${baseUrl}/api/followships/${id}`
+    ,{ headers })
+    return res.data.success
+  }catch(error){
+    console.error('[UnFollow User failed]:', error)
   }
 }

@@ -1,10 +1,11 @@
+import clsx from 'clsx'
 import styled, { css } from 'styled-components'
 
-//Usage : <StyledButton (className="filled") (lg) (width="300px") onclick={onclickFunction} > 註冊 </StyledButton>
+//Usage : <StyledButton (className="filled") (disabled) (lg) (width="300px") onclick={onclickFunction} > 註冊 </StyledButton>
 
-const Button =({ className, onClick,disabled, children }) => {
+const Button =({ className, id, disabled, onClick ,children }) => {
   return(
-    <button className={className} onClick={onClick} disabled={disabled}> {children} </button>
+    <button className={clsx(className,{disabled: disabled})} onClick={onClick} disabled={disabled} data-id={id}> {children} </button>
   )
 }
 
@@ -34,19 +35,28 @@ const StyledButton = styled(Button)`
     font-size: 1.25rem;
     line-height: 30px;
   `}
-  
-  /* 以.disabled 轉為樣式 */
-  .disabled{
-    background-color: #FFFFFF;
-    border: 1px solid #FF6600;
-    color: #FF6600;
-  }
 
-  /* 以.outlined 轉為外框樣式 */
+  /* 以.filled 轉為外框樣式 */
   &.filled{
     background-color:#FF6600;
     border: none;
     color: white;
+  }
+
+    /* 以.disabled 轉為樣式 */
+  &.disabled{
+    background-color: #FFFFFF;
+    border: 1px solid #D5D5DC;
+    color: #D5D5DC;
+    cursor: default;
+
+    &:hover{
+      background-color: #FFFFFF;
+      border: 1px solid #D5D5DC;
+      color: #D5D5DC;
+      cursor: default;
+      box-shadow: none;
+    }
   }
 
   /* 設定hover時樣式 */

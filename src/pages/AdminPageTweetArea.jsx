@@ -1,6 +1,8 @@
-import StyledAdminTweet from "components/StyledAdminTweet";
-import styled from "styled-components";
 import { useState,useEffect } from "react";
+import styled from "styled-components";
+
+//shared components
+import StyledAdminTweet from "components/StyledAdminTweet";
 // api
 import { delUserTweet, getAdminTweets } from "api/api";
 
@@ -24,7 +26,9 @@ const AdminPageTweetsArea = ({ className }) => {
   try {
     const res = await delUserTweet(tweetId);
     const adminTweets = await getAdminTweets();
-    setAdminTweets(adminTweets.map((adminTweet) => ({ ...adminTweet})));
+    if(res){
+      setAdminTweets(adminTweets.map((adminTweet) => ({ ...adminTweet})));
+    }    
   } catch (error) {
     console.error(error);
   }
@@ -42,7 +46,7 @@ const AdminPageTweetsArea = ({ className }) => {
               <li key={adminTweet.id}>
                 <StyledAdminTweet 
                     userName={adminTweet.User.name}
-                    userImageSrc={adminTweet.User.avatar}
+                    userAvatar={adminTweet.User.avatar}
                     userAccount={adminTweet.User.account} 
                     tweetTime={`${Math.floor(Number(new Date() - new Date(adminTweet.createdAt)) / (1000 * 60 * 60))}小時`} 
                     tweetContent={adminTweet.description}

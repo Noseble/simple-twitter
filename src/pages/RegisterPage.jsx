@@ -1,7 +1,7 @@
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import Swal from 'sweetalert2';
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 // 載入共用元件
 import StyledButton from "components/StyledButton"
@@ -14,7 +14,11 @@ import { ReactComponent as Aclogo } from "assets/icon/AcLogo.svg"
 // api
 import { register } from "api/auth";
 
+// context
+import { BaseUrlContext } from "contexts/BaseUrlContext";
+
 const RegisterPage = ({ className }) => {
+  const baseUrl = useContext(BaseUrlContext)
   const [account , setAccount] = useState('')
   const [name , setName] = useState('')
   const [email , setEmail] = useState('')
@@ -66,7 +70,7 @@ const RegisterPage = ({ className }) => {
       </div>
       <StyledButton className='register-button filled' width='100%' onClick={handleClick} >註冊</StyledButton>
       <div className="footer">
-        <StyledTextLink link='/login'>取消</StyledTextLink>
+        <StyledTextLink link={`${baseUrl}/login`}>取消</StyledTextLink>
       </div>
     </div>
 

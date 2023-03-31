@@ -1,4 +1,4 @@
-import { React, useState, useEffect,useContext } from "react";
+import { React, useState, useEffect } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
@@ -57,7 +57,7 @@ const HomePage = ({className}) => {
 
     getUserInfo(myId)
     getTopTenAsync();
-  }, [myId]);
+  }, [navigate,myId]);
 
   return(
     <div className={clsx('web-container', className)}>

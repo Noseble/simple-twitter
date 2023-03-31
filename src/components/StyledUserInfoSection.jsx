@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 
 import styled from "styled-components";
 import StyledUserAvatar from "./StyledUserAvatar";
@@ -7,24 +7,36 @@ import StyledUserTitle from "./StyledUserTitle";
 import StyledOtherButtonArea from "./StyledOtherButtonArea";
 import StyledUserEditModal from "modals/StyledUserEditModal";
 
+import { BaseUrlContext } from 'contexts/BaseUrlContext';
+
 //Usage : <StyledUserInfoSection isSelf={true}/>
 
 const UserInfoSection = ({ userId, userImage, userAvatar, userName, userAccount, userIntroduction, isSelf, isFollowed, isNotified, followersCount, followingsCount, className }) => {
   const [showModal, setShowModal] = useState(false);
+  const baseUrl = useContext(BaseUrlContext)
   const handleShowModal = () => setShowModal(true);
+  
+  console.log('userInfoSection', isFollowed)
 
   return(
     <div className={className}>
       <div className="user-image-area">
-        <img className="user-background-image" src={userImage}/>
+        <img className="user-background-image" src={userImage} alt="" />
         <StyledUserAvatar className='user-avatar' userId={userId} userAvatar={userAvatar} />
         <div className="user-button">
           {isSelf ?
           <>
             <StyledButton onClick={handleShowModal}>編輯個人資料</StyledButton>
-            <StyledUserEditModal userImage={userImage} userAvatar={userAvatar} userName={userName} userIntroduction={userIntroduction} show={showModal} setShow={setShowModal} title="My Modal" />
+            <StyledUserEditModal 
+            userImage={userImage} 
+            userAvatar={userAvatar} 
+            userName={userName} 
+            userIntroduction={userIntroduction} 
+            show={showModal} 
+            setShow={setShowModal}
+            />
           </> :
-          <StyledOtherButtonArea isNotified={isNotified} isFollowing={isFollowed}/>} 
+          <StyledOtherButtonArea userId={userId} isNotified={isNotified} isFollowed={isFollowed}/>} 
         </div>
       </div>
       <div className='user-info-area'>
@@ -33,8 +45,8 @@ const UserInfoSection = ({ userId, userImage, userAvatar, userName, userAccount,
           {userIntroduction}
         </p>
         <div className="user-followship">
-          <a href={`/user/${userId}/following`} className="following">{followersCount || '0'}個<span className='followship-unit'>跟隨中</span></a>
-          <a href={`/user/${userId}/follower`} className="follower">{followingsCount || '0'}位<span className='followship-unit'>跟隨者</span></a>
+          <a href={`${baseUrl}/user/${userId}/following`} className="following">{followingsCount || '0'}個<span className='followship-unit'>跟隨中</span></a>
+          <a href={`${baseUrl}/user/${userId}/follower`} className="follower">{ followersCount || '0'}位<span className='followship-unit'>跟隨者</span></a>
         </div>
       </div>
     </div>

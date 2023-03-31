@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useContext} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -21,39 +21,44 @@ import HomePageUserFollowingArea from 'pages/HomePageUserFollowingArea';
 import HomePageSettingArea from 'pages/HomePageSettingArea';
 import NotFoundPage from 'pages/NotFoundPage';
 
+import { BaseUrlContext } from 'contexts/BaseUrlContext';
+
 const basename = process.env.PUBLIC_URL
 
 
 function App() {
+  
   return (
     <BrowserRouter basename={basename}>
-      <Routes>
-        {/*後台路由*/}
-        <Route path="admin_login" element={<AdminLoginPage />}/>
-        <Route path="admin" element={<AdminPage/>}>
-          <Route index element={<AdminPageTweetsArea/>}/>
-          <Route path="tweets" element={<AdminPageTweetsArea/>}/>
-          <Route path="users" element={<AdminPageUsersArea />}/>
-        </Route>
-        {/*前台路由*/}
-        <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path='/' element={<HomePage/>}>
-          <Route index element={<HomePageIndexArea />} />
-          <Route path="tweet/:tweetId" element={<HomePageTweetArea />} />
-          <Route path="user/:userId" element={<HomePageUserArea />}>
-            <Route index element={<HomePageUserTweetArea />} />
-            <Route path="tweet" element={<HomePageUserTweetArea />}/> 
-            <Route path="reply" element={<HomePageUserReplyArea />}/>
-            <Route path="like" element={<HomePageUserLikeArea />}/>
-            <Route path="follower" element={<HomePageUserFollowerArea/>}/>
-            <Route path="following" element={<HomePageUserFollowingArea/>} />
+      <BaseUrlContext.Provider value={basename}>
+        <Routes>
+          {/*後台路由*/}
+          <Route path="admin_login" element={<AdminLoginPage />}/>
+          <Route path="admin" element={<AdminPage/>}>
+            <Route index element={<AdminPageTweetsArea/>}/>
+            <Route path="tweets" element={<AdminPageTweetsArea/>}/>
+            <Route path="users" element={<AdminPageUsersArea />}/>
           </Route>
-          <Route path="setting" element={<HomePageSettingArea />} />
-        </Route>
-        {/*未找到路由*/}
-        <Route path="*" element={<NotFoundPage />}/>
-      </Routes>
+          {/*前台路由*/}
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+          <Route path='/' element={<HomePage/>}>
+            <Route index element={<HomePageIndexArea />} />
+            <Route path="tweet/:tweetId" element={<HomePageTweetArea />} />
+            <Route path="user/:userId" element={<HomePageUserArea />}>
+              <Route index element={<HomePageUserTweetArea />} />
+              <Route path="tweet" element={<HomePageUserTweetArea />}/> 
+              <Route path="reply" element={<HomePageUserReplyArea />}/>
+              <Route path="like" element={<HomePageUserLikeArea />}/>
+              <Route path="follower" element={<HomePageUserFollowerArea/>}/>
+              <Route path="following" element={<HomePageUserFollowingArea/>} />
+            </Route>
+            <Route path="setting" element={<HomePageSettingArea />} />
+          </Route>
+          {/*未找到路由*/}
+          <Route path="*" element={<NotFoundPage />}/>
+        </Routes>
+      </BaseUrlContext.Provider>
     </BrowserRouter>
   );
 }

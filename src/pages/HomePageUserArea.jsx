@@ -69,14 +69,26 @@ const HomePageUserArea = ({ myInfo, className}) => {
   return(
     <div className={className}>
       <div className='main-header'>
-        <Link to="#" onClick={() => { window.history.back() }}><ReturnIcon className="return-icon" /></Link>
+        <Link to='/' ><ReturnIcon className="return-icon" /></Link>
         <div className="user-title">
           <h3 className="user-title-name">{user.name}</h3>
           <h5 className="user-tweets">{tweetsNumber} 推文</h5>
         </div>
       </div>
       <hr className='main-header-line' />
-      <StyledUserInfoSection className={clsx({hidden: lastSegmentOfUrl === 'following' || lastSegmentOfUrl === 'follower'})} userId={userId} userImage={user.image} userAvatar={user.avatar} userName={user.name} userAccount={user.name} userIntroduction={user.introduction} isSelf={(userId === MyId)} followersCount={followersNumber} followingsCount={followingsNumber} isFollowed={user.isFollowed} isNotiFied={user.isNotiFied}/>
+      <StyledUserInfoSection 
+        className={clsx({hidden: lastSegmentOfUrl === 'following' || lastSegmentOfUrl === 'follower'})} 
+        userId={userId} 
+        userImage={user.image} 
+        userAvatar={user.avatar} 
+        userName={user.name} 
+        userAccount={user.name} 
+        userIntroduction={user.introduction} 
+        isSelf={(userId === MyId)} 
+        followersCount={followersNumber} 
+        followingsCount={followingsNumber} 
+        isFollowed={user.isFollowed} 
+        isNotiFied={user.isNotiFied}/>
       <Outlet myInfo={myInfo}/>
     </div>
   )

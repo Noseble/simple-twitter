@@ -25,8 +25,6 @@ const UserEditModal = ({show, setShow, className}) => {
 
   useEffect(() => {
     const getUserSettingAsync = async(MyId) => {
-      if(introduction.length > 160) return
-      if(name.length > 50) return
       try {
         const currentSettings = await getUserSetting(MyId);
         setName(currentSettings.name);
@@ -40,7 +38,10 @@ const UserEditModal = ({show, setShow, className}) => {
     getUserSettingAsync(MyId);
   }, [MyId]);
 
-  const handleUpdate = async( )=> {
+  const handleUpdate = async(name, introduction)=> {
+    if(introduction.length > 160) return
+    if(name.length > 50) return
+    
     try {
       const res = await setUserSetting( MyId, name, introduction, image, avatar)
       handleClose()
@@ -87,7 +88,7 @@ const UserEditModal = ({show, setShow, className}) => {
       <hr className='main-header-line'/>
       <div className='modal-body'>
         <div className='bg-image-area'>
-          <img className='user-bg-image' src={oldImage} />
+          <img className='user-bg-image' src={oldImage} alt="" />
           {image !== null ? null : <UpdatePhoto className='update-bg' fill='#FFFFFF' /> }
             <input className="file-upload-bg" type="file"  accept="image/png, image/jpeg" onChange={handleUploadFile} />
           <DeleteButton className='delete-bg' fill='#FFFFFF'/>
@@ -95,18 +96,17 @@ const UserEditModal = ({show, setShow, className}) => {
           
         </div>
         <div className='avatar-image-area'>
-          <img className='user-avatar-image' src={oldAvatar} />
+          <img className='user-avatar-image' src={oldAvatar} alt="" />
           {avatar !== null ? <DeleteButton className='delete-avatar' fill='#FFFFFF'/> : <UpdatePhoto className='update-avatar' fill='#FFFFFF' /> }
           {avatar === null ? <input className="file-upload-avatar" type="file"  accept="image/png, image/jpeg" onChange={handleUploadFile} /> : <button className="delete-upload-avatar" onClick={handleClear} /> }
           
           
         </div>
         <div className='input-area'>
-          <StyledTextInput className='text-input' width="100%" labelName='名稱' placeholder='請輸入名稱' wordLimit="50" value={name} onChange={(nameInputValue) => setName(nameInputValue)} />
-          <StyledTextInput textAreaType className='text-input' width="100%" labelName='自我介紹' placeholder='請輸入自我介紹' wordLimit="160" value={introduction} onChange={(introductionInputValue) => setIntroduction(introductionInputValue)} />
+          <StyledTextInput className='text-input' width="100%" labelName='名稱' placeholder='請輸入名稱' wordLimit={50} wordCount={name.length} value={name} onChange={(nameInputValue) => setName(nameInputValue)} />
+          <StyledTextInput textAreaType className='text-input' width="100%" labelName='自我介紹' placeholder='請輸入自我介紹' wordLimit={160} value={introduction} onChange={(introductionInputValue) => setIntroduction(introductionInputValue)} />
         </div>
       </div>
-      {/* labelName, type, value, placeholder, wordLimit, wordCount, onChange,passwordWrong */}
     </ReactModal>
   );
 }

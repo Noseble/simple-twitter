@@ -1,5 +1,5 @@
 import {React,useState,useEffect} from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
 import Swal from 'sweetalert2';
@@ -15,7 +15,6 @@ import { putUserSetting } from "api/api";
 const HomePageSettingArea = ({className}) => {
   const MyId = localStorage.getItem('MyId')
   const navigate = useNavigate();
-  const [settings, setSettings] = useState([]);
   const [account , setAccount] = useState('')
   const [name , setName] = useState('')
   const [email , setEmail] = useState('')
@@ -27,7 +26,6 @@ const HomePageSettingArea = ({className}) => {
       if(name.length > 50) return
       try {
         const currentSettings = await getUserSetting(MyId);
-        setSettings(currentSettings);
         setAccount(currentSettings.account);
         setName(currentSettings.name);
         setEmail(currentSettings.email);
@@ -36,7 +34,7 @@ const HomePageSettingArea = ({className}) => {
       }
     };
     getUserSettingAsync(MyId);
-  }, [MyId]);
+  }, [name.length,MyId]);
   
   const handleUpdate = async( )=> {
     // if( account.length === 0 || name.length === 0 || email.length === 0 || password.length === 0 || passwordCheck.length === 0 ) return

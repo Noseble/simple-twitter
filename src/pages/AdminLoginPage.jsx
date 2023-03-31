@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
@@ -13,9 +13,10 @@ import { ReactComponent as Aclogo } from "assets/icon/AcLogo.svg"
 
 // api
 import { login } from "api/auth"
+import { BaseUrlContext } from "contexts/BaseUrlContext";
 
 const AdminLoginPage = ({ className }) => {
-
+  const baseUrl = useContext(BaseUrlContext)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ const AdminLoginPage = ({ className }) => {
       </div>
       <StyledButton className='login-button filled' width='100%' onClick={handleClick} >登入</StyledButton>
       <div className="footer">
-        <StyledTextLink link='/login'>前台登入</StyledTextLink>
+        <StyledTextLink link={`${baseUrl}/login`}>前台登入</StyledTextLink>
       </div>
     </div>
 

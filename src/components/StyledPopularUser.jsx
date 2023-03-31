@@ -5,17 +5,66 @@ import clsx from 'clsx';
 import StyledUserAvatar from './StyledUserAvatar';
 import StyledUserTitle from './StyledUserTitle';
 import StyledButton from './StyledButton';
+import { followUser, unfollowUser } from 'api/api';
+import { useState } from 'react';
 
 //Usage: <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowed={true} /> 
 
 const PopularUser = ({ userId, userAvatar, userName, userAccount, isFollowed, className }) => {
+  const myId = localStorage.getItem('MyId')
+  const [updateIsFollowed, setUpdateIsFollowed] = useState(isFollowed)
+  
+  //判斷是否快速雙擊按鍵用
+  let lastClickTime = 0 
+
+  const handleFollowshipClick = (e) => {
+    const button = e.currentTarget
+    const currentUserId = button.dataset.id
+
+    // 檢查上次事件觸發時間是否超過 500 毫秒
+		if (Date.now() - lastClickTime < 500) {
+			return;
+		}
+		
+		// 記錄本次事件觸發時間
+		lastClickTime = Date.now();
+
+    if(button.className.includes('filled')){
+      //取消追蹤
+      const unfollowCurrentUser = async(id) => {
+        try{
+          const res = await unfollowUser(id)
+          if(res){
+            setUpdateIsFollowed(false)
+          }
+        }catch(error){
+          console.error(error)
+        }
+      }
+      unfollowCurrentUser(currentUserId)
+    }else{
+      //追蹤
+      const followCurrentUser = async(id) => {
+        try{
+          const res = await followUser(id)
+          if(res){
+            setUpdateIsFollowed(true)
+          }
+        }catch(error){
+          console.error(error)
+        }
+      }
+      followCurrentUser(currentUserId)
+    }
+  }
+  
   return(
     <div className={className}>
-      <div className={ clsx('popular-user', {small:isFollowed}, {large: !isFollowed})}>
+      <div className={ clsx('popular-user', {small:updateIsFollowed}, {large: !updateIsFollowed})}>
         <StyledUserAvatar userId={userId} userAvatar={userAvatar} className="popular-user-avatar"/>
         <StyledUserTitle className="popular-user-info" columnArrange userId={userId} userName={userName} userAccount={`${userAccount}`} />
       </div>
-      <StyledButton className={clsx('popular-user-button',{filled: isFollowed})} width={isFollowed ? '96px' : 'fit-content'} > {isFollowed ? '正在跟隨' : '跟隨'}</StyledButton>
+      <StyledButton className={clsx('popular-user-button',{filled: updateIsFollowed && parseInt(userId) !== parseInt(myId)})} disabled={parseInt(userId) === parseInt(myId)} width={updateIsFollowed ? '96px' : 'fit-content'} onClick={handleFollowshipClick} id={userId}> {updateIsFollowed ? '正在跟隨' : '跟隨'}</StyledButton>
     </div>
   )
 }

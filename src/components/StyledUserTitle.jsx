@@ -1,10 +1,14 @@
+import { BaseUrlContext } from 'contexts/BaseUrlContext';
+import { useContext } from 'react';
 import styled, { css } from 'styled-components';
 
 //Usage: <StyledUserTitle (columnArrange) userName='Kevin Chou' userAccount='@kevinchou' /> 
 
 const UserTitle = ({ userId, userName, userAccount, className }) => {
+  const baseUrl = useContext(BaseUrlContext)
+  
   return(
-    <a href={`/user/${userId}`} className={ className }>
+    <a href={ className.includes('admin') ? null : `${baseUrl}/user/${userId}`} className={ className }>
      <p className='user-name'>{userName}</p>
      <p className='user-account'>{`@${userAccount}`}</p>
     </a>
@@ -54,6 +58,19 @@ const StyledUserTitle = styled(UserTitle)`
 
     .user-account{
       font-weight: 500;
+    }
+  }
+
+  &.admin{
+    cursor: default;
+    &:hover{
+      .user-name{
+        font-weight: 700;
+      }
+
+      .user-account{
+        font-weight: 400;
+      }
     }
   }
 `
