@@ -21,10 +21,12 @@ import HomePageUserFollowingArea from 'pages/HomePageUserFollowingArea';
 import HomePageSettingArea from 'pages/HomePageSettingArea';
 import NotFoundPage from 'pages/NotFoundPage';
 
+const basename = process.env.PUBLIC_URL
+
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <Routes>
         {/*後台路由*/}
         <Route path="admin_login" element={<AdminLoginPage />}/>
