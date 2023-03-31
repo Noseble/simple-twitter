@@ -2,11 +2,15 @@ import {React,useState,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
-import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 import StyledButton from "components/StyledButton";
 import StyledTextInput from "components/StyledTextInput";
+import StyledToastContainer from "components/StyledToastContainer";
 
+// 載入svg
+import { ReactComponent as Success } from "assets/icon/success.svg"
+import { ReactComponent as Failed } from "assets/icon/failed.svg"
 // api 
 import { getUserSetting } from "api/api";
 import { putUserSetting } from "api/api";
@@ -44,30 +48,34 @@ const HomePageSettingArea = ({className}) => {
       const { message } = await putUserSetting( MyId, account, name, email, password)
       if (message === undefined) {
       // 修改成功訊息
-      Swal.fire({
-        position: 'top',
-        title: '修改成功！',
-        timer: 1000,
-        icon: 'success',
-        showConfirmButton: false,
-      });
-      navigate(`/user/${MyId}`)
+      showToastMessage('修改成功','success')
+      setTimeout(() => navigate(`/user/${MyId}`), 1000);
     } else {
       // 修改失敗訊息
-      Swal.fire({
-        position: 'top',
-        title: '修改失敗！',
-        text: message, // 顯示錯誤訊息
-        timer: 1000,
-        icon: 'error',
-        showConfirmButton: false,
-      });
+     showToastMessage( message, 'failed');
     }
     } catch (error) {
     console.error(error);
   }
   }
 
+   const showToastMessage = (message, icon) => {
+  if (icon === 'success') {
+    toast.success(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1000,
+      hideProgressBar: true,
+      icon: <Success />,
+    });
+  } else {
+    toast.error(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1000,
+      hideProgressBar: true,
+      icon: <Failed />,
+    });
+  }
+};
   
 
 
@@ -86,6 +94,7 @@ const HomePageSettingArea = ({className}) => {
       </div>
       <div className="button-area">
         <StyledButton className="filled" lg onClick={handleUpdate}>儲存</StyledButton>
+        <StyledToastContainer />
       </div>
     </div>
   )

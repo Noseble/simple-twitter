@@ -1,13 +1,17 @@
 import {React,useState,useEffect} from "react";
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
 import StyledTextInput from 'components/StyledTextInput';
 import StyledButton from "components/StyledButton";
+import StyledToastContainer from "components/StyledToastContainer";
 
 import defaultUserImg from 'assets/image/defaultUserImg.svg';
 import { ReactComponent as UpdatePhoto } from 'assets/icon/updatePhotoIcon.svg'
 import { ReactComponent as DeleteButton } from 'assets/icon/cross.svg'
+import { ReactComponent as Success } from "assets/icon/success.svg"
+import { ReactComponent as Failed } from "assets/icon/failed.svg"
 
 // api 
 import { getUserSetting } from "api/api";
@@ -45,7 +49,10 @@ const UserEditModal = ({show, setShow, className}) => {
       const res = await setUserSetting( MyId, name, introduction, image, avatar)
       handleClose()
       if (res.message === undefined) {
-     window.location.reload()
+        showToastMessage('修改成功','success')
+        setTimeout(() =>  window.location.reload(), 1000);
+    } else {
+      showToastMessage('修改失敗', 'failed');
     }
     } catch (error) {
     console.error(error);
@@ -67,6 +74,24 @@ const UserEditModal = ({show, setShow, className}) => {
         setAvatar(null);
     }
   };
+
+  const showToastMessage = (message, icon) => {
+  if (icon === 'success') {
+    toast.success(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1000,
+      hideProgressBar: true,
+      icon: <Success />,
+    });
+  } else {
+    toast.error(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1000,
+      hideProgressBar: true,
+      icon: <Failed />,
+    });
+  }
+};
 
 
   return (

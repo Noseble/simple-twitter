@@ -4,7 +4,7 @@ import styled from "styled-components";
 import clsx from 'clsx';
 
 import StyledUserInfoSection from 'components/StyledUserInfoSection';
-
+import StyledToastContainer from 'components/StyledToastContainer';
 import { ReactComponent as ReturnIcon } from 'assets/icon/returnArrow.svg';
 
 import { getUser, getUserFollowers, getUserFollowings, getUserTweets } from 'api/api';
@@ -97,6 +97,7 @@ const HomePageUserArea = ({ className}) => {
         followingsCount={followingsNumber} 
         isFollowed={user.isFollowed} 
         isNotiFied={user.isNotiFied}/>
+        <StyledToastContainer />
       <Outlet />
     </div>
   )

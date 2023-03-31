@@ -1,15 +1,20 @@
 import styled from "styled-components"
 import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+
+
 
 // 載入共用元件
 import StyledButton from "components/StyledButton"
 import StyledTextInput from "components/StyledTextInput"
 import StyledTextLink from "components/StyledTextLink"
+import StyledToastContainer from "components/StyledToastContainer";
 
 // 載入svg
 import { ReactComponent as AcLogo } from "assets/icon/AcLogo.svg"
+import { ReactComponent as Success } from "assets/icon/success.svg"
+import { ReactComponent as Failed } from "assets/icon/failed.svg"
 
 // api
 import { login } from "api/auth"
@@ -35,39 +40,42 @@ if (success) {
     if (user.role === 'user') {
       localStorage.setItem('token', token);
       localStorage.setItem('MyId', user.id);
-      
       // 登入成功訊息
-      Swal.fire({
-        position: 'top',
-        title: '登入成功！',
-        timer: 1000,
-        icon: 'success',
-        showConfirmButton: false,
-      });
-      navigate('/');
-      return;
+      showToastMessage('登入成功','success')
+      setTimeout(() => navigate('/'), 1000);
     } else {
       // 阻止使用者登入並顯示錯誤訊息
-      Swal.fire({
-        position: 'top',
-        title: '權限不足！',
-        text: '您的角色是管理員，無法登入。',
-        icon: 'error',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      showToastMessage('阻止使用者登入', 'failed');
     }
   } else {
     // 登入失敗訊息
-    Swal.fire({
-      position: 'top',
-      title: '登入失敗！',
-      timer: 1000,
-      icon: 'error',
-      showConfirmButton: false,
-    });
+    showToastMessage('登入失敗', 'failed');
   }
   };
+  
+ const showToastMessage = (message, icon) => {
+  if (icon === 'success') {
+    toast.success(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1000,
+      hideProgressBar: true,
+      icon: <Success />,
+    });
+  } else {
+    toast.error(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1000,
+      hideProgressBar: true,
+      icon: <Failed />,
+    });
+  }
+};
+
+
+
+
+
+
 
 
   return(
@@ -79,6 +87,7 @@ if (success) {
         <StyledTextInput className='text-input' labelName='密碼' value={password}  placeholder='請輸入密碼' type='password' width='356px' onChange={(passwordInputValue) => setPassword(passwordInputValue)}/>
       </div>
       <StyledButton className='login-button filled' width='100%' onClick={handleClick}>登入</StyledButton>
+      <StyledToastContainer />
       <div className="footer">
         <StyledTextLink link={`${baseUrl}/register`}>註冊</StyledTextLink>
         <span>．</span>
@@ -90,6 +99,14 @@ if (success) {
 }
 
 const StyledLoginPage = styled(LoginPage)`
+
+.my-swal-title {
+    color: red; !important
+  }
+
+  .my-swal-popup {
+    width: calc(100% + 1000px);
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,6 +151,8 @@ const StyledLoginPage = styled(LoginPage)`
     height: 36px;
     padding: 6px 12px;
   }
-`
+`;
+
+
 
 export default StyledLoginPage

@@ -13,6 +13,7 @@ import { ReactComponent as Reply } from 'assets/icon/reply.svg';
 import { ReactComponent as LikeButton } from 'assets/icon/likeButton.svg';
 import StyledReply from "components/StyledReply"
 import StyledReplyModal from 'modals/StyledReplyModal';
+import StyledToastContainer from "components/StyledToastContainer";
 
 import { dislikeTweet, getTweet, likeTweet } from 'api/api';
 import { UserInfoContext } from 'contexts/UserInfoContext';
@@ -147,7 +148,7 @@ const HomePageTweetArea = ({ className }) => {
           )
         })}
       </ul>
-
+        <StyledToastContainer />
     </div>
   )
 }
