@@ -23,7 +23,7 @@ const HomePageSettingArea = ({className}) => {
   
   useEffect(() => {
     const getUserSettingAsync = async(MyId) => {
-      if(name?.length > 50) return
+      
       try {
         const currentSettings = await getUserSetting(MyId);
         setAccount(currentSettings.account);
@@ -40,6 +40,7 @@ const HomePageSettingArea = ({className}) => {
     // if( account?.length === 0 || name?.length === 0 || email?.length === 0 || password?.length === 0 || passwordCheck?.length === 0 ) return
     try {
       if (password !== passwordCheck ) return 
+      if(name?.length > 50) return
       const { message } = await putUserSetting( MyId, account, name, email, password)
       if (message === undefined) {
       // 修改成功訊息

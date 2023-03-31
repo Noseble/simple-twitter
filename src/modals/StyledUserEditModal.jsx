@@ -42,7 +42,7 @@ const UserEditModal = ({show, setShow, className}) => {
     if(introduction?.length > 160 || name?.length > 50) return
     
     try {
-      const res = await setUserSetting({ MyId, name, introduction, image, avatar})
+      const res = await setUserSetting( MyId, name, introduction, image, avatar)
       handleClose()
       if (res.message === undefined) {
      window.location.reload()
