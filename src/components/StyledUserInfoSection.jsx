@@ -16,8 +16,6 @@ const UserInfoSection = ({ userId, userImage, userAvatar, userName, userAccount,
   const baseUrl = useContext(BaseUrlContext)
   const handleShowModal = () => setShowModal(true);
   
-  console.log('userInfoSection', isFollowed)
-
   return(
     <div className={className}>
       <div className="user-image-area">

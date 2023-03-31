@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import { React, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import clsx from 'clsx';
 
@@ -12,12 +12,14 @@ import NotifyButtonFilled from 'assets/icon/NotifyButtonFilled.svg';
 
 //api
 import { followUser, unfollowUser } from 'api/api';
+import { TopTenUpdateContext } from 'contexts/TopTenUpdateContext.jsx';
 
 //Usage: <StyledOtherButtonArea isNotified={true} isFollowing={true}/> 
 
 const OtherButtonArea = ({ userId, isNotified, isFollowed, className }) => {
 	const [updateIsFollowed, setUpdateIsFollowed] = useState( isFollowed )
-	
+	const isTopTenUpdate = useContext(TopTenUpdateContext)
+
 	useEffect(() => {
     //確保isFollowed被改變實惠更新
 		setUpdateIsFollowed(isFollowed)
@@ -65,6 +67,9 @@ const OtherButtonArea = ({ userId, isNotified, isFollowed, className }) => {
       }
       followCurrentUser(currentUserId)
     }
+
+		isTopTenUpdate.setIsTopTenUpdate(true)
+
   }
 
 	return (

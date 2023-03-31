@@ -6,7 +6,7 @@ import StyledUserAvatar from './StyledUserAvatar';
 import StyledUserTitle from './StyledUserTitle';
 import StyledButton from './StyledButton';
 import { followUser, unfollowUser } from 'api/api';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 //Usage: <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowed={true} /> 
 
@@ -14,6 +14,11 @@ const PopularUser = ({ userId, userAvatar, userName, userAccount, isFollowed, cl
   const myId = localStorage.getItem('MyId')
   const [updateIsFollowed, setUpdateIsFollowed] = useState(isFollowed)
   
+  useEffect(()=>{
+    //確保isFollowed有更新時更新畫面
+    setUpdateIsFollowed(isFollowed)
+  },[isFollowed])
+
   //判斷是否快速雙擊按鍵用
   let lastClickTime = 0 
 

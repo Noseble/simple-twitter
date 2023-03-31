@@ -6,7 +6,6 @@ import StyledUserTitle from "./StyledUserTitle";
 
 //icons
 import {ReactComponent as DeleteButton} from "assets/icon/cross.svg"
-import clsx from "clsx";
 
 //Usage: <StyledAdminTweet userAvatar='https://picsum.photos/300/300?text=1' userName='Kevin Chou' userAccount='@kevinchou' tweetTime= tweetContent='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?'/>
 

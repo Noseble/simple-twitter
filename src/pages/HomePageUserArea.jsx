@@ -10,7 +10,7 @@ import { ReactComponent as ReturnIcon } from 'assets/icon/returnArrow.svg';
 import { getUser, getUserFollowers, getUserFollowings, getUserTweets } from 'api/api';
 
 
-const HomePageUserArea = ({ myInfo, className}) => {
+const HomePageUserArea = ({ className}) => {
   const { userId } = useParams()
   const currentUrl = useLocation().pathname
   const MyId = localStorage.getItem('MyId')
@@ -89,7 +89,7 @@ const HomePageUserArea = ({ myInfo, className}) => {
         followingsCount={followingsNumber} 
         isFollowed={user.isFollowed} 
         isNotiFied={user.isNotiFied}/>
-      <Outlet myInfo={myInfo}/>
+      <Outlet />
     </div>
   )
 }

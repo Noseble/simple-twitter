@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const authURL = 'https://mysterious-basin-96824.herokuapp.com';
 
-export const login = async ({ email, password, role }) => {
+export const login = async ({ account, password, role }) => {
   try {
     const { data } = await axios.post(`${authURL}/api/login`, {
-      email,
+      account,
       password,
       role
     });

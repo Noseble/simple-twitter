@@ -11,6 +11,7 @@ import StyledTweetModal from "modals/StyledTweetModal";
 
 import { getTopTen, getUser } from "api/api";
 import { UserInfoContext } from "contexts/UserInfoContext";
+import { TopTenUpdateContext } from "contexts/TopTenUpdateContext";
 
 const HomePage = ({className}) => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const HomePage = ({className}) => {
   const [userInfo, setUserInfo] = useState({})
   const [topTenList, setTopTenList] = useState([]);
   const currentUrlPath = useLocation().pathname
+  const [isTopTenUpdate, setIsTopTenUpdate] = useState(true)
 
   const handleShowTweetModal = () => setShowTweetModal(true);
   
@@ -27,7 +29,7 @@ const HomePage = ({className}) => {
     localStorage.removeItem('MyId')
     navigate('login')
   }
-
+  
   useEffect(() => {
     //若沒登入，則導至login頁面
     const auth = localStorage.getItem('token')
@@ -56,8 +58,13 @@ const HomePage = ({className}) => {
     };
 
     getUserInfo(myId)
-    getTopTenAsync();
-  }, [navigate,myId]);
+
+    if(isTopTenUpdate){
+      getTopTenAsync();
+      setIsTopTenUpdate(false);
+    }
+    
+  }, [navigate,myId,isTopTenUpdate]);
 
   return(
     <div className={clsx('web-container', className)}>
@@ -78,13 +85,15 @@ const HomePage = ({className}) => {
         <StyledNavItem className='exit-nav-item' onClick={handleLogOut} navTitle='登出' />
       </nav>
 
-      <UserInfoContext.Provider value={userInfo}>      
-        <div className='main-scrollbar'>
-          <div className='main-container'>
-            <Outlet/> {/* 子路由頁面由此放入 */}
+      <TopTenUpdateContext.Provider value={{isTopTenUpdate, setIsTopTenUpdate}}> 
+        <UserInfoContext.Provider value={userInfo}>      
+          <div className='main-scrollbar'>
+            <div className='main-container'>
+              <Outlet/> {/* 子路由頁面由此放入 */}
+            </div>
           </div>
-        </div>
-      </UserInfoContext.Provider>
+        </UserInfoContext.Provider>
+      </TopTenUpdateContext.Provider>
 
       <div className='side-column'>
         <div className={clsx('popular-list-area',{hidden: currentUrlPath==='/setting'})}>
