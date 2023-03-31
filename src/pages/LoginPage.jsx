@@ -23,7 +23,7 @@ const LoginPage = ({ className }) => {
   const [password, setPassword] = useState('');
   
   const handleClick = async () => {
-    if (account.length === 0 || password.length === 0) return;
+    if (account?.length === 0 || password?.length === 0) return;
    
     const { success, token, user } = await login({
       account,

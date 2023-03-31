@@ -37,7 +37,7 @@ const HomePageUserArea = ({ className}) => {
     const getCurrentUserFollowers = async(id) => {
       try {
         const res = await getUserFollowers(id);
-        setFollowersNumber(res.length);
+        setFollowersNumber(res?.length);
       } catch (error) {
         console.error(error);
       }
@@ -46,7 +46,7 @@ const HomePageUserArea = ({ className}) => {
     const getCurrentUserFollowings = async(id) => {
       try {
         const res = await getUserFollowings(id);
-        setFollowingsNumber(res.length);
+        setFollowingsNumber(res?.length);
       } catch (error) {
         console.error(error);
       }
@@ -55,7 +55,7 @@ const HomePageUserArea = ({ className}) => {
     const getCurrentUserTweets = async(id) =>{
       try {
         const res = await getUserTweets(id);
-        setTweetsNumber(res.length);
+        setTweetsNumber(res?.length);
       } catch (error) {
         console.error(error);
       }
