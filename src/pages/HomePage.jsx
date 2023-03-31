@@ -12,6 +12,7 @@ import StyledTweetModal from "modals/StyledTweetModal";
 import { getTopTen, getUser } from "api/api";
 import { UserInfoContext } from "contexts/UserInfoContext";
 import { TopTenUpdateContext } from "contexts/TopTenUpdateContext";
+import { FollowUpdateContext } from "contexts/FollowUpdateContext";
 
 const HomePage = ({className}) => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const HomePage = ({className}) => {
   const [topTenList, setTopTenList] = useState([]);
   const currentUrlPath = useLocation().pathname
   const [isTopTenUpdate, setIsTopTenUpdate] = useState(true)
+  const [isFollowUpdate, setIsFollowUpdate] = useState(true)
 
   const handleShowTweetModal = () => setShowTweetModal(true);
   
@@ -67,49 +69,54 @@ const HomePage = ({className}) => {
   }, [navigate,myId,isTopTenUpdate]);
 
   return(
-    <div className={clsx('web-container', className)}>
+    <FollowUpdateContext.Provider value={{isFollowUpdate, setIsFollowUpdate}}>
+      <div className={clsx('web-container', className)}>
 
-      <nav className="nav-column">
-        <div className="nav-main">
-          <div className="aclogo">
-            <AcLogo className="website-logo" />
+        <nav className="nav-column">
+          <div className="nav-main">
+            <div className="aclogo">
+              <AcLogo className="website-logo" />
+            </div>
+            <div className="nav-list">
+              <Link to='/' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='首頁' className={clsx({selected: currentUrlPath==='/'})}/></Link>
+              <Link to={`/user/${myId}`} style={{ textDecoration: 'none' }}><StyledNavItem navTitle='個人資料' className={clsx({selected: currentUrlPath.includes('user')})}/></Link>
+              <Link to='/setting' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='設定' className={clsx({selected: currentUrlPath==='/setting'})}/></Link>
+            </div>
+            <StyledButton className='filled' width='100%' onClick={handleShowTweetModal}>推文</StyledButton>
+            <StyledTweetModal userId={userInfo.id} userAvatar={userInfo.avatar} show={showTweetModal} setShow={setShowTweetModal} />
           </div>
-          <div className="nav-list">
-            <Link to='/' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='首頁' className={clsx({selected: currentUrlPath==='/'})}/></Link>
-            <Link to={`/user/${myId}`} style={{ textDecoration: 'none' }}><StyledNavItem navTitle='個人資料' className={clsx({selected: currentUrlPath.includes('user')})}/></Link>
-            <Link to='/setting' style={{ textDecoration: 'none' }}><StyledNavItem navTitle='設定' className={clsx({selected: currentUrlPath==='/setting'})}/></Link>
-          </div>
-          <StyledButton className='filled' width='100%' onClick={handleShowTweetModal}>推文</StyledButton>
-          <StyledTweetModal userId={userInfo.id} userAvatar={userInfo.avatar} show={showTweetModal} setShow={setShowTweetModal} />
-        </div>
-        <StyledNavItem className='exit-nav-item' onClick={handleLogOut} navTitle='登出' />
-      </nav>
+          <StyledNavItem className='exit-nav-item' onClick={handleLogOut} navTitle='登出' />
+        </nav>
 
-      <TopTenUpdateContext.Provider value={{isTopTenUpdate, setIsTopTenUpdate}}> 
-        <UserInfoContext.Provider value={userInfo}>      
-          <div className='main-scrollbar'>
-            <div className='main-container'>
-              <Outlet/> {/* 子路由頁面由此放入 */}
+        
+          <TopTenUpdateContext.Provider value={{isTopTenUpdate, setIsTopTenUpdate}}> 
+            <UserInfoContext.Provider value={userInfo}>      
+              <div className='main-scrollbar'>
+                <div className='main-container'>
+                  <Outlet/> {/* 子路由頁面由此放入 */}
+                </div>
+              </div>
+            </UserInfoContext.Provider>
+          </TopTenUpdateContext.Provider>
+        
+
+
+        <div className='side-column'>
+          <div className={clsx('popular-list-area',{hidden: currentUrlPath==='/setting'})}>
+            <h2 className="popular-list-title">推薦跟隨</h2>
+            <hr className="popular-list-hr"/>
+            <div className="popular-list">
+              {topTenList.map((user) => {
+                return(
+                  <StyledPopularUser key={user.id} userId={user.id} userAvatar={user.avatar} userName={user.name} userAccount={user.account} isFollowed={user.isFollowed}/>
+                )
+              })}
             </div>
           </div>
-        </UserInfoContext.Provider>
-      </TopTenUpdateContext.Provider>
-
-      <div className='side-column'>
-        <div className={clsx('popular-list-area',{hidden: currentUrlPath==='/setting'})}>
-          <h2 className="popular-list-title">推薦跟隨</h2>
-          <hr className="popular-list-hr"/>
-          <div className="popular-list">
-            {topTenList.map((user) => {
-              return(
-                <StyledPopularUser key={user.id} userId={user.id} userAvatar={user.avatar} userName={user.name} userAccount={user.account} isFollowed={user.isFollowed}/>
-              )
-            })}
-          </div>
         </div>
-      </div>
 
-    </div>
+      </div>
+    </FollowUpdateContext.Provider>
   )
 }
 

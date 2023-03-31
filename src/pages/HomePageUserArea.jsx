@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useContext } from 'react';
 import { useParams, Link, useLocation, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import clsx from 'clsx';
@@ -8,6 +8,7 @@ import StyledUserInfoSection from 'components/StyledUserInfoSection';
 import { ReactComponent as ReturnIcon } from 'assets/icon/returnArrow.svg';
 
 import { getUser, getUserFollowers, getUserFollowings, getUserTweets } from 'api/api';
+import { FollowUpdateContext } from 'contexts/FollowUpdateContext';
 
 
 const HomePageUserArea = ({ className}) => {
@@ -18,6 +19,7 @@ const HomePageUserArea = ({ className}) => {
   const [followersNumber, setFollowersNumber] = useState('')
   const [followingsNumber, setFollowingsNumber] = useState('')
   const [tweetsNumber, setTweetsNumber] = useState('')
+  const FollowUpdate = useContext(FollowUpdateContext)
 
   //取得現有Url最後一個字串
   const lastSegmentOfUrl = currentUrl.substring(currentUrl.lastIndexOf('/')+ 1)
@@ -59,12 +61,18 @@ const HomePageUserArea = ({ className}) => {
       }
     }
 
-    getCurrentUser(userId);
-    getCurrentUserFollowers(userId);
     getCurrentUserFollowings(userId);
-    getCurrentUserTweets(userId)
+    getCurrentUser(userId);
+    
+    
+    if(FollowUpdate.isFollowUpdate){
+    getCurrentUserTweets(userId);
+    getCurrentUserFollowers(userId);
+    FollowUpdate.setIsFollowUpdate(false)
+    }
 
-  }, [userId]);
+
+  }, [userId,FollowUpdate]);
 
   return(
     <div className={className}>

@@ -16,6 +16,8 @@ const UserInfoSection = ({ userId, userImage, userAvatar, userName, userAccount,
   const baseUrl = useContext(BaseUrlContext)
   const handleShowModal = () => setShowModal(true);
   
+  
+
   return(
     <div className={className}>
       <div className="user-image-area">

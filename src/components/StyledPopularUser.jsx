@@ -6,13 +6,15 @@ import StyledUserAvatar from './StyledUserAvatar';
 import StyledUserTitle from './StyledUserTitle';
 import StyledButton from './StyledButton';
 import { followUser, unfollowUser } from 'api/api';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { FollowUpdateContext } from 'contexts/FollowUpdateContext';
 
 //Usage: <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowed={true} /> 
 
 const PopularUser = ({ userId, userAvatar, userName, userAccount, isFollowed, className }) => {
   const myId = localStorage.getItem('MyId')
   const [updateIsFollowed, setUpdateIsFollowed] = useState(isFollowed)
+  const { setIsFollowUpdate } = useContext(FollowUpdateContext)
   
   useEffect(()=>{
     //確保isFollowed有更新時更新畫面
@@ -61,6 +63,9 @@ const PopularUser = ({ userId, userAvatar, userName, userAccount, isFollowed, cl
       }
       followCurrentUser(currentUserId)
     }
+
+    setIsFollowUpdate(true)
+
   }
   
   return(
