@@ -6,14 +6,20 @@ import StyledButton from './StyledButton';
 
 //Usage: <StyledReplyTweet (modalUsed) userAvatar='https://picsum.photos/300/300?text=1'/> 
 
-const ReplyTweet = ({ userAvatar, userId, onChange, onClick, error, className }) => {
+const ReplyTweet = ({ userAvatar, userId, onChange, onClick, error, onKeyDown, className }) => {
   let alertMessage = '內容不可為空白'
 
   return(
     <div className={className}>
       <div className='reply-tweet-area'>
         <StyledUserAvatar className='user-avatar' userAvatar={userAvatar} userId={userId} />
-        <textarea className="tweet-input-area" type="textarea" placeholder='推你的回覆' onChange={(event) => onChange?.(event.target.value)} />
+        <textarea 
+          className="tweet-input-area" 
+          type="textarea" 
+          placeholder='推你的回覆' 
+          onChange={(event) => onChange?.(event.target.value)}
+          onKeyDown={onKeyDown}
+        />
       </div>
       <div className='footer-area'>
         <span className='alert-message'>{error === 0 ? alertMessage : null}</span>

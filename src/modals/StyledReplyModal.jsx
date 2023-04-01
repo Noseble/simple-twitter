@@ -71,7 +71,21 @@ const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUse
         </div>
         <div className='connect-line'></div>
 			</div>
-      <StyledReplyTweet modalUsed userAvatar={userAvatar} userId={userId} error={comment?.length} onChange={(commentInputValue) => setComment(commentInputValue)} onClick={handleAddRepliesAsync}/>
+      <StyledReplyTweet 
+        modalUsed userAvatar={userAvatar} 
+        userId={userId} 
+        error={comment?.length} 
+        onChange={(commentInputValue) => setComment(commentInputValue)} 
+        onClick={handleAddRepliesAsync}
+        onKeyDown={(event)=>{
+          if (event.keyCode === 13 && !event.shiftKey) { // Enter key
+            event.preventDefault(); // prevent default behavior
+            handleAddRepliesAsync();
+          } else if (event.keyCode === 13 && event.shiftKey) { // Shift + Enter
+            setComment(comment + "\n");
+          }
+        }}
+      />
       <StyledToastContainer />
     </ReactModal>
   );

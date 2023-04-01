@@ -15,7 +15,7 @@ import { useState } from 'react';
 
 //Usage: <StyledPostTweet (modalUsed) userImageSrc='https://picsum.photos/300/300?text=1'/> 
 
-const PostTweet = ({ userId, userAvatar,  className }) => {
+const PostTweet = ({ userId, userAvatar, className }) => {
   let alertMessage = '內容不可為空白'
   const [description, setDescription] = useState('')
 
@@ -48,7 +48,20 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
     <div className={className}>
       <div className='post-tweet-area'>
         <StyledUserAvatar className='user-avatar' userId={userId} userAvatar={userAvatar}/>
-        <textarea className="tweet-input-area" type="textarea" placeholder='有什麼新鮮事?' onChange={(e) => setDescription(e.target.value)}/>
+        <textarea 
+          className="tweet-input-area" 
+          type="textarea" 
+          placeholder='有什麼新鮮事?' 
+          onChange={(e) => setDescription(e.target.value)}
+          onKeyDown={(event)=>{
+            if (event.key ===  'Enter' && !event.shiftKey) { // Enter key
+              event.preventDefault(); // prevent default behavior
+              handleAddTweet();
+            } else if (event.key ===  'Enter' && event.shiftKey) { // Shift + Enter
+              setDescription(description + '\n');
+            }
+          }}
+        />
       </div>
       <div className='footer-area'>
         <span className='alert-message'>{description?.length === 0 ? alertMessage : null }</span>
