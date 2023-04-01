@@ -9,8 +9,6 @@ import StyledNavItem from "components/StyledNavItem";
 import { ReactComponent as AcLogo } from 'assets/icon/AcLogo.svg'
 import { useEffect } from "react";
 
-
-
 const AdminPage = ({className}) => {
   const navigate = useNavigate();
   const currentUrlPath = useLocation().pathname
@@ -18,16 +16,16 @@ const AdminPage = ({className}) => {
   console.log(currentUrlPath)
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('MyId')
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('myId')
     navigate('/admin_login')
   }
   
   useEffect(()=>{
 
     //若沒登入，則導至login頁面
-    const auth = localStorage.getItem('token')
-    if(auth === null){
+    const auth = sessionStorage.getItem('token')
+    if(auth===null){
       navigate('/admin_login')
     }
 

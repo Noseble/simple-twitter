@@ -144,6 +144,22 @@ const StyledTextInput = styled(TextInput)`
       }
     }
   }
+  
+  /* alert 樣式 */
+  &.alert{
+
+    .input-block{
+      border-bottom: 2px solid #FC5A5A;
+    }
+    .input-message{
+      color: #FC5A5A;
+    }
+    .input-none {
+      display: none;
+    }
+
+  }
+
 `
 
 export default StyledTextInput

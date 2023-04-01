@@ -12,7 +12,7 @@ import { FollowUpdateContext } from 'contexts/FollowUpdateContext';
 //Usage: <StyledPopularUser userName='Pizza Hut' userAccount='pizzahut' isFollowed={true} /> 
 
 const PopularUser = ({ userId, userAvatar, userName, userAccount, isFollowed, className }) => {
-  const myId = localStorage.getItem('MyId')
+  const myId = sessionStorage.getItem('myId')
   const [updateIsFollowed, setUpdateIsFollowed] = useState(isFollowed)
   const IsFollowUpdate = useContext(FollowUpdateContext)
   

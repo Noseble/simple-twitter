@@ -34,7 +34,7 @@ const AdminLoginPage = ({ className }) => {
 
   if (success) {
     if (user.role === 'admin') {
-      localStorage.setItem('token', token);
+      sessionStorage.setItem('token', token);
 
       // 登入成功訊息
        showToastMessage('登入成功','success')

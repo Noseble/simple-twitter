@@ -38,8 +38,8 @@ const LoginPage = ({ className }) => {
 
 if (success) {
     if (user.role === 'user') {
-      localStorage.setItem('token', token);
-      localStorage.setItem('MyId', user.id);
+      sessionStorage.setItem('token', token);
+      sessionStorage.setItem('myId', user.id);
       // 登入成功訊息
       showToastMessage('登入成功','success')
       setTimeout(() => navigate('/'), 1000);
