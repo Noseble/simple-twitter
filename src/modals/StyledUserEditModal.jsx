@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 
 import StyledTextInput from 'components/StyledTextInput';
 import StyledButton from "components/StyledButton";
-import StyledToastContainer from "components/StyledToastContainer";
 
 import defaultUserImg from 'assets/image/defaultUserImg.svg';
 import { ReactComponent as UpdatePhoto } from 'assets/icon/updatePhotoIcon.svg'
@@ -123,7 +122,6 @@ const UserEditModal = ({show, setShow, className}) => {
           <img className='user-avatar-image' src={oldAvatar} alt="" />
           {avatar !== null ? <DeleteButton className='delete-avatar' fill='#FFFFFF'/> : <UpdatePhoto className='update-avatar' fill='#FFFFFF' /> }
           {avatar === null ? <input className="file-upload-avatar" type="file"  accept="image/png, image/jpeg" onChange={handleUploadFile} /> : <button className="delete-upload-avatar" onClick={handleClear} /> }
-          
           
         </div>
         <div className='input-area'>

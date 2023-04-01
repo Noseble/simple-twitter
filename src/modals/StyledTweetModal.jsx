@@ -19,13 +19,11 @@ const TweetModal = ({ userId, userAvatar, show, setShow, className}) => {
       }} 
       portalClassName="modal-portal"
     >
-
       <div className='modal-header'>
         <Cross className='exit-button' fill='#FF6600' onClick={handleClose} />
       </div>
       <hr className='main-header-line'/>
       <StyledPostTweet modalUsed userId={userId} userAvatar={userAvatar}/>
-
     </ReactModal>
   );
 }

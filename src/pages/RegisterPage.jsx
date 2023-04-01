@@ -30,8 +30,20 @@ const RegisterPage = ({ className }) => {
   const navigate = useNavigate();
 
   const handleClick = async ()=> {
-    if( account?.length === 0 || name?.length === 0 || email?.length === 0 || password?.length === 0 || passwordCheck?.length === 0 ) return
-    if (password !== passwordCheck ) return
+    if( account?.length === 0 || name?.length === 0 || email?.length === 0 || password?.length === 0 || passwordCheck?.length === 0 ) 
+    { showToastMessage('所有欄位皆為必填', 'failed'); 
+    return
+    }
+
+    if (password !== passwordCheck ) {
+    showToastMessage('兩次密碼不相同', 'failed');
+    return
+    }
+    
+    if (!isValidEmail(email)) {
+    showToastMessage('請輸入正確的email格式', 'failed');
+    return;
+    }
     
    const { success, message } = await register({ account, name,  email , password, passwordCheck });
 
@@ -63,7 +75,12 @@ const RegisterPage = ({ className }) => {
         });
       }
     };
-
+  
+    const isValidEmail = (email) => {
+    // 正則表達式驗證是否符合 email 格式
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    }
 
 
   return(
@@ -73,7 +90,7 @@ const RegisterPage = ({ className }) => {
       <div className="register-input-area">
         <StyledTextInput className='text-input' labelName='帳號' value={account} placeholder='請輸入帳號' width='356px' wordLimit={50} wordCount={account?.length} onChange={(accountInputValue) => setAccount(accountInputValue)} />
         <StyledTextInput className='text-input' labelName='名稱' value={name} placeholder='請輸入使用者名稱' width='356px' wordLimit={20} wordCount={name?.length} onChange={(nameInputValue) => setName(nameInputValue)}/>
-        <StyledTextInput className='text-input' labelName='Email' value={email} placeholder='請輸入Email' width='356px' wordLimit={50} wordCount={email?.length} onChange={(emailInputValue) => setEmail(emailInputValue)} />
+        <StyledTextInput className='text-input' labelName='Email' value={email} type='email' placeholder='請輸入Email' width='356px' wordLimit={50} wordCount={email?.length} onChange={(emailInputValue) => setEmail(emailInputValue)} />
         <StyledTextInput className='text-input' labelName='密碼' value={password} type='password' placeholder='請設定密碼' width='356px' wordLimit={16} wordCount={password?.length} onChange={(passwordInputValue) => setPassword(passwordInputValue)} />
         <StyledTextInput className='text-input' labelName='密碼確認'  value={passwordCheck} type='password' placeholder='請再次輸入密碼' width='356px' wordLimit={16} wordCount={passwordCheck?.length} passwordWrong={password !== passwordCheck} onChange={(passwordCheckInputValue) => setPasswordCheck(passwordCheckInputValue)} />
       </div>
