@@ -41,7 +41,7 @@ const AdminPageTweetsArea = ({ className }) => {
         </div>
         <hr className="main-header-line"/>
         <ul className="admin-tweet-list">
-          {adminTweets.map(({...adminTweet}) => {
+          {adminTweets?.map(({...adminTweet}) => {
             return(
               <li key={adminTweet.id}>
                 <StyledAdminTweet 

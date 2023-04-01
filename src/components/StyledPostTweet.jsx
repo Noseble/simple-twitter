@@ -81,7 +81,7 @@ const StyledPostTweet = styled(PostTweet)`
 
     &:focus{
       outline: none;
-      box-shadow: 0 1px 3px 0 #6C757D;
+      box-shadow: 0px 0px 3px 0px #6C757D;
     }
   }
 

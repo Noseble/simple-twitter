@@ -14,7 +14,7 @@ import { FollowUpdateContext } from 'contexts/FollowUpdateContext';
 const PopularUser = ({ userId, userAvatar, userName, userAccount, isFollowed, className }) => {
   const myId = localStorage.getItem('MyId')
   const [updateIsFollowed, setUpdateIsFollowed] = useState(isFollowed)
-  const { setIsFollowUpdate } = useContext(FollowUpdateContext)
+  const IsFollowUpdate = useContext(FollowUpdateContext)
   
   useEffect(()=>{
     //確保isFollowed有更新時更新畫面
@@ -64,7 +64,7 @@ const PopularUser = ({ userId, userAvatar, userName, userAccount, isFollowed, cl
       followCurrentUser(currentUserId)
     }
 
-    setIsFollowUpdate(true)
+    IsFollowUpdate.setIsFollowUpdate(true)
 
   }
   
@@ -74,7 +74,7 @@ const PopularUser = ({ userId, userAvatar, userName, userAccount, isFollowed, cl
         <StyledUserAvatar userId={userId} userAvatar={userAvatar} className="popular-user-avatar"/>
         <StyledUserTitle className="popular-user-info" columnArrange userId={userId} userName={userName} userAccount={`${userAccount}`} />
       </div>
-      <StyledButton className={clsx('popular-user-button',{filled: updateIsFollowed && parseInt(userId) !== parseInt(myId)})} disabled={parseInt(userId) === parseInt(myId)} width={updateIsFollowed ? '96px' : 'fit-content'} onClick={handleFollowshipClick} id={userId}> {updateIsFollowed ? '正在跟隨' : '跟隨'}</StyledButton>
+      <StyledButton className={clsx('popular-user-button',{filled: updateIsFollowed && parseInt(userId) !== parseInt(myId)},{hidden:parseInt(userId) === parseInt(myId)})} width={updateIsFollowed ? '96px' : 'fit-content'} onClick={handleFollowshipClick} id={userId}> {updateIsFollowed ? '正在跟隨' : '跟隨'}</StyledButton>
     </div>
   )
 }
@@ -86,9 +86,9 @@ const StyledPopularUser = styled( PopularUser )`
   align-items:center;
 
   /* box model */
-  width:241px;
-  height:50px;
-  margin: 16px;
+  width:273px;
+  height:82px;
+  padding: 8px 16px;
 
   .popular-user{
     display:flex;
@@ -115,6 +115,10 @@ const StyledPopularUser = styled( PopularUser )`
 
   .popular-user-button{
     width: fit-content;
+
+    &.hidden{
+      visibility: hidden;
+    }
   }
 `
 

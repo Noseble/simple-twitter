@@ -42,7 +42,7 @@ const AdminPage = ({className}) => {
             <AcLogo className="website-logo" />
           </div>
           <div className="nav-list">
-            <Link to='/admin/tweets' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'推文清單'} className={clsx({selected: currentUrlPath==='/admin/tweets'})} /></Link>
+            <Link to='/admin/tweets' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'推文清單'} className={clsx({selected: currentUrlPath==='/admin' || currentUrlPath==='/admin/tweets' })} /></Link>
             <Link to='/admin/users' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'使用者列表'} className={clsx({selected: currentUrlPath==='/admin/users'})}/></Link>
           </div>
         </div>

@@ -10,6 +10,7 @@ import { followUser, unfollowUser } from 'api/api';
 //Usage: <StyledUserRow userAvatar='https://picsum.photos/300/300?text=1' userName='John' userIntroduction='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isFollowed={false}/>
 
 const UserRow = ({ userId, userAvatar, userName, userIntroduction, isFollowed, className }) => {
+	const myId = localStorage.getItem('MyId')
 	const [updateIsFollowed, setUpdateIsFollowed] = useState(isFollowed)
 	
 	//判斷是否快速雙擊按鍵用
@@ -61,8 +62,8 @@ const UserRow = ({ userId, userAvatar, userName, userIntroduction, isFollowed, c
 			<StyledUserAvatar userId={userId} userAvatar={userAvatar} />
 			<div className='user-area'>
 				<div className='user-header'>
-					<Link to={`/user/${userId}`} style={{ textDecoration: 'none' }}><label>{userName}</label></Link>
-          <StyledButton className={clsx({filled: updateIsFollowed})} onClick={handleFollowshipClick} id={userId}>{updateIsFollowed? '正在跟隨' : '跟隨'}</StyledButton>
+					<Link to={`/user/${userId}`} style={{ textDecoration: 'none' }}><label className='user-title'>{userName}</label></Link>
+          <StyledButton className={clsx('follow-button',{filled: updateIsFollowed},{hidden:parseInt(userId) === parseInt(myId)})} onClick={handleFollowshipClick} id={userId}>{updateIsFollowed? '正在跟隨' : '跟隨'}</StyledButton>
 				</div>
 				<p className='user-content'>
 				  {userIntroduction}
@@ -83,7 +84,6 @@ const StyledUserRow = styled(UserRow)`
 	p {
 		font-size: 14px;
 		font-weight: 300;
-		margin: 0 auto;
 	}
 
 	.user-area {
@@ -93,6 +93,8 @@ const StyledUserRow = styled(UserRow)`
 		width: 100%;
 
 		.user-content{
+			display:flex;
+			text-align: start;
 			margin-top: 8px;
 		}
 	}
@@ -102,6 +104,19 @@ const StyledUserRow = styled(UserRow)`
 		align-items: center;
 		justify-content: space-between;
 		height: 40px;
+
+		.user-title{
+			cursor: pointer;
+			
+			&:hover{
+				font-weight: 500;
+			}
+		}
+
+		.follow-button.{
+			&.hidden{
+      visibility: hidden;
+		}
 	
 		label:first-child{
 			margin-right: 5px;
