@@ -10,7 +10,7 @@ import { followUser, unfollowUser } from 'api/api';
 //Usage: <StyledUserRow userAvatar='https://picsum.photos/300/300?text=1' userName='John' userIntroduction='Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto eaque maxime quaerat perspiciatis fuga, unde vitae vero. Qui, cupiditate?' isFollowed={false}/>
 
 const UserRow = ({ userId, userAvatar, userName, userIntroduction, isFollowed, className }) => {
-	const myId = localStorage.getItem('MyId')
+	const myId = sessionStorage.getItem('myId')
 	const [updateIsFollowed, setUpdateIsFollowed] = useState(isFollowed)
 	
 	//判斷是否快速雙擊按鍵用

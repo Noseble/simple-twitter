@@ -18,7 +18,7 @@ import { getUserSetting } from "api/api";
 import { setUserSetting } from "api/api";
 
 const UserEditModal = ({show, setShow, className}) => {
-  const MyId = localStorage.getItem('MyId')
+  const myId = sessionStorage.getItem('myId')
   const [name , setName] = useState('')
   const [oldAvatar , setOldAvatar] = useState('')
   const [introduction, setIntroduction] = useState('')
@@ -28,9 +28,9 @@ const UserEditModal = ({show, setShow, className}) => {
   const handleClose = () => setShow(false);
 
   useEffect(() => {
-    const getUserSettingAsync = async(MyId) => {
+    const getUserSettingAsync = async(id) => {
       try {
-        const currentSettings = await getUserSetting(MyId);
+        const currentSettings = await getUserSetting(id);
         setName(currentSettings.name);
         setIntroduction(currentSettings.introduction);
         setOldAvatar(currentSettings.avatar);
@@ -39,14 +39,14 @@ const UserEditModal = ({show, setShow, className}) => {
         console.error(error);
       }
     };
-    getUserSettingAsync(MyId);
-  }, [MyId]);
+    getUserSettingAsync(myId);
+  }, [myId]);
 
   const handleUpdate = async()=> {
     if(introduction?.length > 160 || name?.length > 50) return
     
     try {
-      const res = await setUserSetting( MyId, name, introduction, image, avatar)
+      const res = await setUserSetting( myId, name, introduction, image, avatar)
       handleClose()
       if (res.message === undefined) {
         showToastMessage('修改成功','success')

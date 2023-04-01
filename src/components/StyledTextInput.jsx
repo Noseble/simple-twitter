@@ -116,16 +116,6 @@ const StyledTextInput = styled(TextInput)`
       color: #696974;
     }
 
-    /* error 樣式 */
-    .input-block{
-      border-bottom: 2px solid #FC5A5A;
-    }
-    .input-message{
-      color: #FC5A5A;
-    }
-    .input-none {
-      display: none;
-    }
   }
 
   /* focus 樣式 */
@@ -145,6 +135,22 @@ const StyledTextInput = styled(TextInput)`
       }
     }
   }
+  
+  /* alert 樣式 */
+  &.alert{
+
+    .input-block{
+      border-bottom: 2px solid #FC5A5A;
+    }
+    .input-message{
+      color: #FC5A5A;
+    }
+    .input-none {
+      display: none;
+    }
+
+  }
+
 `
 
 export default StyledTextInput

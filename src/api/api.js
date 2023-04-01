@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const baseUrl = 'https://mysterious-basin-96824.herokuapp.com'
 
-const headers =  { Authorization: `Bearer ${localStorage.getItem('token')}`}
+const headers =  { Authorization: `Bearer ${sessionStorage.getItem('token')}`}
 
 export const getUser = async( id ) => {
   try{

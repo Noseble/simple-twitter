@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
-import Swal from 'sweetalert2';
 
 // 載入共用元件
 import StyledButton from "components/StyledButton"

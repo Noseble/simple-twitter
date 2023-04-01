@@ -17,7 +17,7 @@ import { putUserSetting } from "api/api";
 
 
 const HomePageSettingArea = ({className}) => {
-  const MyId = localStorage.getItem('MyId')
+  const myId = sessionStorage.getItem('myId')
   const navigate = useNavigate();
   const [account , setAccount] = useState('')
   const [name , setName] = useState('')
@@ -26,10 +26,10 @@ const HomePageSettingArea = ({className}) => {
   const [passwordCheck, setPasswordCheck] = useState('')
   
   useEffect(() => {
-    const getUserSettingAsync = async(MyId) => {
+    const getUserSettingAsync = async(id) => {
       
       try {
-        const currentSettings = await getUserSetting(MyId);
+        const currentSettings = await getUserSetting(id);
         setAccount(currentSettings.account);
         setName(currentSettings.name);
         setEmail(currentSettings.email);
@@ -37,19 +37,19 @@ const HomePageSettingArea = ({className}) => {
         console.error(error);
       }
     };
-    getUserSettingAsync(MyId);
-  }, [name?.length,MyId]);
+    getUserSettingAsync(myId);
+  }, [myId]);
   
   const handleUpdate = async( )=> {
     // if( account?.length === 0 || name?.length === 0 || email?.length === 0 || password?.length === 0 || passwordCheck?.length === 0 ) return
     try {
       if (password !== passwordCheck ) return 
       if(name?.length > 50) return
-      const { message } = await putUserSetting( MyId, account, name, email, password)
+      const { message } = await putUserSetting( myId, account, name, email, password)
       if (message === undefined) {
       // 修改成功訊息
       showToastMessage('修改成功','success')
-      setTimeout(() => navigate(`/user/${MyId}`), 1000);
+      setTimeout(() => navigate(`/user/${myId}`), 1000);
     } else {
       // 修改失敗訊息
      showToastMessage( message, 'failed');

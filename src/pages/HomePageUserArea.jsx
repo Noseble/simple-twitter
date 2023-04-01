@@ -14,7 +14,7 @@ import { FollowUpdateContext } from 'contexts/FollowUpdateContext';
 const HomePageUserArea = ({ className}) => {
   const { userId } = useParams()
   const currentUrl = useLocation().pathname
-  const MyId = localStorage.getItem('MyId')
+  const myId = sessionStorage.getItem('myId')
   const [user, setUser] = useState({});
   const [followersNumber, setFollowersNumber] = useState('')
   const [followingsNumber, setFollowingsNumber] = useState('')
@@ -101,7 +101,7 @@ const HomePageUserArea = ({ className}) => {
         userName={user.name} 
         userAccount={user.name} 
         userIntroduction={user.introduction} 
-        isSelf={(userId === MyId)} 
+        isSelf={(userId === myId)} 
         followersCount={followersNumber} 
         followingsCount={followingsNumber} 
         isFollowed={user.isFollowed} 
