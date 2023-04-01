@@ -173,7 +173,6 @@ export const addTweet = async ({ description }) => {
   }
 } 
 
-
 export const getAdminTweets = async () => {
   try {
     const res = await axios.get(`${baseUrl}/api/admin/tweets`,{ headers });

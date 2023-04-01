@@ -26,7 +26,7 @@ const AdminPageUsersArea = ({ className }) => {
         </div>
         <hr className="main-header-line"/>
         <div className='user-card-list'>
-        {AdminUsers.map(({...AdminUser})=>{
+        {AdminUsers?.map(({...AdminUser})=>{
           return(
             <StyledUserCard 
               key={AdminUser.id}

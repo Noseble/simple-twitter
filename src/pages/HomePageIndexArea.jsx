@@ -37,7 +37,7 @@ const HomePageIndexArea = ({className}) => {
       <hr className="post-tweet-underline"/>
       <ul className='tweet-list'> 
       
-        {tweets.map(({...tweet}) => {
+        {tweets?.map(({...tweet}) => {
             return(
               <li key={tweet.id}>
                 <TweetIdContext.Provider value={tweet.id}>

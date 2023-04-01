@@ -11,7 +11,6 @@ import StyledTweetModal from "modals/StyledTweetModal";
 
 import { getTopTen, getUser } from "api/api";
 import { UserInfoContext } from "contexts/UserInfoContext";
-import { TopTenUpdateContext } from "contexts/TopTenUpdateContext";
 import { FollowUpdateContext } from "contexts/FollowUpdateContext";
 
 const HomePage = ({className}) => {
@@ -21,7 +20,6 @@ const HomePage = ({className}) => {
   const [userInfo, setUserInfo] = useState({})
   const [topTenList, setTopTenList] = useState([]);
   const currentUrlPath = useLocation().pathname
-  const [isTopTenUpdate, setIsTopTenUpdate] = useState(true)
   const [isFollowUpdate, setIsFollowUpdate] = useState(true)
 
   const handleShowTweetModal = () => setShowTweetModal(true);
@@ -61,12 +59,12 @@ const HomePage = ({className}) => {
 
     getUserInfo(myId)
 
-    if(isTopTenUpdate){
+    if(isFollowUpdate){
       getTopTenAsync();
-      setIsTopTenUpdate(false);
+      setIsFollowUpdate(false);
     }
     
-  }, [navigate,myId,isTopTenUpdate]);
+  }, [navigate,myId,isFollowUpdate]);
 
   return(
     <FollowUpdateContext.Provider value={{isFollowUpdate, setIsFollowUpdate}}>
@@ -88,25 +86,20 @@ const HomePage = ({className}) => {
           <StyledNavItem className='exit-nav-item' onClick={handleLogOut} navTitle='登出' />
         </nav>
 
-        
-          <TopTenUpdateContext.Provider value={{isTopTenUpdate, setIsTopTenUpdate}}> 
-            <UserInfoContext.Provider value={userInfo}>      
-              <div className='main-scrollbar'>
-                <div className='main-container'>
-                  <Outlet/> {/* 子路由頁面由此放入 */}
-                </div>
-              </div>
-            </UserInfoContext.Provider>
-          </TopTenUpdateContext.Provider>
-        
-
+        <UserInfoContext.Provider value={userInfo}>      
+          <div className='main-scrollbar'>
+            <div className='main-container'>
+              <Outlet/> {/* 子路由頁面由此放入 */}
+            </div>
+          </div>
+        </UserInfoContext.Provider>
 
         <div className='side-column'>
           <div className={clsx('popular-list-area',{hidden: currentUrlPath==='/setting'})}>
             <h2 className="popular-list-title">推薦跟隨</h2>
             <hr className="popular-list-hr"/>
             <div className="popular-list">
-              {topTenList.map((user) => {
+              {topTenList?.map((user) => {
                 return(
                   <StyledPopularUser key={user.id} userId={user.id} userAvatar={user.avatar} userName={user.name} userAccount={user.account} isFollowed={user.isFollowed}/>
                 )
@@ -131,7 +124,6 @@ const StyledHomepage= styled(HomePage)`
 
   .popular-list-area{
     width:100%;
-    max-height: 731px;
     background-color: #FAFAFB;
     border-radius: 16px;
     margin-top: 16px;
@@ -154,6 +146,7 @@ const StyledHomepage= styled(HomePage)`
   .popular-list{
     width: 100%;
     height: fit-content;
+    padding: 8px 0;
   }
 `
 

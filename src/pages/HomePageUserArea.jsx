@@ -23,56 +23,65 @@ const HomePageUserArea = ({ className}) => {
 
   //取得現有Url最後一個字串
   const lastSegmentOfUrl = currentUrl.substring(currentUrl.lastIndexOf('/')+ 1)
+  
+  const getCurrentUser = async(id) => {
+    try {
+      const res = await getUser(id);
+      setUser(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getCurrentUserFollowers = async(id) => {
+    try {
+      const res = await getUserFollowers(id);
+      setFollowersNumber(res?.length);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const getCurrentUserFollowings = async(id) => {
+    try {
+      const res = await getUserFollowings(id);
+      setFollowingsNumber(res?.length);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const getCurrentUserTweets = async(id) =>{
+    try {
+      const res = await getUserTweets(id);
+      setTweetsNumber(res?.length);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
-    const getCurrentUser = async(id) => {
-      try {
-        const res = await getUser(id);
-        setUser(res);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    const getCurrentUserFollowers = async(id) => {
-      try {
-        const res = await getUserFollowers(id);
-        setFollowersNumber(res?.length);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    const getCurrentUserFollowings = async(id) => {
-      try {
-        const res = await getUserFollowings(id);
-        setFollowingsNumber(res?.length);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    const getCurrentUserTweets = async(id) =>{
-      try {
-        const res = await getUserTweets(id);
-        setTweetsNumber(res?.length);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    getCurrentUserFollowings(userId);
-    getCurrentUser(userId);
-    
-    
-    if(FollowUpdate.isFollowUpdate){
+    //進道不同user路由的初始化
     getCurrentUserTweets(userId);
     getCurrentUserFollowers(userId);
-    FollowUpdate.setIsFollowUpdate(false)
+    getCurrentUserFollowings(userId);
+    getCurrentUser(userId);
+
+  }, [userId]);
+
+  useEffect(()=>{
+    //每次點擊追蹤後更新資訊
+    if(FollowUpdate.isFollowUpdate){
+      //設定延遲時間確保資料庫更新了
+      setTimeout(()=>{
+        getCurrentUserTweets(userId);
+        getCurrentUserFollowers(userId);
+        getCurrentUserFollowings(userId);
+        FollowUpdate.setIsFollowUpdate(false);
+      },250)
     }
-
-
-  }, [userId,FollowUpdate]);
+  
+  },[userId,FollowUpdate])
 
   return(
     <div className={className}>
