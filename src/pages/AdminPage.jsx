@@ -14,7 +14,7 @@ import { useEffect } from "react";
 const AdminPage = ({className}) => {
   const navigate = useNavigate();
   const currentUrlPath = useLocation().pathname
-
+  
   console.log(currentUrlPath)
 
   const handleLogout = () => {
@@ -27,7 +27,7 @@ const AdminPage = ({className}) => {
 
     //若沒登入，則導至login頁面
     const auth = localStorage.getItem('token')
-    if(auth===null){
+    if(auth === null){
       navigate('/admin_login')
     }
 

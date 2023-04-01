@@ -99,14 +99,17 @@ if (success) {
 }
 
 const StyledLoginPage = styled(LoginPage)`
-
-.my-swal-title {
-    color: red; !important
+  /* error的樣式 */
+  .Toastify__toast-container {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+    width: 402px;
+    height: 104px;
   }
 
-  .my-swal-popup {
-    width: calc(100% + 1000px);
-  }
   display: flex;
   flex-direction: column;
   align-items: center;

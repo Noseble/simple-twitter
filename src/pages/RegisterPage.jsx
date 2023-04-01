@@ -1,15 +1,18 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
-import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 // 載入共用元件
 import StyledButton from "components/StyledButton"
 import StyledTextInput from "components/StyledTextInput"
 import StyledTextLink from "components/StyledTextLink"
+import StyledToastContainer from "components/StyledToastContainer";
 
 // 載入svg
 import { ReactComponent as Aclogo } from "assets/icon/AcLogo.svg"
+import { ReactComponent as Success } from "assets/icon/success.svg"
+import { ReactComponent as Failed } from "assets/icon/failed.svg"
 
 // api
 import { register } from "api/auth";
@@ -34,26 +37,32 @@ const RegisterPage = ({ className }) => {
 
     if (success) {
         // 註冊成功訊息
-        Swal.fire({
-          position: 'top',
-          title: '註冊成功！',
-          timer: 1000,
-          icon: 'success',
-          showConfirmButton: false,
-        });
-        navigate('/login')
-      } else {
+        showToastMessage('註冊成功','success')
+        setTimeout(() => navigate('/login'), 1000);
+      } 
+      else {
         // 註冊失敗訊息
-        Swal.fire({
-          position: 'top',
-          title: '註冊失敗！',
-          text: message, // 顯示錯誤訊息
-          timer: 1000,
-          icon: 'error',
-          showConfirmButton: false,
+        showToastMessage( message, 'failed');
+      }
+    }
+
+    const showToastMessage = (message, icon) => {
+      if (icon === 'success') {
+        toast.success(message, {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 1000,
+          hideProgressBar: true,
+          icon: <Success />,
+        });
+      } else {
+        toast.error(message, {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 1000,
+          hideProgressBar: true,
+          icon: <Failed />,
         });
       }
-}
+    };
 
 
 
@@ -71,6 +80,7 @@ const RegisterPage = ({ className }) => {
       <StyledButton className='register-button filled' width='100%' onClick={handleClick} >註冊</StyledButton>
       <div className="footer">
         <StyledTextLink link={`${baseUrl}/login`}>取消</StyledTextLink>
+        <StyledToastContainer />
       </div>
     </div>
 
@@ -78,6 +88,17 @@ const RegisterPage = ({ className }) => {
 }
 
 const StyledRegisterPage = styled(RegisterPage)`
+    /* error的樣式 */
+  .Toastify__toast-container {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+    width: 402px;
+    height: 104px;
+  }
+
   display: flex;
   flex-direction: column;
   align-items: center;
