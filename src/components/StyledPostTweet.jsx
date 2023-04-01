@@ -15,13 +15,12 @@ import { useState } from 'react';
 
 //Usage: <StyledPostTweet (modalUsed) userImageSrc='https://picsum.photos/300/300?text=1'/> 
 
-const PostTweet = ({ userId, userAvatar, className }) => {
-  let alertMessage = '內容不可為空白'
+const PostTweet = ({ userId, userAvatar,  className }) => {
+
   const [description, setDescription] = useState('')
 
-
   const handleAddTweet = async () => {
-    if(description?.length === 0 || description?.length > 140 ) return
+    if(description?.length === 0 || description?.length === 140 ) return
 
     try{
     const {success} = await addTweet({description})
@@ -48,6 +47,7 @@ const PostTweet = ({ userId, userAvatar, className }) => {
     <div className={className}>
       <div className='post-tweet-area'>
         <StyledUserAvatar className='user-avatar' userId={userId} userAvatar={userAvatar}/>
+
         <textarea 
           className="tweet-input-area" 
           type="textarea" 
@@ -62,9 +62,10 @@ const PostTweet = ({ userId, userAvatar, className }) => {
             }
           }}
         />
+        
       </div>
       <div className='footer-area'>
-        <span className='alert-message'>{description?.length === 0 ? alertMessage : null }</span>
+        {description.length === 140 ? <span className='alert-message'>內容不能超過 140 字</span>:''}
         <StyledButton className={`tweet-button ${description?.length === 0 ? 'disabled' : 'filled'}`} disabled={description?.length === 0 ? 'disabled' : null} onClick={handleAddTweet}>推文</StyledButton>
         <StyledToastContainer />
       </div>
@@ -118,7 +119,6 @@ const StyledPostTweet = styled(PostTweet)`
     align-items: center;
     
     .alert-message{
-      visibility:hidden;
       width: fit-content;
       margin-right: 20px;
       color: #FC5A5A;

@@ -123,7 +123,6 @@ const UserEditModal = ({show, setShow, className}) => {
           {avatar !== null ? <DeleteButton className='delete-avatar' fill='#FFFFFF'/> : <UpdatePhoto className='update-avatar' fill='#FFFFFF' /> }
           {avatar === null ? <input className="file-upload-avatar" type="file"  accept="image/png, image/jpeg" onChange={handleUploadFile} /> : <button className="delete-upload-avatar" onClick={handleClear} /> }
           
-          
         </div>
         <div className='input-area'>
           <StyledTextInput className='text-input' width="100%" labelName='名稱' placeholder='請輸入名稱' wordLimit={50} wordCount={name?.length} value={name} onChange={(nameInputValue) => setName(nameInputValue)} />

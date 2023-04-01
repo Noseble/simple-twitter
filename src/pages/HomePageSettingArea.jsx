@@ -45,9 +45,19 @@ const HomePageSettingArea = ({className}) => {
   const handleUpdate = async( )=> {
     // if( account?.length === 0 || name?.length === 0 || email?.length === 0 || password?.length === 0 || passwordCheck?.length === 0 ) return
     try {
-      if (password !== passwordCheck ) return 
       if(name?.length > 50) return
-      const { message } = await putUserSetting( myId, account, name, email, password)
+      
+      if (password !== passwordCheck ) {
+      showToastMessage('兩次密碼不相同', 'failed');
+      return
+      }
+    
+      if (!isValidEmail(email)) {
+      showToastMessage('請輸入正確的email格式', 'failed');
+      return;
+      }
+
+      const { message } = await putUserSetting( MyId, account, name, email, password)
       if (message === undefined) {
       // 修改成功訊息
       showToastMessage('修改成功','success')
@@ -77,8 +87,13 @@ const HomePageSettingArea = ({className}) => {
       icon: <Failed />,
     });
   }
-};
+  };
   
+      const isValidEmail = (email) => {
+    // 正則表達式驗證是否符合 email 格式
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    }
 
 
   return(

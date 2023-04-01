@@ -22,7 +22,7 @@ const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUse
   const [comment, setComment ] = useState('')
 
   const handleAddRepliesAsync = async() => {
-    if(comment?.length > 140 || comment?.length === 0) return
+    if(comment?.length === 140 || comment?.length === 0) return
     try {
       const res = await addReplies( id, tweetId, comment)
       if(res){

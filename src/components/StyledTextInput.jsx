@@ -1,22 +1,23 @@
 import {React } from 'react';
 import styled, { css } from 'styled-components';
+import clsx from 'clsx';
 
 //Usage: <StyledTextInput (className='focus/error/disabled') width="360px" labelName='名稱' placeholder='請輸入名稱' (wordLimit="50") />
 
 const TextInput = ({ textAreaType, width, labelName, type, value, placeholder, wordLimit, wordCount, onChange,passwordWrong, className})=>{
-  const alertMessage = '字數超過上線'
+  const alertMessage = '字數超出上限!'
   const alertMessage2 = '兩次密碼輸入不一樣'
   return(
     <div className={className}>
-      <div className='input-block'>
+      <div className={clsx('input-block', { 'input-block': wordCount === wordLimit, 'error': wordCount === wordLimit })}>
         <label className='input-label'>{labelName ? labelName : "Label"}</label>
         {textAreaType?
-          <textarea disabled={ className.includes('disabled') ? true : false }  value={value || ''} placeholder={placeholder || "Placeholder"} onChange={(event) => onChange?.(event.target.value)} /> :
-          <input disabled={ className.includes('disabled') ? true : false } type={type || 'text'}  value={value || ''} placeholder={placeholder || "Placeholder"} onChange={(event) => onChange?.(event.target.value)} />
+          <textarea disabled={ className.includes('disabled') ? true : false }  value={value || ''} placeholder={placeholder || "Placeholder"} maxlength={wordLimit} onChange={(event) => onChange?.(event.target.value)} /> :
+          <input disabled={ className.includes('disabled') ? true : false } type={type || 'text'}  value={value || ''} placeholder={placeholder || "Placeholder"} maxlength={wordLimit} onChange={(event) => onChange?.(event.target.value)} />
         }
       </div>
       <div className='input-info'>
-        <span className="input-message">{ wordCount > wordLimit ? alertMessage : null }</span>
+        <span className="input-message">{ wordCount === wordLimit ? alertMessage : null }</span>
         <span className="input-message">{ passwordWrong ? alertMessage2 : null }</span>
         { wordLimit ? <span className='limit' onChange={(event) => onChange?.(event.target.value)}>{wordCount} / {wordLimit}</span> : null}
       </div>
@@ -24,6 +25,8 @@ const TextInput = ({ textAreaType, width, labelName, type, value, placeholder, w
 
   )
 }
+
+// {clsx(input-block, { [input-block]: wordCount > wordLimit })}
 
 const StyledTextInput = styled(TextInput)`
   ${props=>css`
@@ -56,6 +59,9 @@ const StyledTextInput = styled(TextInput)`
 
     &:hover{
       border-bottom: 2px solid #50B5FF;
+    }
+    &.error {
+      border-bottom: 2px solid #FC5A5A;
     }
   }
 
@@ -116,8 +122,11 @@ const StyledTextInput = styled(TextInput)`
       color: #696974;
     }
 
+    .input-message{
+      color: #FC5A5A;
+    }
   }
-
+  
   /* focus 樣式 */
   &.focus{
     .input-block{
