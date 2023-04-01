@@ -4,7 +4,7 @@ import { React, useState, useEffect, useContext } from "react"
 //shared components
 import StyledPostTweet from "components/StyledPostTweet"
 import StyledTweet from "components/StyledTweet"
-
+import StyledToastContainer from "components/StyledToastContainer";
 // api
 import { getTweets } from "api/api"
 
@@ -62,7 +62,7 @@ const HomePageIndexArea = ({className}) => {
               </li>
             )
           })}
-          
+          <StyledToastContainer />
       </ul>
     </div>
 
