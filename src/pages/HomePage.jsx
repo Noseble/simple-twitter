@@ -16,7 +16,7 @@ import { FollowUpdateContext } from "contexts/FollowUpdateContext";
 const HomePage = ({className}) => {
   const navigate = useNavigate();
   const [showTweetModal, setShowTweetModal] = useState(false);
-  const myId = localStorage.getItem('MyId')
+  const myId = sessionStorage.getItem('myId')
   const [userInfo, setUserInfo] = useState({})
   const [topTenList, setTopTenList] = useState([]);
   const currentUrlPath = useLocation().pathname
@@ -25,39 +25,40 @@ const HomePage = ({className}) => {
   const handleShowTweetModal = () => setShowTweetModal(true);
   
   const handleLogOut = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('MyId')
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('myId')
     navigate('login')
   }
   
+  const getUserInfo = async(id)=>{
+    try{
+      const res = await getUser(id)
+      setUserInfo(res)
+    }catch(error){
+      console.error(error)
+    }
+  }
+
+  const getTopTenAsync = async() => {
+    try {
+      const res = await getTopTen();
+      const newTopTenIds = res.users.map(user=>user.id);
+      const newTopTenUsers = await Promise.all(newTopTenIds.map(userId => getUser(userId)));
+      setTopTenList(newTopTenUsers);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     //若沒登入，則導至login頁面
-    const auth = localStorage.getItem('token')
+    const auth = sessionStorage.getItem('token')
     if(auth===null){
       navigate('login')
     }
 
-    const getUserInfo = async(id)=>{
-      try{
-        const res = await getUser(id)
-        setUserInfo(res)
-      }catch(error){
-        console.error(error)
-      }
-    }
-
-    const getTopTenAsync = async() => {
-      try {
-        const res = await getTopTen();
-        const newTopTenIds = res.users.map(user=>user.id);
-        const newTopTenUsers = await Promise.all(newTopTenIds.map(userId => getUser(userId)));
-        setTopTenList(newTopTenUsers);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     getUserInfo(myId)
+    getTopTenAsync();
 
     if(isFollowUpdate){
       getTopTenAsync();

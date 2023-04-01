@@ -8,7 +8,7 @@ const UserTitle = ({ userId, userName, userAccount, className }) => {
   const baseUrl = useContext(BaseUrlContext)
   
   return(
-    <a href={ className.includes('admin') ? null : `${baseUrl}/user/${userId}`} className={ className }>
+    <a href={ className.includes('admin') ? "/" : `${baseUrl}/user/${userId}`} className={ className }>
      <p className='user-name'>{userName}</p>
      <p className='user-account'>{`@${userAccount}`}</p>
     </a>
@@ -21,6 +21,10 @@ const StyledUserTitle = styled(UserTitle)`
   align-items: center;
   width: fit-content;
   text-decoration: none;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
     
   p{
     margin:0;
