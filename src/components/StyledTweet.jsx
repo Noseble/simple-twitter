@@ -137,6 +137,7 @@ const StyledTweet = styled(Tweet)`
 			line-height: 26px;
 			margin: 0 auto;
 			overflow-x: hidden;
+			white-space: pre-wrap;
 		}
  
 		.footer {

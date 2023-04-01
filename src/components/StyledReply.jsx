@@ -67,10 +67,11 @@ const StyledReply = styled(Reply)`
     }
    
    	.reply-content{
-		font-size: 16px;
-		line-height: 26px;
-		margin: 0 auto;
-    width: 534px;
+      font-size: 16px;
+      line-height: 26px;
+      margin: 0 auto;
+      width: 534px;
+      white-space: pre-wrap;
 	  }
 
 

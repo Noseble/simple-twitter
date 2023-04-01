@@ -16,6 +16,7 @@ import { useState } from 'react';
 //Usage: <StyledPostTweet (modalUsed) userImageSrc='https://picsum.photos/300/300?text=1'/> 
 
 const PostTweet = ({ userId, userAvatar,  className }) => {
+
   const [description, setDescription] = useState('')
 
   const handleAddTweet = async () => {
@@ -46,7 +47,22 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
     <div className={className}>
       <div className='post-tweet-area'>
         <StyledUserAvatar className='user-avatar' userId={userId} userAvatar={userAvatar}/>
-        <textarea className="tweet-input-area" type="textarea" placeholder='有什麼新鮮事?' maxlength='140' onChange={(e) => setDescription(e.target.value)}/>
+
+        <textarea 
+          className="tweet-input-area" 
+          type="textarea" 
+          placeholder='有什麼新鮮事?' 
+          onChange={(e) => setDescription(e.target.value)}
+          onKeyDown={(event)=>{
+            if (event.key ===  'Enter' && !event.shiftKey) { // Enter key
+              event.preventDefault(); // prevent default behavior
+              handleAddTweet();
+            } else if (event.key ===  'Enter' && event.shiftKey) { // Shift + Enter
+              setDescription(description + '\n');
+            }
+          }}
+        />
+        
       </div>
       <div className='footer-area'>
         {description.length === 140 ? <span className='alert-message'>內容不能超過 140 字</span>:''}

@@ -33,7 +33,10 @@ const HomePageIndexArea = ({className}) => {
         <h2>首頁</h2>
       </div>
       <hr className='main-header-line' />
-      <StyledPostTweet userId={userInfo.id} userAvatar={userInfo.avatar}/>
+      <StyledPostTweet 
+        userId={userInfo.id} 
+        userAvatar={userInfo.avatar}
+      />
       <hr className="post-tweet-underline"/>
       <ul className='tweet-list'> 
       

@@ -96,6 +96,7 @@ const StyledUserInfoSection = styled(UserInfoSection)`
       margin-bottom: 0;
       font-size: 14px;
       line-height: 22px;
+      white-space: pre-wrap;
     }
   }
 
