@@ -1,12 +1,17 @@
 import { React, useState,useContext } from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
 import {ReactComponent as Cross} from 'assets/icon/cross.svg'
 import StyledReplyTweet from 'components/StyledReplyTweet';
 import StyledUserAvatar from 'components/StyledUserAvatar';
 import StyledUserTitle from 'components/StyledUserTitle';
+import StyledToastContainer from "components/StyledToastContainer";
 import { TweetIdContext } from 'contexts/TweetIdContext';
+
+// 載入svg
+import { ReactComponent as Success } from "assets/icon/success.svg"
 
 // api
 import { addReplies } from 'api/api';
@@ -22,12 +27,22 @@ const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUse
       const res = await addReplies( id, tweetId, comment)
       if(res){
         handleClose()
-        window.location.reload()
+        showToastMessage()
+      setTimeout(() => window.location.reload(), 1000);
       }
     } catch(error){
       console.error(error)
     }
   }
+   const showToastMessage = () => {
+    toast.success('推文成功', {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 800,
+      hideProgressBar: true,
+      icon: <Success />,
+    });
+ };
+
   return (
     <ReactModal 
       isOpen={show} 
@@ -57,6 +72,7 @@ const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUse
         <div className='connect-line'></div>
 			</div>
       <StyledReplyTweet modalUsed userAvatar={userAvatar} userId={userId} error={comment?.length} onChange={(commentInputValue) => setComment(commentInputValue)} onClick={handleAddRepliesAsync}/>
+      <StyledToastContainer />
     </ReactModal>
   );
 }
