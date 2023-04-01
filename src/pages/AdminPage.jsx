@@ -12,7 +12,7 @@ import { useEffect } from "react";
 const AdminPage = ({className}) => {
   const navigate = useNavigate();
   const currentUrlPath = useLocation().pathname
-
+  
   console.log(currentUrlPath)
 
   const handleLogout = () => {

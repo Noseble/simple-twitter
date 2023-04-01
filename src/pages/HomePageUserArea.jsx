@@ -113,6 +113,17 @@ const HomePageUserArea = ({ className}) => {
 }
 
 const StyledHomePageUserArea = styled(HomePageUserArea)`
+    /* error的樣式 */
+  .Toastify__toast-container {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+    width: 402px;
+    height: 104px;
+  }
+  
   .return-icon{
     margin-right: 19px;
     cursor:pointer;

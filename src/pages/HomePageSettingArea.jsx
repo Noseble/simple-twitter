@@ -4,6 +4,7 @@ import styled from "styled-components";
 import clsx from "clsx";
 import { toast } from 'react-toastify';
 
+// 載入共用元件
 import StyledButton from "components/StyledButton";
 import StyledTextInput from "components/StyledTextInput";
 import StyledToastContainer from "components/StyledToastContainer";
@@ -11,6 +12,7 @@ import StyledToastContainer from "components/StyledToastContainer";
 // 載入svg
 import { ReactComponent as Success } from "assets/icon/success.svg"
 import { ReactComponent as Failed } from "assets/icon/failed.svg"
+
 // api 
 import { getUserSetting } from "api/api";
 import { putUserSetting } from "api/api";
@@ -101,6 +103,17 @@ const HomePageSettingArea = ({className}) => {
 }
 
 const StyledHomePageSettingArea= styled(HomePageSettingArea)`
+    /* error的樣式 */
+  .Toastify__toast-container {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+    width: 402px;
+    height: 104px;
+  }
+
   .setting-area{
     width: 100%;
     padding: 24px 24px 0;
