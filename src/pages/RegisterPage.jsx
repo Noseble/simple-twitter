@@ -96,7 +96,7 @@ const RegisterPage = ({ className }) => {
       </div>
       <StyledButton className='register-button filled' width='100%' onClick={handleClick} >註冊</StyledButton>
       <div className="footer">
-        <StyledTextLink link={`${baseUrl}/login`}>取消</StyledTextLink>
+        <StyledTextLink link="/login">取消</StyledTextLink>
         <StyledToastContainer />
       </div>
     </div>

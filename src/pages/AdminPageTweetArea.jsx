@@ -69,16 +69,16 @@ const AdminPageTweetsArea = ({ className }) => {
         </div>
         <hr className="main-header-line"/>
         <ul className="admin-tweet-list">
-          {adminTweets?.map(({...adminTweet}) => {
+          {adminTweets?.map((adminTweet) => {
             return(
-              <li key={adminTweet.id}>
+              <li key={adminTweet?.id}>
                 <StyledAdminTweet 
-                    userName={adminTweet.User.name}
-                    userAvatar={adminTweet.User.avatar}
-                    userAccount={adminTweet.User.account} 
-                    tweetTime={`${Math.floor(Number(new Date() - new Date(adminTweet.createdAt)) / (1000 * 60 * 60))}小時`} 
-                    tweetContent={adminTweet.description}
-                    onClick={() => handleDelTweet(adminTweet.id)}
+                    userName={adminTweet?.User?.name}
+                    userAvatar={adminTweet?.User?.avatar}
+                    userAccount={adminTweet?.User?.account} 
+                    tweetTime={`${Math.floor(Number(new Date() - new Date(adminTweet?.createdAt)) / (1000 * 60 * 60))}小時`} 
+                    tweetContent={adminTweet?.description}
+                    onClick={() => handleDelTweet(adminTweet?.id)}
                     />
               </li>
             )

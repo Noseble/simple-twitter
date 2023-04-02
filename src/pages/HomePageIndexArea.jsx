@@ -40,23 +40,24 @@ const HomePageIndexArea = ({className}) => {
       <hr className="post-tweet-underline"/>
       <ul className='tweet-list'> 
       
-        {tweets?.map(({...tweet}) => {
+        {tweets?.map(tweet => {
+            const tweetUser= tweet.User
             return(
-              <li key={tweet.id}>
-                <TweetIdContext.Provider value={tweet.id}>
+              <li key={tweet?.id}>
+                <TweetIdContext.Provider value={tweet?.id}>
                 <StyledTweet
-                  tweetId={tweet.id}
-                  tweetUserId={tweet.User.id}
-                  tweetUserAvatar={tweet.User.avatar} 
-                  tweetUserName={tweet.User.name} 
-                  tweetUserAccount={tweet.User.account}
-                  tweetTime={tweet.createdAt}
-                  tweetDescription={tweet.description} 
-                  isLiked={tweet.currentUserLikes}
-                  userId={userInfo.id}
-                  userAvatar={userInfo.avatar}
-                  replyCounts={tweet.replyCounts}
-                  likeCounts={tweet.likeCounts}
+                  tweetId={tweet?.id}
+                  tweetUserId={tweetUser?.id}
+                  tweetUserAvatar={tweetUser?.avatar} 
+                  tweetUserName={tweetUser?.name} 
+                  tweetUserAccount={tweetUser?.account}
+                  tweetTime={tweet?.createdAt}
+                  tweetDescription={tweet?.description} 
+                  isLiked={tweet?.currentUserLikes}
+                  userId={userInfo?.id}
+                  userAvatar={userInfo?.avatar}
+                  replyCounts={tweet?.replyCounts}
+                  likeCounts={tweet?.likeCounts}
                   />
                   </TweetIdContext.Provider>
               </li>

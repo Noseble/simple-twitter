@@ -102,7 +102,7 @@ const HomePage = ({className}) => {
             <div className="popular-list">
               {topTenList?.map((user) => {
                 return(
-                  <StyledPopularUser key={user.id} userId={user.id} userAvatar={user.avatar} userName={user.name} userAccount={user.account} isFollowed={user.isFollowed}/>
+                  <StyledPopularUser key={user?.id} userId={user?.id} userAvatar={user?.avatar} userName={user?.name} userAccount={user?.account} isFollowed={user?.isFollowed}/>
                 )
               })}
             </div>

@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 //Usage: <StyledTextLink> 連結名稱 </StyledTextLink> 
 
 const TextLink = ({ link, className, children }) => {
   return(
-    <a href={link} className={className}> {children} </a>
+    <Link to={link} className={className}> {children} </Link>
   )
 }
 

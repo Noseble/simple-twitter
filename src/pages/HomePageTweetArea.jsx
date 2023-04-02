@@ -139,10 +139,10 @@ const HomePageTweetArea = ({ className }) => {
       </div>
       <hr className="main-header-line"/>
       <ul className="reply-list">
-        {replies.map((reply)=>{
+        {replies?.map((reply)=>{
           return(
-            <li key={reply.id}>
-              <StyledReply userId ={reply.User.id} userName={reply.User.name} userAccount={reply.User.account} userAvatar={reply.User.avatar} replyTime={reply.createdAt} replyToId={tweetUser.id} replyToAccount={tweetUser.account} replyContent={reply.comment}/> 
+            <li key={reply?.id}>
+              <StyledReply userId ={reply?.User?.id} userName={reply?.User?.name} userAccount={reply?.User?.account} userAvatar={reply?.User?.avatar} replyTime={reply?.createdAt} replyToId={tweetUser?.id} replyToAccount={tweetUser?.account} replyContent={reply?.comment}/> 
               <hr className="main-header-line"/>
             </li>
           )

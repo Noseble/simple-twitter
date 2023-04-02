@@ -79,7 +79,7 @@ const showToastMessage = (message, icon) => {
       </div>
       <StyledButton className='login-button filled' width='100%' onClick={handleClick} >登入</StyledButton>
       <div className="footer">
-        <StyledTextLink link={`${baseUrl}/login`}>前台登入</StyledTextLink>
+        <StyledTextLink link="/login">前台登入</StyledTextLink>
         <StyledToastContainer />
       </div>
     </div>

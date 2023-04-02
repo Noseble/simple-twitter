@@ -82,9 +82,9 @@ if (success) {
       <StyledButton className='login-button filled' width='100%' onClick={handleClick}>登入</StyledButton>
       <StyledToastContainer />
       <div className="footer">
-        <StyledTextLink link={`${baseUrl}/register`}>註冊</StyledTextLink>
+        <StyledTextLink link="/register">註冊</StyledTextLink>
         <span>．</span>
-        <StyledTextLink link={`${baseUrl}/admin_login`}>後台登入</StyledTextLink>
+        <StyledTextLink link="/admin_login">後台登入</StyledTextLink>
       </div>
     </div>
 
