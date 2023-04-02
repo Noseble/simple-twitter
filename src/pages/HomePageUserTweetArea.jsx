@@ -6,36 +6,46 @@ import { getUser, getUserTweets } from 'api/api';
 import { useParams } from 'react-router';
 
 import { UserInfoContext } from 'contexts/UserInfoContext';
+import { UserInfoUpdateContext } from 'contexts/UserInfoUpdateContext';
 
 const HomePageUserTweetArea = ({ className }) => {
   const userInfo = useContext(UserInfoContext)
   const { userId } = useParams()
   const [ tweets, setTweets ] = useState([])
   const [ currentUser, setCurrentUser ] = useState({})
+  const userInfoUpdate = useContext(UserInfoUpdateContext)
   
-  useEffect(() => {
-
-    const getCurrentUser = async(id) => {
-      try {
-        const res = await getUser(id);
-        setCurrentUser(res);
-      } catch (error) {
-        console.error(error);
-      }
+  const getCurrentUser = async(id) => {
+    try {
+      const res = await getUser(id);
+      setCurrentUser(res);
+    } catch (error) {
+      console.error(error);
     }
-    
-    const getTweetsAsync = async(id) => {
-      try {
-        const newTweets = await getUserTweets( id );
-        setTweets(newTweets);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    
+  }
+  
+  const getTweetsAsync = async(id) => {
+    try {
+      const newTweets = await getUserTweets( id );
+      setTweets(newTweets);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    //初始化
     getCurrentUser(userId);
     getTweetsAsync(userId);
   }, [userId]);
+
+  useEffect(()=>{
+    if(userInfoUpdate.isEdited){
+      getCurrentUser(userId);
+      getTweetsAsync(userId);
+      userInfoUpdate.setIsEdited(false)
+    }
+  },[userId,userInfoUpdate])
 
   return(  
     <div className={className}>

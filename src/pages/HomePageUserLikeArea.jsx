@@ -6,26 +6,37 @@ import { useParams } from "react-router"
 
 import { getUserLikes } from "api/api"
 import { UserInfoContext } from "contexts/UserInfoContext"
+import { UserInfoUpdateContext } from "contexts/UserInfoUpdateContext"
 
 
 const HomePageUserLikeArea = ({ className }) => {
   const userInfo = useContext(UserInfoContext)
   const { userId } = useParams()
   const [ likedTweets, setLikedTweets ] = useState([])
+  const userInfoUpdate = useContext(UserInfoUpdateContext)
   
-  useEffect(() => {
-    
-    const getLikedTweetsAsync = async(id) => {
-      try {
-        const res = await getUserLikes( id );
-        setLikedTweets(res);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const getLikedTweetsAsync = async(id) => {
+    try {
+      const res = await getUserLikes( id );
+      setLikedTweets(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  useEffect(() => {
+    //初始化
     getLikedTweetsAsync(userId);
   }, [userId]);
+
+  useEffect(()=>{
+    if(userInfoUpdate.isEdited){
+      getLikedTweetsAsync(userId);
+      userInfoUpdate.setIsEdited(false);
+    }
+  },[userId,userInfoUpdate])
+
+
 
   console.log(likedTweets)
  

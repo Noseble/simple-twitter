@@ -1,4 +1,4 @@
-import {React,useState,useEffect} from "react";
+import {React,useState,useEffect,useContext} from "react";
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
@@ -16,7 +16,9 @@ import { ReactComponent as Failed } from "assets/icon/failed.svg"
 import { getUserSetting } from "api/api";
 import { setUserSetting } from "api/api";
 
-const UserEditModal = ({show, setShow, className}) => {
+import { UserInfoUpdateContext } from "contexts/UserInfoUpdateContext";
+
+const UserEditModal = ({show, setShow, setIsEdited, className}) => {
   const myId = sessionStorage.getItem('myId')
   const [name , setName] = useState('')
   const [oldAvatar , setOldAvatar] = useState('')
@@ -25,21 +27,31 @@ const UserEditModal = ({show, setShow, className}) => {
   const [image, setImage] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const handleClose = () => setShow(false);
+  const userInfoUpdate = useContext(UserInfoUpdateContext)
+  
+  const getUserSettingAsync = async(id) => {
+    try {
+      const currentSettings = await getUserSetting(id);
+      setName(currentSettings.name);
+      setIntroduction(currentSettings.introduction);
+      setOldAvatar(currentSettings.avatar);
+      setOldImage(currentSettings.image);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const getUserSettingAsync = async(id) => {
-      try {
-        const currentSettings = await getUserSetting(id);
-        setName(currentSettings.name);
-        setIntroduction(currentSettings.introduction);
-        setOldAvatar(currentSettings.avatar);
-        setOldImage(currentSettings.image);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    //初始化
     getUserSettingAsync(myId);
   }, [myId]);
+
+  useEffect(()=>{
+    if(userInfoUpdate.isEdited){
+      getUserSettingAsync(myId)
+      userInfoUpdate.setIsEdited(false)
+    }
+  },[myId,userInfoUpdate])
 
   const handleUpdate = async()=> {
     if(introduction?.length > 160 || name?.length > 50) return
@@ -49,7 +61,10 @@ const UserEditModal = ({show, setShow, className}) => {
       handleClose()
       if (res.message === undefined) {
         showToastMessage('修改成功','success')
-        setTimeout(() =>  window.location.reload(), 1000);
+        setTimeout(() =>{
+          userInfoUpdate.setIsEdited(true)
+          handleClose()
+        } , 500);
     } else {
       showToastMessage('修改失敗', 'failed');
     }

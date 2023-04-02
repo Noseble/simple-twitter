@@ -9,6 +9,7 @@ import { ReactComponent as ReturnIcon } from 'assets/icon/returnArrow.svg';
 
 import { getUser, getUserFollowers, getUserFollowings, getUserTweets } from 'api/api';
 import { FollowUpdateContext } from 'contexts/FollowUpdateContext';
+import { UserInfoUpdateContext } from 'contexts/UserInfoUpdateContext';
 
 
 const HomePageUserArea = ({ className}) => {
@@ -20,6 +21,7 @@ const HomePageUserArea = ({ className}) => {
   const [followingsNumber, setFollowingsNumber] = useState('')
   const [tweetsNumber, setTweetsNumber] = useState('')
   const FollowUpdate = useContext(FollowUpdateContext)
+  const userInfoUpdate = useContext(UserInfoUpdateContext)
 
   //取得現有Url最後一個字串
   const lastSegmentOfUrl = currentUrl.substring(currentUrl.lastIndexOf('/')+ 1)
@@ -83,6 +85,14 @@ const HomePageUserArea = ({ className}) => {
   
   },[userId,FollowUpdate])
 
+  useEffect(()=>{
+    //若使用者編輯資訊
+    if(userInfoUpdate.isEdited){
+      getCurrentUser(userId);
+      userInfoUpdate.setIsEdited(false);
+    }
+  },[userInfoUpdate,userId])
+
   return(
     <div className={className}>
       <div className='main-header'>
@@ -105,8 +115,9 @@ const HomePageUserArea = ({ className}) => {
         followersCount={followersNumber} 
         followingsCount={followingsNumber} 
         isFollowed={user.isFollowed} 
-        isNotiFied={user.isNotiFied}/>
-        <StyledToastContainer />
+        isNotiFied={user.isNotiFied}
+      />
+      <StyledToastContainer />
       <Outlet />
     </div>
   )

@@ -17,6 +17,8 @@ const UserInfoSection = ({ userId, userImage, userAvatar, userName, userAccount,
   const handleShowModal = () => setShowModal(true);
   const [newFollowersCount, setNewFollowersCount] = useState(followersCount)
   const [newFollowingsCount, setNewFollowingsCount] = useState(followingsCount)
+  const [updateAvatar, setUpdateAvatar] = useState(userAvatar)
+  const [updateImage, setUpdateImage] = useState(userImage)
 
   useEffect(()=>{
     //點擊追蹤按鈕後更新
@@ -24,11 +26,17 @@ const UserInfoSection = ({ userId, userImage, userAvatar, userName, userAccount,
     setNewFollowingsCount(followingsCount)
   },[followersCount,followingsCount])
 
+  useEffect(()=>{
+    //使用者編輯後更新
+    setUpdateAvatar(userAvatar)
+    setUpdateImage(userImage)
+  },[userAvatar,userImage])
+
   return(
     <div className={className}>
       <div className="user-image-area">
-        <img className="user-background-image" src={userImage} alt="" />
-        <StyledUserAvatar className='user-avatar' userId={userId} userAvatar={userAvatar} />
+        <img className="user-background-image" src={updateImage} alt="" />
+        <StyledUserAvatar className='user-avatar' userId={userId} userAvatar={updateAvatar} />
         <div className="user-button">
           {isSelf ?
           <>

@@ -12,6 +12,7 @@ import StyledTweetModal from "modals/StyledTweetModal";
 import { getTopTen, getUser } from "api/api";
 import { UserInfoContext } from "contexts/UserInfoContext";
 import { FollowUpdateContext } from "contexts/FollowUpdateContext";
+import { UserInfoUpdateContext } from "contexts/UserInfoUpdateContext";
 
 const HomePage = ({className}) => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const HomePage = ({className}) => {
   const [topTenList, setTopTenList] = useState([]);
   const currentUrlPath = useLocation().pathname
   const [isFollowUpdate, setIsFollowUpdate] = useState(true)
+  const [isEdited, setIsEdited] = useState(true)
 
   const handleShowTweetModal = () => setShowTweetModal(true);
   
@@ -60,15 +62,16 @@ const HomePage = ({className}) => {
     getUserInfo(myId)
     getTopTenAsync();
 
-    if(isFollowUpdate){
+    if(isFollowUpdate || isEdited){
       getTopTenAsync();
       setIsFollowUpdate(false);
     }
     
-  }, [navigate,myId,isFollowUpdate]);
+  }, [navigate,myId,isEdited, isFollowUpdate]);
 
   return(
     <FollowUpdateContext.Provider value={{isFollowUpdate, setIsFollowUpdate}}>
+    <UserInfoUpdateContext.Provider value={{isEdited, setIsEdited}}>
       <div className={clsx('web-container', className)}>
 
         <nav className="nav-column">
@@ -110,6 +113,7 @@ const HomePage = ({className}) => {
         </div>
 
       </div>
+    </UserInfoUpdateContext.Provider>
     </FollowUpdateContext.Provider>
   )
 }
