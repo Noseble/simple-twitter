@@ -122,11 +122,17 @@ export const getUserSetting = async (id) => {
 
 export const putUserSetting = async (id,account, name,  email , password, introduction, image, avatar) => {
   try {
+    if( password === ''){
     const  res   = await axiosInstance.put(`${baseUrl}/api/users/${id}`, {
-      account, name,  email , password, introduction, image, avatar
+      account, name,  email , introduction, image, avatar
     });
-
-    return res
+    return res 
+    } else { 
+      const  res   = await axiosInstance.put(`${baseUrl}/api/users/${id}`, {
+      account, name,  email ,password, introduction, image, avatar
+    });
+    return res 
+    }
   } catch (error) {
     console.error('[Put User Setting failed]:',error)
     return error.response.data;

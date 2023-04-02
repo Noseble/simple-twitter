@@ -26,7 +26,7 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
 
     if (success) {
       showToastMessage()
-      // setTimeout(() => window.location.reload(), 1000);
+      setTimeout(() => window.location.reload(), 1000);
       }
     } catch(error){
       console.error(error)
@@ -36,7 +36,7 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
   const showToastMessage = () => {
     toast.success('推文成功', {
       position: toast.POSITION.TOP_RIGHT,
-      autoClose: 100000,
+      autoClose: 10000,
       hideProgressBar: true,
       icon: <Success />,
     });
