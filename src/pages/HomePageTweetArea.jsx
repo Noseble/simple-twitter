@@ -187,12 +187,13 @@ const StyledHomePageTweetArea = styled(HomePageTweetArea)`
       }
     }
 
-    .tweet-content{
+    .tweet-content {
       margin-bottom: 8px;
       font-size: 24px;
       line-height: 36px;
+      word-wrap: break-word;
     }
-    
+
     .tweet-time{
       font-style: normal;
       font-weight: 500;

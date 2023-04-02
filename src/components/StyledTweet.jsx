@@ -79,7 +79,7 @@ const Tweet = ({ tweetId, tweetUserId, tweetUserAvatar, tweetUserName, tweetUser
 						</div>
 						<Link to={`/tweet/${tweetId}`} style={{ textDecoration: 'none' }}>
 							<p className='tweet-content'>
-							{tweetDescription}
+								{tweetDescription}
 							</p>
 						</Link>
 						<div className='footer'>
@@ -117,7 +117,7 @@ const StyledTweet = styled(Tweet)`
 	
   .tweet-area{
     display: flex;
-		width: 100%;
+		width: 90%;
     flex-direction: column;
     margin-left: 8px;
 
@@ -139,7 +139,7 @@ const StyledTweet = styled(Tweet)`
 			line-height: 26px;
 			margin: 0 auto;
 			overflow-x: hidden;
-			white-space: pre-wrap;
+			word-wrap: break-word;
 		}
  
 		.footer {

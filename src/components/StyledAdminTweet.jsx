@@ -21,7 +21,8 @@ const AdminTweet = ({ userAvatar, userName, userAccount, tweetTime, tweetContent
           </div>
         </div>
         <p className="tweet-content">
-          {tweetContent}
+          {tweetContent.slice(0, 50)}
+          {tweetContent.length >= 50 && '...'}
         </p>
       </div>
       <DeleteButton className="delete-icon" fill='#696974'  onClick={onClick} />
