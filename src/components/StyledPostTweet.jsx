@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 /* import shared components */
 import StyledUserAvatar from './StyledUserAvatar';
 import StyledButton from './StyledButton';
-import StyledToastContainer from "components/StyledToastContainer";
 
 // 載入svg
 import { ReactComponent as Success } from "assets/icon/success.svg"
@@ -27,7 +26,7 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
 
     if (success) {
       showToastMessage()
-      setTimeout(() => window.location.reload(), 1000);
+      // setTimeout(() => window.location.reload(), 1000);
       }
     } catch(error){
       console.error(error)
@@ -37,7 +36,7 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
   const showToastMessage = () => {
     toast.success('推文成功', {
       position: toast.POSITION.TOP_RIGHT,
-      autoClose: 1000,
+      autoClose: 100000,
       hideProgressBar: true,
       icon: <Success />,
     });
@@ -67,7 +66,6 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
       <div className='footer-area'>
         {description.length === 140 ? <span className='alert-message'>內容不能超過 140 字</span>:''}
         <StyledButton className={`tweet-button ${description?.length === 0 ? 'disabled' : 'filled'}`} disabled={description?.length === 0 ? 'disabled' : null} onClick={handleAddTweet}>推文</StyledButton>
-        <StyledToastContainer />
       </div>
       
     </div>
