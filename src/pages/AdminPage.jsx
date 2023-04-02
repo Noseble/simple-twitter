@@ -9,24 +9,22 @@ import StyledNavItem from "components/StyledNavItem";
 import { ReactComponent as AcLogo } from 'assets/icon/AcLogo.svg'
 import { useEffect } from "react";
 
-
-
 const AdminPage = ({className}) => {
   const navigate = useNavigate();
   const currentUrlPath = useLocation().pathname
-
+  
   console.log(currentUrlPath)
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('MyId')
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('myId')
     navigate('/admin_login')
   }
   
   useEffect(()=>{
 
     //若沒登入，則導至login頁面
-    const auth = localStorage.getItem('token')
+    const auth = sessionStorage.getItem('token')
     if(auth===null){
       navigate('/admin_login')
     }
@@ -42,7 +40,7 @@ const AdminPage = ({className}) => {
             <AcLogo className="website-logo" />
           </div>
           <div className="nav-list">
-            <Link to='/admin/tweets' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'推文清單'} className={clsx({selected: currentUrlPath==='/admin/tweets'})} /></Link>
+            <Link to='/admin/tweets' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'推文清單'} className={clsx({selected: currentUrlPath==='/admin' || currentUrlPath==='/admin/tweets' })} /></Link>
             <Link to='/admin/users' style={{ textDecoration: 'none' }}><StyledNavItem navTitle={'使用者列表'} className={clsx({selected: currentUrlPath==='/admin/users'})}/></Link>
           </div>
         </div>

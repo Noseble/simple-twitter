@@ -2,10 +2,16 @@ import {React,useState,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import clsx from "clsx";
-import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
+// 載入共用元件
 import StyledButton from "components/StyledButton";
 import StyledTextInput from "components/StyledTextInput";
+import StyledToastContainer from "components/StyledToastContainer";
+
+// 載入svg
+import { ReactComponent as Success } from "assets/icon/success.svg"
+import { ReactComponent as Failed } from "assets/icon/failed.svg"
 
 // api 
 import { getUserSetting } from "api/api";
@@ -13,7 +19,7 @@ import { putUserSetting } from "api/api";
 
 
 const HomePageSettingArea = ({className}) => {
-  const MyId = localStorage.getItem('MyId')
+  const myId = sessionStorage.getItem('myId')
   const navigate = useNavigate();
   const [account , setAccount] = useState('')
   const [name , setName] = useState('')
@@ -22,10 +28,10 @@ const HomePageSettingArea = ({className}) => {
   const [passwordCheck, setPasswordCheck] = useState('')
   
   useEffect(() => {
-    const getUserSettingAsync = async(MyId) => {
-      if(name?.length > 50) return
+    const getUserSettingAsync = async(id) => {
+      
       try {
-        const currentSettings = await getUserSetting(MyId);
+        const currentSettings = await getUserSetting(id);
         setAccount(currentSettings.account);
         setName(currentSettings.name);
         setEmail(currentSettings.email);
@@ -33,41 +39,61 @@ const HomePageSettingArea = ({className}) => {
         console.error(error);
       }
     };
-    getUserSettingAsync(MyId);
-  }, [name?.length,MyId]);
+    getUserSettingAsync(myId);
+  }, [myId]);
   
   const handleUpdate = async( )=> {
     // if( account?.length === 0 || name?.length === 0 || email?.length === 0 || password?.length === 0 || passwordCheck?.length === 0 ) return
     try {
-      if (password !== passwordCheck ) return 
-      const { message } = await putUserSetting( MyId, account, name, email, password)
+      if(name?.length > 50) return
+      
+      if (password !== passwordCheck ) {
+      showToastMessage('兩次密碼不相同', 'failed');
+      return
+      }
+    
+      if (!isValidEmail(email)) {
+      showToastMessage('請輸入正確的email格式', 'failed');
+      return;
+      }
+
+      const { message } = await putUserSetting( myId, account, name, email, password)
       if (message === undefined) {
       // 修改成功訊息
-      Swal.fire({
-        position: 'top',
-        title: '修改成功！',
-        timer: 1000,
-        icon: 'success',
-        showConfirmButton: false,
-      });
-      navigate(`/user/${MyId}`)
+      showToastMessage('修改成功','success')
+      setTimeout(() => navigate(`/user/${myId}`), 1000);
     } else {
       // 修改失敗訊息
-      Swal.fire({
-        position: 'top',
-        title: '修改失敗！',
-        text: message, // 顯示錯誤訊息
-        timer: 1000,
-        icon: 'error',
-        showConfirmButton: false,
-      });
+     showToastMessage( message, 'failed');
     }
     } catch (error) {
     console.error(error);
   }
   }
 
+   const showToastMessage = (message, icon) => {
+  if (icon === 'success') {
+    toast.success(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1000,
+      hideProgressBar: true,
+      icon: <Success />,
+    });
+  } else {
+    toast.error(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1000,
+      hideProgressBar: true,
+      icon: <Failed />,
+    });
+  }
+  };
   
+      const isValidEmail = (email) => {
+    // 正則表達式驗證是否符合 email 格式
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    }
 
 
   return(
@@ -85,12 +111,24 @@ const HomePageSettingArea = ({className}) => {
       </div>
       <div className="button-area">
         <StyledButton className="filled" lg onClick={handleUpdate}>儲存</StyledButton>
+        <StyledToastContainer />
       </div>
     </div>
   )
 }
 
 const StyledHomePageSettingArea= styled(HomePageSettingArea)`
+    /* error的樣式 */
+  .Toastify__toast-container {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+    width: 402px;
+    height: 104px;
+  }
+
   .setting-area{
     width: 100%;
     padding: 24px 24px 0;

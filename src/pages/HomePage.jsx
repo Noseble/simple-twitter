@@ -11,62 +11,61 @@ import StyledTweetModal from "modals/StyledTweetModal";
 
 import { getTopTen, getUser } from "api/api";
 import { UserInfoContext } from "contexts/UserInfoContext";
-import { TopTenUpdateContext } from "contexts/TopTenUpdateContext";
 import { FollowUpdateContext } from "contexts/FollowUpdateContext";
 
 const HomePage = ({className}) => {
   const navigate = useNavigate();
   const [showTweetModal, setShowTweetModal] = useState(false);
-  const myId = localStorage.getItem('MyId')
+  const myId = sessionStorage.getItem('myId')
   const [userInfo, setUserInfo] = useState({})
   const [topTenList, setTopTenList] = useState([]);
   const currentUrlPath = useLocation().pathname
-  const [isTopTenUpdate, setIsTopTenUpdate] = useState(true)
   const [isFollowUpdate, setIsFollowUpdate] = useState(true)
 
   const handleShowTweetModal = () => setShowTweetModal(true);
   
   const handleLogOut = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('MyId')
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('myId')
     navigate('login')
   }
   
+  const getUserInfo = async(id)=>{
+    try{
+      const res = await getUser(id)
+      setUserInfo(res)
+    }catch(error){
+      console.error(error)
+    }
+  }
+
+  const getTopTenAsync = async() => {
+    try {
+      const res = await getTopTen();
+      const newTopTenIds = res.users.map(user=>user.id);
+      const newTopTenUsers = await Promise.all(newTopTenIds.map(userId => getUser(userId)));
+      setTopTenList(newTopTenUsers);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     //若沒登入，則導至login頁面
-    const auth = localStorage.getItem('token')
+    const auth = sessionStorage.getItem('token')
     if(auth===null){
       navigate('login')
     }
 
-    const getUserInfo = async(id)=>{
-      try{
-        const res = await getUser(id)
-        setUserInfo(res)
-      }catch(error){
-        console.error(error)
-      }
-    }
-
-    const getTopTenAsync = async() => {
-      try {
-        const res = await getTopTen();
-        const newTopTenIds = res.users.map(user=>user.id);
-        const newTopTenUsers = await Promise.all(newTopTenIds.map(userId => getUser(userId)));
-        setTopTenList(newTopTenUsers);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     getUserInfo(myId)
+    getTopTenAsync();
 
-    if(isTopTenUpdate){
+    if(isFollowUpdate){
       getTopTenAsync();
-      setIsTopTenUpdate(false);
+      setIsFollowUpdate(false);
     }
     
-  }, [navigate,myId,isTopTenUpdate]);
+  }, [navigate,myId,isFollowUpdate]);
 
   return(
     <FollowUpdateContext.Provider value={{isFollowUpdate, setIsFollowUpdate}}>
@@ -88,27 +87,22 @@ const HomePage = ({className}) => {
           <StyledNavItem className='exit-nav-item' onClick={handleLogOut} navTitle='登出' />
         </nav>
 
-        
-          <TopTenUpdateContext.Provider value={{isTopTenUpdate, setIsTopTenUpdate}}> 
-            <UserInfoContext.Provider value={userInfo}>      
-              <div className='main-scrollbar'>
-                <div className='main-container'>
-                  <Outlet/> {/* 子路由頁面由此放入 */}
-                </div>
-              </div>
-            </UserInfoContext.Provider>
-          </TopTenUpdateContext.Provider>
-        
-
+        <UserInfoContext.Provider value={userInfo}>      
+          <div className='main-scrollbar'>
+            <div className='main-container'>
+              <Outlet/> {/* 子路由頁面由此放入 */}
+            </div>
+          </div>
+        </UserInfoContext.Provider>
 
         <div className='side-column'>
           <div className={clsx('popular-list-area',{hidden: currentUrlPath==='/setting'})}>
             <h2 className="popular-list-title">推薦跟隨</h2>
             <hr className="popular-list-hr"/>
             <div className="popular-list">
-              {topTenList.map((user) => {
+              {topTenList?.map((user) => {
                 return(
-                  <StyledPopularUser key={user.id} userId={user.id} userAvatar={user.avatar} userName={user.name} userAccount={user.account} isFollowed={user.isFollowed}/>
+                  <StyledPopularUser key={user?.id} userId={user?.id} userAvatar={user?.avatar} userName={user?.name} userAccount={user?.account} isFollowed={user?.isFollowed}/>
                 )
               })}
             </div>
@@ -121,6 +115,17 @@ const HomePage = ({className}) => {
 }
 
 const StyledHomepage= styled(HomePage)`
+  /* error的樣式 */
+  .Toastify__toast-container {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+    width: 402px;
+    height: 104px;
+  }
+  
   .modal-portal{
     position:absolute;
     top: 56px;
@@ -131,7 +136,6 @@ const StyledHomepage= styled(HomePage)`
 
   .popular-list-area{
     width:100%;
-    max-height: 731px;
     background-color: #FAFAFB;
     border-radius: 16px;
     margin-top: 16px;
@@ -154,6 +158,7 @@ const StyledHomepage= styled(HomePage)`
   .popular-list{
     width: 100%;
     height: fit-content;
+    padding: 8px 0;
   }
 `
 

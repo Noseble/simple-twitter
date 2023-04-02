@@ -1,22 +1,23 @@
 import styled from "styled-components"
-import { useContext, useState } from 'react';
+import {  useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 // 載入共用元件
 import StyledButton from "components/StyledButton"
 import StyledTextInput from "components/StyledTextInput"
 import StyledTextLink from "components/StyledTextLink"
+import StyledToastContainer from "components/StyledToastContainer";
 
 // 載入svg
 import { ReactComponent as Aclogo } from "assets/icon/AcLogo.svg"
+import { ReactComponent as Success } from "assets/icon/success.svg"
+import { ReactComponent as Failed } from "assets/icon/failed.svg"
 
 // api
 import { login } from "api/auth"
-import { BaseUrlContext } from "contexts/BaseUrlContext";
 
 const AdminLoginPage = ({ className }) => {
-  const baseUrl = useContext(BaseUrlContext)
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -31,37 +32,36 @@ const AdminLoginPage = ({ className }) => {
 
   if (success) {
     if (user.role === 'admin') {
-      localStorage.setItem('token', token);
+      sessionStorage.setItem('token', token);
 
       // 登入成功訊息
-      Swal.fire({
-        position: 'top',
-        title: '登入成功！',
-        timer: 1000,
-        icon: 'success',
-        showConfirmButton: false,
-      });
-      navigate('/admin');
+       showToastMessage('登入成功','success')
+      setTimeout(() => navigate('/admin'), 1000);
       return;
     } else {
       // 阻止使用者登入並顯示錯誤訊息
-      Swal.fire({
-        position: 'top',
-        title: '權限不足！',
-        text: '您的角色不是管理員，無法登入。',
-        icon: 'error',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      showToastMessage('您的角色不是管理員', 'failed');
     }
   } else {
     // 登入失敗訊息
-    Swal.fire({
-      position: 'top',
-      title: '登入失敗！',
-      timer: 1000,
-      icon: 'error',
-      showConfirmButton: false,
+    showToastMessage('找不到使用者', 'failed');
+  }
+};
+
+const showToastMessage = (message, icon) => {
+  if (icon === 'success') {
+    toast.success(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1000,
+      hideProgressBar: true,
+      icon: <Success />,
+    });
+  } else {
+    toast.error(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1000,
+      hideProgressBar: true,
+      icon: <Failed />,
     });
   }
 };
@@ -77,7 +77,8 @@ const AdminLoginPage = ({ className }) => {
       </div>
       <StyledButton className='login-button filled' width='100%' onClick={handleClick} >登入</StyledButton>
       <div className="footer">
-        <StyledTextLink link={`${baseUrl}/login`}>前台登入</StyledTextLink>
+        <StyledTextLink link="/login">前台登入</StyledTextLink>
+        <StyledToastContainer />
       </div>
     </div>
 

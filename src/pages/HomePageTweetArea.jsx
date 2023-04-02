@@ -13,6 +13,7 @@ import { ReactComponent as Reply } from 'assets/icon/reply.svg';
 import { ReactComponent as LikeButton } from 'assets/icon/likeButton.svg';
 import StyledReply from "components/StyledReply"
 import StyledReplyModal from 'modals/StyledReplyModal';
+import StyledToastContainer from "components/StyledToastContainer";
 
 import { dislikeTweet, getTweet, likeTweet } from 'api/api';
 import { UserInfoContext } from 'contexts/UserInfoContext';
@@ -138,21 +139,32 @@ const HomePageTweetArea = ({ className }) => {
       </div>
       <hr className="main-header-line"/>
       <ul className="reply-list">
-        {replies.map((reply)=>{
+        {replies?.map((reply)=>{
           return(
-            <li key={reply.id}>
-              <StyledReply userId ={reply.User.id} userName={reply.User.name} userAccount={reply.User.account} userAvatar={reply.User.avatar} replyTime={reply.createdAt} replyToId={tweetUser.id} replyToAccount={tweetUser.account} replyContent={reply.comment}/> 
+            <li key={reply?.id}>
+              <StyledReply userId ={reply?.User?.id} userName={reply?.User?.name} userAccount={reply?.User?.account} userAvatar={reply?.User?.avatar} replyTime={reply?.createdAt} replyToId={tweetUser?.id} replyToAccount={tweetUser?.account} replyContent={reply?.comment}/> 
               <hr className="main-header-line"/>
             </li>
           )
         })}
       </ul>
-
+        <StyledToastContainer />
     </div>
   )
 }
 
 const StyledHomePageTweetArea = styled(HomePageTweetArea)`
+  /* error的樣式 */
+    .Toastify__toast-container {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      color: #000000;
+      width: 402px;
+      height: 104px;
+    }
+    
   .return-icon{
     margin-right: 19px;
     cursor:pointer;

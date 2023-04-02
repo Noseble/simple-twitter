@@ -1,6 +1,7 @@
 import {React,useState,useEffect} from "react";
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
 import StyledTextInput from 'components/StyledTextInput';
 import StyledButton from "components/StyledButton";
@@ -8,13 +9,15 @@ import StyledButton from "components/StyledButton";
 import defaultUserImg from 'assets/image/defaultUserImg.svg';
 import { ReactComponent as UpdatePhoto } from 'assets/icon/updatePhotoIcon.svg'
 import { ReactComponent as DeleteButton } from 'assets/icon/cross.svg'
+import { ReactComponent as Success } from "assets/icon/success.svg"
+import { ReactComponent as Failed } from "assets/icon/failed.svg"
 
 // api 
 import { getUserSetting } from "api/api";
 import { setUserSetting } from "api/api";
 
 const UserEditModal = ({show, setShow, className}) => {
-  const MyId = localStorage.getItem('MyId')
+  const myId = sessionStorage.getItem('myId')
   const [name , setName] = useState('')
   const [oldAvatar , setOldAvatar] = useState('')
   const [introduction, setIntroduction] = useState('')
@@ -24,9 +27,9 @@ const UserEditModal = ({show, setShow, className}) => {
   const handleClose = () => setShow(false);
 
   useEffect(() => {
-    const getUserSettingAsync = async(MyId) => {
+    const getUserSettingAsync = async(id) => {
       try {
-        const currentSettings = await getUserSetting(MyId);
+        const currentSettings = await getUserSetting(id);
         setName(currentSettings.name);
         setIntroduction(currentSettings.introduction);
         setOldAvatar(currentSettings.avatar);
@@ -35,17 +38,20 @@ const UserEditModal = ({show, setShow, className}) => {
         console.error(error);
       }
     };
-    getUserSettingAsync(MyId);
-  }, [MyId]);
+    getUserSettingAsync(myId);
+  }, [myId]);
 
   const handleUpdate = async()=> {
     if(introduction?.length > 160 || name?.length > 50) return
     
     try {
-      const res = await setUserSetting({ MyId, name, introduction, image, avatar})
+      const res = await setUserSetting( myId, name, introduction, image, avatar)
       handleClose()
       if (res.message === undefined) {
-     window.location.reload()
+        showToastMessage('修改成功','success')
+        setTimeout(() =>  window.location.reload(), 1000);
+    } else {
+      showToastMessage('修改失敗', 'failed');
     }
     } catch (error) {
     console.error(error);
@@ -67,6 +73,24 @@ const UserEditModal = ({show, setShow, className}) => {
         setAvatar(null);
     }
   };
+
+  const showToastMessage = (message, icon) => {
+  if (icon === 'success') {
+    toast.success(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1000,
+      hideProgressBar: true,
+      icon: <Success />,
+    });
+  } else {
+    toast.error(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 1000,
+      hideProgressBar: true,
+      icon: <Failed />,
+    });
+  }
+};
 
 
   return (
@@ -98,7 +122,6 @@ const UserEditModal = ({show, setShow, className}) => {
           <img className='user-avatar-image' src={oldAvatar} alt="" />
           {avatar !== null ? <DeleteButton className='delete-avatar' fill='#FFFFFF'/> : <UpdatePhoto className='update-avatar' fill='#FFFFFF' /> }
           {avatar === null ? <input className="file-upload-avatar" type="file"  accept="image/png, image/jpeg" onChange={handleUploadFile} /> : <button className="delete-upload-avatar" onClick={handleClear} /> }
-          
           
         </div>
         <div className='input-area'>

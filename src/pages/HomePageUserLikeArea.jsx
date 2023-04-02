@@ -34,22 +34,22 @@ const HomePageUserLikeArea = ({ className }) => {
       <StyledUserNavItem/>
       <hr className="main-header-line"/>
       <ul className="tweet-list">
-        {likedTweets.map((likedTweet)=>{
+        {likedTweets?.map((likedTweet)=>{
           return(
-            <li key={likedTweet.id}>
+            <li key={likedTweet?.id}>
               <StyledTweet 
-                tweetId={likedTweet.TweetId} 
-                tweetUserId={likedTweet.Tweet?.User?.id}
-                tweetUserAvatar={likedTweet.Tweet?.User?.avatar} 
-                tweetUserName={likedTweet.Tweet?.User?.name} 
-                tweetUserAccount={likedTweet.Tweet?.User?.account} 
-                tweetTime={likedTweet.createdAt} 
-                tweetDescription={likedTweet.Tweet?.description} 
-                userId={userInfo.id}
-                userAvatar={userInfo.avatar}
-                isLiked={likedTweet.Tweet?.currentUserLikes} 
-                replyCounts={likedTweet.Tweet?.replyCounts}
-                likeCounts={likedTweet.Tweet?.likeCounts}
+                tweetId={likedTweet?.TweetId} 
+                tweetUserId={likedTweet?.Tweet?.User?.id}
+                tweetUserAvatar={likedTweet?.Tweet?.User?.avatar} 
+                tweetUserName={likedTweet?.Tweet?.User?.name} 
+                tweetUserAccount={likedTweet?.Tweet?.User?.account} 
+                tweetTime={likedTweet?.createdAt} 
+                tweetDescription={likedTweet?.Tweet?.description} 
+                userId={userInfo?.id}
+                userAvatar={userInfo?.avatar}
+                isLiked={likedTweet?.Tweet?.currentUserLikes} 
+                replyCounts={likedTweet?.Tweet?.replyCounts}
+                likeCounts={likedTweet?.Tweet?.likeCounts}
                 />     
             </li>
           )

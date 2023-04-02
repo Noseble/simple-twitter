@@ -42,22 +42,22 @@ const HomePageUserTweetArea = ({ className }) => {
       <StyledUserNavItem/>
       <hr className="main-header-line"/>
       <ul className="tweet-list">
-        {tweets.map((tweet) =>{
+        {tweets?.map(tweet =>{
           return(
-            <li key={tweet.id}>
+            <li key={tweet?.id}>
               <StyledTweet 
-                tweetId={tweet.id} 
-                tweetUserId={tweet.UserId} 
-                tweetUserAvatar={currentUser.avatar} 
-                tweetUserName={currentUser.name} 
-                tweetUserAccount={currentUser.account} 
-                tweetTime={tweet.createdAt} 
-                tweetDescription={tweet.description} 
-                isLiked={tweet.isLiked}
-                replyCounts={tweet.replyCounts}
-                likeCounts={tweet.likeCounts}
-                userId={userInfo.id}
-                userAvatar={userInfo.avatar}
+                tweetId={tweet?.id} 
+                tweetUserId={tweet?.UserId} 
+                tweetUserAvatar={currentUser?.avatar} 
+                tweetUserName={currentUser?.name} 
+                tweetUserAccount={currentUser?.account} 
+                tweetTime={tweet?.createdAt} 
+                tweetDescription={tweet?.description} 
+                isLiked={tweet?.isLiked}
+                replyCounts={tweet?.replyCounts}
+                likeCounts={tweet?.likeCounts}
+                userId={userInfo?.id}
+                userAvatar={userInfo?.avatar}
               />   
             </li>
           )

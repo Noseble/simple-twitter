@@ -26,18 +26,18 @@ const AdminPageUsersArea = ({ className }) => {
         </div>
         <hr className="main-header-line"/>
         <div className='user-card-list'>
-        {AdminUsers.map(({...AdminUser})=>{
+        {AdminUsers?.map((AdminUser)=>{
           return(
             <StyledUserCard 
-              key={AdminUser.id}
-              bgImageSrc={AdminUser.image}
-              userImageSrc={AdminUser.avatar}
-              userName={AdminUser.name}
-              userAccount={AdminUser.account}
-              userTweetsCount={AdminUser.TweetsCount}
-              userLikesCounts={AdminUser.TweetsLikedCount}
-              userFollowingCount={AdminUser.FollowingsCount}
-              userFollowerCount={AdminUser.TweetsLikedCount} />
+              key={AdminUser?.id}
+              bgImageSrc={AdminUser?.image}
+              userImageSrc={AdminUser?.avatar}
+              userName={AdminUser?.name}
+              userAccount={AdminUser?.account}
+              userTweetsCount={AdminUser?.TweetsCount}
+              userLikesCounts={AdminUser?.TweetsLikedCount}
+              userFollowingCount={AdminUser?.FollowingsCount}
+              userFollowerCount={AdminUser?.TweetsLikedCount} />
           )
         })}  
         

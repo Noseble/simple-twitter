@@ -1,4 +1,4 @@
-import { useState,useContext } from 'react';
+import { useState,useContext, useEffect } from 'react';
 
 import styled from "styled-components";
 import StyledUserAvatar from "./StyledUserAvatar";
@@ -15,8 +15,14 @@ const UserInfoSection = ({ userId, userImage, userAvatar, userName, userAccount,
   const [showModal, setShowModal] = useState(false);
   const baseUrl = useContext(BaseUrlContext)
   const handleShowModal = () => setShowModal(true);
-  
-  
+  const [newFollowersCount, setNewFollowersCount] = useState(followersCount)
+  const [newFollowingsCount, setNewFollowingsCount] = useState(followingsCount)
+
+  useEffect(()=>{
+    //點擊追蹤按鈕後更新
+    setNewFollowersCount(followersCount)
+    setNewFollowingsCount(followingsCount)
+  },[followersCount,followingsCount])
 
   return(
     <div className={className}>
@@ -45,8 +51,8 @@ const UserInfoSection = ({ userId, userImage, userAvatar, userName, userAccount,
           {userIntroduction}
         </p>
         <div className="user-followship">
-          <a href={`${baseUrl}/user/${userId}/following`} className="following">{followingsCount || '0'}個<span className='followship-unit'>跟隨中</span></a>
-          <a href={`${baseUrl}/user/${userId}/follower`} className="follower">{ followersCount || '0'}位<span className='followship-unit'>跟隨者</span></a>
+          <a href={`${baseUrl}/user/${userId}/following`} className="following">{newFollowingsCount || '0'}個<span className='followship-unit'>跟隨中</span></a>
+          <a href={`${baseUrl}/user/${userId}/follower`} className="follower">{ newFollowersCount || '0'}位<span className='followship-unit'>跟隨者</span></a>
         </div>
       </div>
     </div>
@@ -90,6 +96,7 @@ const StyledUserInfoSection = styled(UserInfoSection)`
       margin-bottom: 0;
       font-size: 14px;
       line-height: 22px;
+      white-space: pre-wrap;
     }
   }
 

@@ -85,6 +85,7 @@ const Tweet = ({ tweetId, tweetUserId, tweetUserAvatar, tweetUserName, tweetUser
 						<div className='footer'>
 							<button onClick={handleShowModal}><Reply className='icon' fill='#6C757D' height='14px' /><label>{replyCounts}</label></button>
 							<StyledReplyModal 
+							  id={tweetId}
 								tweetUserId={tweetUserId} 
 								tweetUserAvatar={tweetUserAvatar} 
 								tweetUserName={tweetUserName} 
@@ -96,6 +97,7 @@ const Tweet = ({ tweetId, tweetUserId, tweetUserAvatar, tweetUserName, tweetUser
 								show={showModal} 
 								setShow={setShowModal}
 							/>
+							{/* id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUserAccount, tweetTime, tweetDescription, userAvatar, userId, show, setShow */}
 							<button data-tweetid={tweetId} onClick={handleLikeClick} ><LikeButton ref={likeIconRef} className={clsx('icon','like-icon',{liked: isLiked})} fill='none' stroke='#6C757D' strokeWidth='2px' height='14px' /><label>{updatedLikeCounts}</label></button>					
 						</div>
 					</div>
@@ -137,6 +139,7 @@ const StyledTweet = styled(Tweet)`
 			line-height: 26px;
 			margin: 0 auto;
 			overflow-x: hidden;
+			white-space: pre-wrap;
 		}
  
 		.footer {

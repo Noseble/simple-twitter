@@ -29,10 +29,10 @@ const HomePageUserFollowerArea = ({ className }) => {
       <StyledFollowshipNavItem/>
       <hr className="main-header-line"/>
       <ul className="follower-list">
-        {userFollowers.map((userFollower)=>{
+        {userFollowers?.map((userFollower)=>{
           return(
-            <li key={userFollower.id}>      
-              <StyledUserRow userId={userFollower.followerId} userAvatar={userFollower.avatar} userName={userFollower.name} userIntroduction={userFollower.introduction} isFollowed={userFollower.currentUserIsFollowing}/>
+            <li key={userFollower?.id}>      
+              <StyledUserRow userId={userFollower?.followerId} userAvatar={userFollower?.avatar} userName={userFollower?.name} userIntroduction={userFollower?.introduction} isFollowed={userFollower?.currentUserIsFollowing}/>
             </li>
           )
         })}
