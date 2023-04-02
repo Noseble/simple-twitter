@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/simple-twitter/static/css/main.b1764874.css",
-    "main.js": "/simple-twitter/static/js/main.a2ce87cd.js",
+    "main.js": "/simple-twitter/static/js/main.70b483c9.js",
     "static/js/787.aa94361f.chunk.js": "/simple-twitter/static/js/787.aa94361f.chunk.js",
     "static/media/NavSettingIcon.svg": "/simple-twitter/static/media/NavSettingIcon.6a779ab98bfc2d8bf183472c8ea9b245.svg",
     "static/media/NavSettingIconFilled.svg": "/simple-twitter/static/media/NavSettingIconFilled.a31755706766873b4f4dd6e0aa80e955.svg",
@@ -14,8 +14,8 @@
     "static/media/updatePhotoIcon.svg": "/simple-twitter/static/media/updatePhotoIcon.45c368d984f124441517bc8094f270a8.svg",
     "static/media/NotifyButtonFilled.svg": "/simple-twitter/static/media/NotifyButtonFilled.eaedf8c3ba33c7897b91434bc985a414.svg",
     "static/media/NavHomeIcon.svg": "/simple-twitter/static/media/NavHomeIcon.fcc72e26ce00ee0bde94df103287403b.svg",
-    "index.html": "/simple-twitter/index.html",
     "static/media/reply.svg": "/simple-twitter/static/media/reply.28ce8595b2217c7969da94a29c6a40f9.svg",
+    "index.html": "/simple-twitter/index.html",
     "static/media/NavHomeIconFilled.svg": "/simple-twitter/static/media/NavHomeIconFilled.fba35166d8f86f1b677d047f662fd77b.svg",
     "static/media/Pen.svg": "/simple-twitter/static/media/Pen.20eac02e0f13bc4173d0a7d21adcc2d8.svg",
     "static/media/NavUserIconFilled.svg": "/simple-twitter/static/media/NavUserIconFilled.16baffbe760d101636d53f5bc871c4e9.svg",
@@ -25,11 +25,11 @@
     "static/media/likeButton.svg": "/simple-twitter/static/media/likeButton.4d1fcf2d6b4b4d3f34c1156afed45c33.svg",
     "static/media/success.svg": "/simple-twitter/static/media/success.959683f4fbd48c631175400cbc0e6ac1.svg",
     "main.b1764874.css.map": "/simple-twitter/static/css/main.b1764874.css.map",
-    "main.a2ce87cd.js.map": "/simple-twitter/static/js/main.a2ce87cd.js.map",
+    "main.70b483c9.js.map": "/simple-twitter/static/js/main.70b483c9.js.map",
     "787.aa94361f.chunk.js.map": "/simple-twitter/static/js/787.aa94361f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b1764874.css",
-    "static/js/main.a2ce87cd.js"
+    "static/js/main.70b483c9.js"
   ]
 }
