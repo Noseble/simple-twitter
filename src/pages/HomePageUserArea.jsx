@@ -86,7 +86,7 @@ const HomePageUserArea = ({ className}) => {
   return(
     <div className={className}>
       <div className='main-header'>
-        <Link to='/' ><ReturnIcon className="return-icon" /></Link>
+        <Link to={lastSegmentOfUrl === 'following' || lastSegmentOfUrl === 'follower' ? `/user/${userId}` :'/'} ><ReturnIcon className="return-icon" /></Link>
         <div className="user-title">
           <h3 className="user-title-name">{user.name}</h3>
           <h5 className="user-tweets">{tweetsNumber} 推文</h5>
