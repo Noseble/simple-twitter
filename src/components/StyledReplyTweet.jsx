@@ -8,6 +8,7 @@ import StyledButton from './StyledButton';
 
 const ReplyTweet = ({ userAvatar, userId, onChange, onClick, error, onKeyDown, className }) => {
   let alertMessage = '內容不可為空白'
+  let alertMessage2 = '內容不能超過 140 字'
 
   return(
     <div className={className}>
@@ -16,13 +17,14 @@ const ReplyTweet = ({ userAvatar, userId, onChange, onClick, error, onKeyDown, c
         <textarea 
           className="tweet-input-area" 
           type="textarea" 
+          maxLength={140}
           placeholder='推你的回覆' 
           onChange={(event) => onChange?.(event.target.value)}
           onKeyDown={onKeyDown}
         />
       </div>
       <div className='footer-area'>
-        <span className='alert-message'>{error === 0 ? alertMessage : null}</span>
+        <span className='alert-message'>{error === 0 ? alertMessage : null}{error === 140 ? alertMessage2 : null}</span>
         <StyledButton className={`tweet-button ${error === 0 ? 'disabled' : 'filled'}`} disabled={error === 0 ? 'disabled' : null} onClick={onClick} >回復 </StyledButton>
       </div>
       

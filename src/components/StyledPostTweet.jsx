@@ -19,14 +19,14 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
   const [description, setDescription] = useState('')
 
   const handleAddTweet = async () => {
-    if(description?.length === 0 || description?.length === 140 ) return
+    if(description?.length === 0 || description?.length > 140 ) return
 
     try{
     const {success} = await addTweet({description})
 
     if (success) {
       showToastMessage()
-      // setTimeout(() => window.location.reload(), 1000);
+      setTimeout(() => window.location.reload(), 1000);
       }
     } catch(error){
       console.error(error)
@@ -36,7 +36,7 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
   const showToastMessage = () => {
     toast.success('推文成功', {
       position: toast.POSITION.TOP_RIGHT,
-      autoClose: 100000,
+      autoClose: 1000,
       hideProgressBar: true,
       icon: <Success />,
     });
@@ -51,6 +51,7 @@ const PostTweet = ({ userId, userAvatar,  className }) => {
           className="tweet-input-area" 
           type="textarea" 
           placeholder='有什麼新鮮事?' 
+          maxLength={140} 
           onChange={(e) => setDescription(e.target.value)}
           onKeyDown={(event)=>{
             if (event.key ===  'Enter' && !event.shiftKey) { // Enter key
