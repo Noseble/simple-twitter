@@ -16,7 +16,7 @@ import { ReactComponent as Success } from "assets/icon/success.svg"
 // api
 import { addReplies } from 'api/api';
 
-const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUserAccount, tweetTime, tweetDescription, userAvatar, userId, show, setShow, className }) => {
+const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUserAccount, tweetTime, tweetDescription, userAvatar, userId, show, setShow, setIsReplied, className }) => {
   const handleClose = () => setShow(false);
   const tweetId = useContext(TweetIdContext)
   const [comment, setComment ] = useState('')
@@ -28,7 +28,7 @@ const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUse
       if(res){
         handleClose()
         showToastMessage()
-      setTimeout(() => window.location.reload(), 1000);
+        setTimeout(() => setIsReplied(true), 1000);
       }
     } catch(error){
       console.error(error)
@@ -143,6 +143,7 @@ const StyledReplyModal = styled(ReplyModal)`
         line-height: 26px;
         margin: 0 auto;
         width: 100%;
+        white-space: pre-wrap;
       }
     }
 
