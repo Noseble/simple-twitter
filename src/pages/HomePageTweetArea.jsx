@@ -28,6 +28,7 @@ const HomePageTweetArea = ({ className }) => {
   const [updatedLikeCounts, setUpdatedLikeCounts] = useState(0);
   const likeIconRef = useRef(null)
   const handleShowModal = () => setShowModal(true);
+  const [isReplied, setIsReplied] = useState(true)
   
   //判斷是否快速雙擊按鍵用
   let lastClickTime = 0
@@ -86,8 +87,14 @@ const HomePageTweetArea = ({ className }) => {
         console.error(error)
       }
     }
-    getCurrentTweet(tweetId)
-  },[tweetId])
+    
+    if(isReplied){
+      getCurrentTweet(tweetId)
+      setIsReplied(false)
+    }
+    
+    
+  },[tweetId,isReplied])
   
 
   return(
@@ -132,7 +139,8 @@ const HomePageTweetArea = ({ className }) => {
             userId={userInfo.id}
             userAvatar={userInfo.avatar} 
             show={showModal} 
-            setShow={setShowModal} 
+            setShow={setShowModal}
+            setIsReplied={setIsReplied}
           />
           <LikeButton data-tweetid={tweetId} ref={likeIconRef} className={clsx('icon',{liked: tweet.currentUserLikes})} fill='none' stroke='#6C757D' strokeWidth='2px' height='24px' onClick={handleLikeClick}/>
         </div>
