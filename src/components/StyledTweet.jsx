@@ -1,4 +1,4 @@
-import { React, useState, useRef } from 'react';
+import { React, useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import clsx from 'clsx';
@@ -20,8 +20,17 @@ const Tweet = ({ tweetId, tweetUserId, tweetUserAvatar, tweetUserName, tweetUser
 	const [showModal, setShowModal] = useState(false);
 	const likeIconRef = useRef(null)
 	const [updatedLikeCounts, setUpdatedLikeCounts] = useState(likeCounts)
+	const [updateReplyCounts, setUpdateReplyCounts] = useState(replyCounts)
   const handleShowModal = () => setShowModal(true);
+	const [isReplied, setIsReplied] =useState(false)
 	
+  useEffect(()=>{
+    if(isReplied){
+			setUpdateReplyCounts(n => n + 1)
+			setIsReplied(false)
+		}
+	},[isReplied])
+
 	//判斷是否快速雙擊按鍵用
 	let lastClickTime = 0 
 
@@ -83,7 +92,7 @@ const Tweet = ({ tweetId, tweetUserId, tweetUserAvatar, tweetUserName, tweetUser
 							</p>
 						</Link>
 						<div className='footer'>
-							<button onClick={handleShowModal}><Reply className='icon' fill='#6C757D' height='14px' /><label>{replyCounts}</label></button>
+							<button onClick={handleShowModal}><Reply className='icon' fill='#6C757D' height='14px' /><label>{updateReplyCounts}</label></button>
 							<StyledReplyModal 
 							  id={tweetId}
 								tweetUserId={tweetUserId} 
@@ -96,6 +105,7 @@ const Tweet = ({ tweetId, tweetUserId, tweetUserAvatar, tweetUserName, tweetUser
 								userId={userId} 
 								show={showModal} 
 								setShow={setShowModal}
+								setIsReplied={setIsReplied}
 							/>
 							{/* id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUserAccount, tweetTime, tweetDescription, userAvatar, userId, show, setShow */}
 							<button data-tweetid={tweetId} onClick={handleLikeClick} ><LikeButton ref={likeIconRef} className={clsx('icon','like-icon',{liked: isLiked})} fill='none' stroke='#6C757D' strokeWidth='2px' height='14px' /><label>{updatedLikeCounts}</label></button>					
