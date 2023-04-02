@@ -8,7 +8,7 @@ const UserTitle = ({ userId, userName, userAccount, className }) => {
   const baseUrl = useContext(BaseUrlContext)
   
   return(
-    <a href={ className.includes('admin') ? "/" : `${baseUrl}/user/${userId}`} className={ className }>
+    <a href={ className.includes('admin') ? "/#" : `${baseUrl}/user/${userId}`} className={ className }>
      <p className='user-name'>{userName}</p>
      <p className='user-account'>{`@${userAccount}`}</p>
     </a>

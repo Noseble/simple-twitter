@@ -57,7 +57,7 @@ const HomePageSettingArea = ({className}) => {
       return;
       }
 
-      const { message } = await putUserSetting( MyId, account, name, email, password)
+      const { message } = await putUserSetting( myId, account, name, email, password)
       if (message === undefined) {
       // 修改成功訊息
       showToastMessage('修改成功','success')

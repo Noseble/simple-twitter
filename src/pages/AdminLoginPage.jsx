@@ -42,11 +42,11 @@ const AdminLoginPage = ({ className }) => {
       return;
     } else {
       // 阻止使用者登入並顯示錯誤訊息
-      showToastMessage('您的角色不是管理員，無法登入', 'failed');
+      showToastMessage('您的角色不是管理員', 'failed');
     }
   } else {
     // 登入失敗訊息
-    showToastMessage('登入失敗', 'failed');
+    showToastMessage('找不到使用者', 'failed');
   }
 };
 

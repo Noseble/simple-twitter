@@ -45,7 +45,7 @@ if (success) {
       setTimeout(() => navigate('/'), 1000);
     } else {
       // 阻止使用者登入並顯示錯誤訊息
-      showToastMessage('阻止使用者登入', 'failed');
+      showToastMessage('找不到使用者', 'failed');
     }
   } else {
     // 登入失敗訊息

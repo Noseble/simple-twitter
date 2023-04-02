@@ -12,8 +12,8 @@ const TextInput = ({ textAreaType, width, labelName, type, value, placeholder, w
       <div className={clsx('input-block', { 'input-block': wordCount === wordLimit, 'error': wordCount === wordLimit })}>
         <label className='input-label'>{labelName ? labelName : "Label"}</label>
         {textAreaType?
-          <textarea disabled={ className.includes('disabled') ? true : false }  value={value || ''} placeholder={placeholder || "Placeholder"} maxlength={wordLimit} onChange={(event) => onChange?.(event.target.value)} /> :
-          <input disabled={ className.includes('disabled') ? true : false } type={type || 'text'}  value={value || ''} placeholder={placeholder || "Placeholder"} maxlength={wordLimit} onChange={(event) => onChange?.(event.target.value)} />
+          <textarea disabled={ className.includes('disabled') ? true : false }  value={value || ''} placeholder={placeholder || "Placeholder"} maxLength={wordLimit} onChange={(event) => onChange?.(event.target.value)} /> :
+          <input disabled={ className.includes('disabled') ? true : false } type={type || 'text'}  value={value || ''} placeholder={placeholder || "Placeholder"} maxLength={wordLimit} onChange={(event) => onChange?.(event.target.value)} />
         }
       </div>
       <div className='input-info'>

@@ -27,6 +27,9 @@ const PopularUser = ({ userId, userAvatar, userName, userAccount, isFollowed, cl
   const handleFollowshipClick = (e) => {
     const button = e.currentTarget
     const currentUserId = button.dataset.id
+    console.log(myId)
+
+    console.log(currentUserId)
 
     // 檢查上次事件觸發時間是否超過 500 毫秒
 		if (Date.now() - lastClickTime < 500) {
@@ -65,7 +68,6 @@ const PopularUser = ({ userId, userAvatar, userName, userAccount, isFollowed, cl
     }
 
     IsFollowUpdate.setIsFollowUpdate(true)
-
   }
   
   return(
