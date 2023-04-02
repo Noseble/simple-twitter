@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 
@@ -18,11 +18,9 @@ import { ReactComponent as Failed } from "assets/icon/failed.svg"
 
 // api
 import { login } from "api/auth"
-import { BaseUrlContext } from "contexts/BaseUrlContext";
 
 
 const LoginPage = ({ className }) => {
-  const baseUrl = useContext(BaseUrlContext)
   const navigate = useNavigate();
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');

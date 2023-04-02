@@ -17,11 +17,7 @@ import { ReactComponent as Failed } from "assets/icon/failed.svg"
 // api
 import { register } from "api/auth";
 
-// context
-import { BaseUrlContext } from "contexts/BaseUrlContext";
-
 const RegisterPage = ({ className }) => {
-  const baseUrl = useContext(BaseUrlContext)
   const [account , setAccount] = useState('')
   const [name , setName] = useState('')
   const [email , setEmail] = useState('')

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 /* 導入共用元件 */
@@ -17,7 +18,7 @@ const Reply = ({ userId, userName, userAccount, userAvatar, replyTime, replyToId
 					<StyledUserTitle userId={userId} userName={userName} userAccount={userAccount}/>
           <span className='reply-time'>．{`${Math.floor(Number(new Date() - new Date(replyTime)) / (1000 * 60 * 60))}小時`}</span>
 				</div>
-          <label className='reply-to-area'>回覆 <a href={`/user/${replyToId}`} className='target-user'>{`@${replyToAccount}`}</a></label>
+          <label className='reply-to-area'>回覆 <Link to={`/user/${replyToId}`} className='target-user'>{`@${replyToAccount}`}</Link></label>
 				<p className='reply-content'>
           {replyContent}
 				</p>

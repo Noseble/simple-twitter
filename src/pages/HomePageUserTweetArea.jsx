@@ -42,7 +42,7 @@ const HomePageUserTweetArea = ({ className }) => {
       <StyledUserNavItem/>
       <hr className="main-header-line"/>
       <ul className="tweet-list">
-        {tweets?.map((tweet) =>{
+        {tweets?.map(tweet =>{
           return(
             <li key={tweet?.id}>
               <StyledTweet 
