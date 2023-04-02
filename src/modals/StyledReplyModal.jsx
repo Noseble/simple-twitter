@@ -123,7 +123,7 @@ const StyledReplyModal = styled(ReplyModal)`
       display: flex;
       flex-direction: column;
       margin-left: 8px;
-      width:100%;
+      width: 90%;
 
       .tweet-title{
         display: flex;
@@ -143,7 +143,7 @@ const StyledReplyModal = styled(ReplyModal)`
         line-height: 26px;
         margin: 0 auto;
         width: 100%;
-        white-space: pre-wrap;
+        word-wrap: break-word;
       }
     }
 
