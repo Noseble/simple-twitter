@@ -38,18 +38,90 @@ npm install
 npm run start
 ```
 
-![1111111111](https://user-images.githubusercontent.com/51280671/229341701-568dbe34-4e9a-4c51-b193-ef9bf98690dc.jpg)
+## 登入
 
+![1680484320252](https://user-images.githubusercontent.com/51280671/229390982-17798a84-6c9c-40d8-a257-316e30fb352e.jpg)
 
 `使用測試帳號登入`
 `1.註冊新帳號`
 `2.後台登入`
 
-![1680424168964](https://user-images.githubusercontent.com/51280671/229341706-af4efd8d-d3e6-48a0-8dac-e051c202f6cb.jpg)
+## 註冊
+
+![1680484339552](https://user-images.githubusercontent.com/51280671/229390759-ad8e5dd0-7d07-40f2-94c3-c0ba4ce5b0d1.jpg)
 
 
 `依序輸入資料註冊`
 `注意! Eamil須符合xxx@xxx.xxx格式`
+
+## 前台頁面
+
+![1680484262055](https://user-images.githubusercontent.com/51280671/229391483-6e4ae7a8-ab8e-4f00-8005-e09dfbbf3355.jpg)
+`首頁`
+
+`1.輸入推文內容`
+
+`1.1點擊推按鈕，再彈窗處輸入推文內容 注意! 推文不能超過140字`
+
+`2.按下推文按鈕送出推文`
+
+`3.追蹤其他用戶`
+
+`4.點擊回復按鈕，回復推文 注意! 回文不能超過140字`
+
+`5.喜歡該推文按鈕`
+
+`6.使用者個人資料`
+
+`7.設定使用者資料`
+
+## 使用者頁面
+
+![person page](https://user-images.githubusercontent.com/51280671/229400964-083ecae5-5afe-45c7-a53f-7cb22a404f35.jpg)
+
+`6-1.編輯個人資料`
+
+`6-2.看該使用者推文清單`
+
+`6-3.看該使用者回復清單`
+
+`6-4.看該使用者喜歡清單`
+
+`6-5.看該使用者追隨者清單`
+
+![setting info](https://user-images.githubusercontent.com/51280671/229400874-fdb3b05a-25ec-4017-80ed-27d04225d630.jpg)
+
+`1.上傳背景圖片`
+
+`1.1.刪除此次上傳背景圖片`
+
+`2.上傳大頭貼`
+
+`3.編輯個人名稱 注意! 名稱不能超過50字`
+
+`4.編輯自我介紹 注意! 自我介紹不能超過160字`
+
+`5.儲存編輯內容`
+
+![setting](https://user-images.githubusercontent.com/51280671/229401105-9dfdfeda-f1c4-4e81-bd6d-b0aea6d80c87.jpg)
+
+`編輯個人資訊`
+
+## 後台頁面
+
+![root](https://user-images.githubusercontent.com/51280671/229401501-8666426b-b9f7-4c16-88fd-d6d9ac49a060.jpg)
+
+`1.所有推文清單`
+
+`2.所有使用者清單`
+
+`3.瀏覽所有使用者推文`
+
+`4.點擊ｘ刪除該貼文`
+
+![UESR](https://user-images.githubusercontent.com/51280671/229401918-6d318869-ea02-472b-b9fe-3f5610b6dfac.jpg)
+
+`瀏覽所有使用者清單`
 
 ## 後端Repo
 
