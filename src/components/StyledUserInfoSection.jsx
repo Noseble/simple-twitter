@@ -1,4 +1,5 @@
 import { useState,useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import styled from "styled-components";
 import StyledUserAvatar from "./StyledUserAvatar";
@@ -59,8 +60,8 @@ const UserInfoSection = ({ userId, userImage, userAvatar, userName, userAccount,
           {userIntroduction}
         </p>
         <div className="user-followship">
-          <a href={`${baseUrl}/user/${userId}/following`} className="following">{newFollowingsCount || '0'}個<span className='followship-unit'>跟隨中</span></a>
-          <a href={`${baseUrl}/user/${userId}/follower`} className="follower">{ newFollowersCount || '0'}位<span className='followship-unit'>跟隨者</span></a>
+          <Link to={`/user/${userId}/following`} className="following">{newFollowingsCount || '0'}個<span className='followship-unit'>跟隨中</span></Link>
+          <Link to={`/user/${userId}/follower`} className="follower">{ newFollowersCount || '0'}位<span className='followship-unit'>跟隨者</span></Link>
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import { React, useState,useContext } from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 import {ReactComponent as Cross} from 'assets/icon/cross.svg'
 import StyledReplyTweet from 'components/StyledReplyTweet';
@@ -58,7 +59,7 @@ const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUse
       </div>
       <hr className='main-header-line'/>
 			<div className='modal-body'>
-        <StyledUserAvatar userAvatar={tweetUserAvatar} />
+        <StyledUserAvatar userId={tweetUserId} userAvatar={tweetUserAvatar} />
         <div className='tweet-area'>          
           <div className="tweet-title">
             <StyledUserTitle userId={tweetUserId} userName={tweetUserName} userAccount={tweetUserAccount}/>
@@ -67,12 +68,13 @@ const ReplyModal = ({  id, tweetUserId, tweetUserAvatar, tweetUserName, tweetUse
           <p className='tweet-content'>
             {tweetDescription} 
           </p>
-          <label className='reply-to-area'>回覆給 <a href={`/user/${tweetUserId}`} className='target-user'>@{tweetUserName}</a></label>
+          <label className='reply-to-area'>回覆給 <Link to={`/user/${tweetUserId}`} className='target-user'>@{tweetUserName}</Link></label>
         </div>
         <div className='connect-line'></div>
 			</div>
       <StyledReplyTweet 
-        modalUsed userAvatar={userAvatar} 
+        modalUsed 
+        userAvatar={userAvatar} 
         userId={userId} 
         error={comment?.length} 
         onChange={(commentInputValue) => setComment(commentInputValue)} 
